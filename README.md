@@ -1,1 +1,1 @@
-# weely-coffee
+# weekly-coffee
