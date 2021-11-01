@@ -1,0 +1,11 @@
+{
+    "name": "고대근",
+    "address": "서울시 동대문구",
+    "date": "2021-10-26",
+    "details": [
+        {"productId": 1, "productName": "마스크 50매", "unitPrice": 10000, "quantity": 1 },
+        {"productId": 2, "productName": "물티슈 80매", "unitPrice": 7000, "quantity": 1},
+		{"productId": 3, "productName": "손소독제 500ml", "unitPrice": 5000, "quantity": 1},
+		{"productId": 4, "productName": "콜롬비아 200g", "unitPrice": 14000, "quantity": 1}
+    ]
+}
