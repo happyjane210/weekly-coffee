@@ -15,13 +15,23 @@ const Home: NextPage = () => {
   return (
     <>
       <Layout>
-        <div>
-          <h1>this is section</h1>
-          <h1>this is section</h1>
-          <h1>this is section</h1>
-          <h1>this is section</h1>
-          <h1>this is section</h1>
-          <h1>this is section</h1>
+        <div
+          className="position-relative overflow-hidden p-md-5 m-md-3 text-center bg-light"
+          style={{ height: 800 }}
+        >
+          <div className="col-md-5 p-lg-5 mt-5">
+            <br />
+            <br />
+            <br />
+            <h3>Whenever you need a cup of coffee.</h3>
+            <h2></h2>
+            <h1>WEEKLY COFFEE</h1>
+            <br />
+          </div>
+
+          <h1>
+            <a href="/products">Getting Start☕</a>
+          </h1>
         </div>
       </Layout>
     </>
