@@ -1,0 +1,27 @@
+.nav {
+  background-color: #403726;
+  height: 5rem;
+  font-size: larger;
+}
+
+.span {
+  color: #eee3e3;
+  font-weight: 600;
+  font-size: x-large;
+  text-decoration: none;
+}
+
+.span:hover {
+  color: #ffffff;
+}
+
+.a {
+  color: #eee3e3;
+  font-weight: 400;
+  font-size: large;
+  text-decoration: none;
+}
+
+.a:hover {
+  color: #ffffff;
+}
