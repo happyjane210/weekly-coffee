@@ -49,7 +49,8 @@
 - Next.js 코드 구조와 방식을 익혔습니다.
 - 네비게이션바 , 로고 , 메인페이지 등 프론트 개발 기본 구조를 구현했습니다.
   <br>
-
+![화면 캡처 2021-11-03 014137](https://user-images.githubusercontent.com/87756895/139917351-34a1abc6-6792-4c9a-a8a5-cb083c86379a.png)
+[](url)[](url)
 <br>
 
 ## Back-end
