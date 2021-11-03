@@ -51,6 +51,8 @@
 >   <br> https://github.com/happyjane210/weekly-coffee/commit/2d869f888b360022bca2dc52e0388d68fbc5d019<br>
 > - Develop Issue <br> https://www.notion.so/2021-11-02-cdee37cf621a44ecb3fbc22d1c52a294 <br>
 
+<br>
+
 - Next.js 코드 구조와 방식을 익혔습니다.
 - 네비게이션바 , 로고 , 메인페이지 등 프론트 개발 기본 구조를 구현했습니다.
   <br>
@@ -67,7 +69,7 @@
 ### 2021-11-03
 
 <details>
-<summary>사이드바 및 제품목록 그리드 구현 [👇click]</summary>
+<summary>사이드바 및 제품목록 그리드 구현 [👈click]</summary>
 
 ## Front-end
 
@@ -77,6 +79,8 @@
 >   <br> https://github.com/happyjane210/weekly-coffee/commit/1912320b8a43f501b10bc21c8cd2af977acd5abb
 > - Develop Issue
 >   <br> https://www.notion.so/2021-11-03-d56fcedf92d142f9b61657e95a4ce045 <br>
+
+<br>
 
 - 왼편 사이드바를 구현했습니다.
 - 각 컴포넌트에 import 했던 상단 nav바를 app.tsx 한 곳에 추가해 전역으로 적용되도록 변경하였습니다.
@@ -97,7 +101,7 @@
 ### 2021-00-00 (양식)
 
 <details>
-<summary> 요약 [👇click]</summary>
+<summary> 요약 [👈click]</summary>
 
 ## Front-end / Back-end
 
@@ -111,8 +115,13 @@
 >   URL
 >   <br>
 
+<br>
+
 -
-- <br>
+-
+
+<br>
   사진 / 참고자료
-  <br>
-    </details>
+<br>
+
+</details>
