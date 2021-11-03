@@ -53,6 +53,8 @@
 
 <br>
 
+### 진행 내용
+
 - Next.js 코드 구조와 방식을 익혔습니다.
 - 네비게이션바 , 로고 , 메인페이지 등 프론트 개발 기본 구조를 구현했습니다.
   <br>
@@ -62,6 +64,13 @@
 [](url)[](url)
 
 <br>
+
+### 참고 자료
+
+- https://www.koke.kr/
+- https://fritz.co.kr/
+- https://imagecolorpicker.com/
+
 </details>
 
 <br>
@@ -82,6 +91,8 @@
 
 <br>
 
+### 진행 내용
+
 - 왼편 사이드바를 구현했습니다.
 - 각 컴포넌트에 import 했던 상단 nav바를 app.tsx 한 곳에 추가해 전역으로 적용되도록 변경하였습니다.
 - 상품목록 (products)를 구현했습니다.
@@ -93,6 +104,10 @@
 ![화면 캡처 2021-11-03 235558](https://user-images.githubusercontent.com/87756895/140133143-77eb0403-0e7e-4c0f-8215-12eb1ff721a1.png)
 
 <br>
+
+### 참고 자료
+
+- <http://makeup-api.herokuapp.com/api/v1/products.json?brand=dior>
 
 </details>
 
