@@ -26,8 +26,7 @@
 ### 2021-11-01
 
 <details>
-<summary>개발 환경 구성 [👆click]</summary>
-<br>
+<summary>개발 환경 구성 [👉click]</summary>
 
 ### **개발 환경 구성**
 
@@ -37,13 +36,12 @@
 
 </details>
 
----
+<br>
 
 ### 2021-11-02
 
 <details>
-<summary>홈화면 구현 [👆click]</summary>
-<br>
+<summary>홈화면 구현 [👈click]</summary>
 
 ## Front-end
 
@@ -62,12 +60,12 @@
 <br>
 </details>
 
----
+<br>
 
 ### 2021-11-03
 
 <details>
-<summary>사이드바 및 제품목록 그리드 구현 [👆click]</summary>
+<summary>사이드바 및 제품목록 그리드 구현 [👇click]</summary>
 <br>
 
 ## Front-end
