@@ -71,6 +71,10 @@
 - https://fritz.co.kr/
 - https://imagecolorpicker.com/
 
+<br>
+
+---
+
 </details>
 
 <br>
@@ -108,6 +112,10 @@
 ### 참고 자료
 
 - <http://makeup-api.herokuapp.com/api/v1/products.json?brand=dior>
+
+<br>
+
+---
 
 </details>
 
