@@ -1,8 +1,8 @@
-import router, { useRouter } from "next/router";
 import React from "react";
 import { DefaultRootState, useSelector } from "react-redux";
 import Products from "../index";
 import Sidebar from "../../../components/sidebar/sidebar";
+import { useRouter } from "next/router";
 
 const ProductDetail = () => {
   const router = useRouter();
