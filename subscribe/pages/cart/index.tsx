@@ -1,13 +1,17 @@
 import React from "react";
 import Layout from "../../components/layout";
+import Sidebar from "../../components/sidebar/sidebar";
 
 const cart = () => {
   return (
-    <div>
-      <Layout>
-        <h1>CART</h1>
-      </Layout>
-    </div>
+    <>
+      <article className="d-flex">
+        <Sidebar />
+        <section style={{ width: "80vw", margin: "0 auto", padding: "1rem" }}>
+          <h1>CART</h1>
+        </section>
+      </article>
+    </>
   );
 };
 

@@ -1,5 +1,4 @@
 import React from "react";
-import img from "../public/image/logo.png";
 
 export default function Top() {
   return (

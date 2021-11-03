@@ -3,11 +3,11 @@ import Layout from "../../components/layout";
 
 const mypage = () => {
   return (
-    <div>
-      <Layout>
-        <h1>Mypage</h1>
-      </Layout>
-    </div>
+    <>
+      <section style={{ width: "80vw", margin: "0 auto", padding: "1rem" }}>
+        <h1>MYPAGE</h1>
+      </section>
+    </>
   );
 };
 
