@@ -2,6 +2,8 @@ import "../styles/globals.css";
 import "../styles/bootstrap-custom.scss";
 import type { AppProps } from "next/app";
 import Layout from "../components/layout";
+import { Provider } from "react-redux";
+import { store } from "../provider";
 
 // Component : AppProps로 넘어온 컴포넌트는 현재페이지를 의미함
 // 페이지 전환시 이 컴포넌트props가 변경됨
@@ -10,7 +12,9 @@ import Layout from "../components/layout";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Layout>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </Layout>
   );
 }

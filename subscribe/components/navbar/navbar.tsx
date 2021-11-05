@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import Link from "next/link";
 import style from "./navbar.module.css";
+import Top from "../top";
 
 const navbar = () => {
   return (
@@ -33,7 +34,7 @@ const navbar = () => {
                 </Link>
               </Nav.Item>
               <Nav.Item>
-                <Link href="/mypage">
+                <Link href="/cats">
                   <a className={style.a}>MYPAGE</a>
                 </Link>
               </Nav.Item>

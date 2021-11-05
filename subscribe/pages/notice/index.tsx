@@ -3,9 +3,11 @@ import Layout from "../../components/layout";
 
 const notice = () => {
   return (
-    <div>
-      <h1>NOTICE</h1>
-    </div>
+    <>
+      <section style={{ width: "80vw", margin: "0 auto", padding: "1rem" }}>
+        <h1>NOTICE</h1>
+      </section>
+    </>
   );
 };
 

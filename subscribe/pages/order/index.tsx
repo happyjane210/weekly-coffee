@@ -3,7 +3,9 @@ import React from "react";
 const order = () => {
   return (
     <>
-      <h1>Order</h1>
+      <section style={{ width: "80vw", margin: "0 auto", padding: "1rem" }}>
+        <h1>Order</h1>
+      </section>
     </>
   );
 };

@@ -1,9 +1,9 @@
-import { Axios } from "axios";
 import React, { useState } from "react";
-import router from "next/router";
-import { auto } from "@popperjs/core";
-import Link from "next/link";
+import router, { useRouter } from "next/router";
 import Sidebar from "../../components/sidebar/sidebar";
+import { Card } from "react-bootstrap";
+import Link from "next/link";
+import axios from "axios";
 
 interface ProductsProp {
   item: Item[];
@@ -13,7 +13,6 @@ interface Item {
   id: number;
   api_featured_image: string;
   brand: string;
-  currency: string;
   description: string;
   image_link: string;
   name: string;
@@ -26,12 +25,17 @@ interface Item {
   website_link: string;
 }
 
+interface ProductsProp {
+  item: Item[];
+}
+
 const Products = ({ item }: ProductsProp) => {
   console.log(item);
+  const router = useRouter();
 
   return (
     <>
-      <article className="d-flex">
+      <article className="d-flex" style={{ minHeight: "calc(100vh - 290px)" }}>
         <Sidebar />
         <section style={{ width: "80vw", margin: "0 auto", padding: "1rem" }}>
           <h1 className="text-center my-5 p-4">
@@ -39,9 +43,8 @@ const Products = ({ item }: ProductsProp) => {
           </h1>
           <div className="d-flex flex-wrap">
             {item.map((item: Item, index: any) => (
-              <div
-                className="card"
-                key={index}
+              <Card
+                key={item.id}
                 style={{
                   width: "calc((100% - 3rem) / 4)",
                   marginLeft: index % 4 === 0 ? "0" : "1rem",
@@ -52,27 +55,28 @@ const Products = ({ item }: ProductsProp) => {
                   router.push(`/products/detail/${item.id}`);
                 }}
               >
-                <img
+                <Card.Img
+                  variant="top"
                   src={item.api_featured_image}
-                  className="card-img-top"
                   alt={item.name}
                   width="150px"
                 />
-                <div className="card-body">
-                  <h4 className="card-title text-center">{item.name}</h4>
-                  <h2 className="card-title text-center">
-                    <b>{item.brand}</b> <br />
-                    {item.product_type}
-                  </h2>
-                  <h3 className="card-text" style={{ color: "#00bcd4" }}>
-                    <strong>
-                      {item.price_sign}
-                      {item.price}
-                    </strong>
-                  </h3>
-                  {/* <p className="card-text">{item.description}</p> */}
-                </div>
-              </div>
+                <Card.Body>
+                  <Card.Title className="text-center">{item.name}</Card.Title>
+                  <Card.Body>
+                    <h2 className="text-center">
+                      <b>{item.brand}</b>
+                    </h2>
+                    <h4 className="text-center">{item.product_type}</h4>
+                    <h3 className="text-center" style={{ color: "#00bcd4" }}>
+                      <b>
+                        {item.price_sign}
+                        {item.price}
+                      </b>
+                    </h3>
+                  </Card.Body>
+                </Card.Body>
+              </Card>
             ))}
           </div>
         </section>
@@ -82,11 +86,11 @@ const Products = ({ item }: ProductsProp) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch(
+  const res = await axios.get<Item[]>(
     "http://makeup-api.herokuapp.com/api/v1/products.json?brand=benefit"
   );
 
-  const item: Item = await res.json();
+  const item = res.data;
 
   return { props: { item } };
 }

@@ -1,0 +1,17 @@
+.order {
+  width: 35%;
+  text-align: center;
+}
+
+.product {
+  width: 65%;
+  text-align: center;
+}
+
+.img {
+  width: 50%;
+}
+
+.orderbox {
+  height: 80%;
+}
