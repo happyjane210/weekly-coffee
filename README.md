@@ -121,6 +121,35 @@
 
 <br>
 
+### 2021-11-05
+
+<details>
+<summary> 제품상세 페이지 구현 [👈click]</summary>
+
+## Front-end
+
+<br>
+
+> - Github commit
+>   <br> https://github.com/happyjane210/weekly-coffee/commit/d59686d52a778f1a1d31999c35849189d74fb3b9
+
+<br>
+
+- Server Side Rendering 방식으로 api의 id값을 받아 제품 상세페이지로 이동하는 화면을 구현했습니다.
+- Order Detail 옵션 선택 창 구현 중입니다.
+
+<br>
+
+![화면 캡처 2021-11-07 220058](https://user-images.githubusercontent.com/87756895/140647230-6c40755c-c518-49bd-89f8-a905324177ad.png)
+
+<br>
+
+---
+
+</details>
+
+<br>
+
 ### 2021-00-00 (양식)
 
 <details>
