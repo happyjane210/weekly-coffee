@@ -5,6 +5,7 @@ import style from "./cart.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../provider";
 import product, { ProductItem } from "../../provider/modules/product";
+import router from "next/router";
 
 const cart = () => {
   const cart = useSelector((state: RootState) => state.product.data);
@@ -38,7 +39,7 @@ const cart = () => {
               </thead>
               <tbody>
                 {cart.map((item: ProductItem, index: number) => (
-                  <tr>
+                  <tr key={index}>
                     <td>
                       <Form>
                         <Form.Check type={"checkbox"} />
@@ -85,10 +86,23 @@ const cart = () => {
                     <b>KRW 00,000</b>
                   </td>
                   <td colSpan={2}>
-                    <Button variant="outline-secondary" className="me-2">
+                    <Button
+                      variant="outline-secondary"
+                      className="me-2"
+                      onClick={() => {
+                        router.push("/order");
+                      }}
+                    >
                       선택 상품 주문
                     </Button>
-                    <Button variant="outline-dark">전체 상품 주문</Button>
+                    <Button
+                      variant="outline-dark"
+                      onClick={() => {
+                        router.push("/order");
+                      }}
+                    >
+                      전체 상품 주문
+                    </Button>
                   </td>
                 </tr>
               </tfoot>

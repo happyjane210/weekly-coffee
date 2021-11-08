@@ -14,4 +14,5 @@
 .orderbox {
   height: fit-content;
   padding: 1rem;
+  box-shadow: 3px 3px 10px grey;
 }
