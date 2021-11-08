@@ -5,7 +5,8 @@ import Sidebar from "../../../components/sidebar/sidebar";
 import style from "./productdetail.module.css";
 import axios from "axios";
 import { GetServerSideProps } from "next";
-import { Card } from "react-bootstrap";
+import { Card, Form, Button } from "react-bootstrap";
+import router from "next/router";
 
 interface Item {
   id: number;
@@ -45,11 +46,13 @@ const ProductDetail = ({ item }: DetailProp) => {
         <Sidebar />
         <section
           className="d-flex justify-content-between"
-          style={{ width: "90vw", margin: "0 auto", padding: "2rem" }}
+          style={{ width: "90vw", margin: "0 auto", padding: "4rem" }}
         >
           {/* product detail */}
           <div className={style.product}>
-            <h1>ProductDetail</h1>
+            <h1>
+              <b>ProductDetail</b>
+            </h1>
             <img
               src={item.api_featured_image}
               alt={item.name}
@@ -78,20 +81,101 @@ const ProductDetail = ({ item }: DetailProp) => {
           <div className={style.order}>
             <Card className={style.orderbox}>
               <Card.Body>
-                <Card.Title className="text-center">
-                  <h1>ORDER DETAIL</h1>
-                </Card.Title>
                 <Card.Body>
-                  <h2 className="text-center">
-                    <b>{item.brand}</b>
-                  </h2>
-                  <h4 className="text-center">{item.product_type}</h4>
-                  <h3 className="text-center" style={{ color: "#00bcd4" }}>
+                  <h1>
+                    [{item.brand}] {item.name}
+                  </h1>
+                  <h1 style={{ color: "#00bcd4" }}>
                     <b>
                       {item.price_sign}
                       {item.price}
                     </b>
-                  </h3>
+                  </h1>
+                  <hr className="my-5" />
+                  <h3>💡NOTE💡</h3>
+                  <h3>It'll be shipped every Monday.</h3>
+                  <hr className="my-5" />
+                  <h3>coffee bean</h3>
+                  <Form.Select
+                    aria-label="Floating label select example"
+                    size="lg"
+                    className="mb-4"
+                  >
+                    <option>select coffee bean</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </Form.Select>
+                  <h3>subscribe term</h3>
+                  <Form.Select
+                    aria-label="Floating label select example"
+                    size="lg"
+                    className="mb-4"
+                  >
+                    <option>select subscribe term</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </Form.Select>
+                  <h3>grind-point</h3>
+                  <Form.Select
+                    aria-label="Floating label select example"
+                    size="lg"
+                    className="mb-4"
+                  >
+                    <option>select grind-point</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </Form.Select>
+                  <h3>quantity</h3>
+                  <input
+                    type="number"
+                    name="quantity"
+                    placeholder="1"
+                    id="quantity"
+                    min="1"
+                    style={{
+                      padding: "0.4rem",
+                      fontSize: "18px",
+                      textAlign: "center",
+                      maxWidth: "100px",
+                    }}
+                  />
+
+                  <hr className="my-5" />
+                  <div className="d-flex">
+                    <h2 className="me-3">
+                      <b>PRICE</b>
+                    </h2>
+                    <h2>
+                      <b>
+                        {item.price_sign}
+                        {item.price}
+                      </b>
+                    </h2>
+                  </div>
+
+                  <div className="d-grid gap-2 mt-5">
+                    <Button
+                      variant="outline-secondary"
+                      size="lg"
+                      onClick={() => {
+                        router.push("/cart");
+                      }}
+                    >
+                      ADD TO CART
+                    </Button>
+                    <Button
+                      variant="outline-dark"
+                      size="lg"
+                      onClick={() => {
+                        router.push("/order");
+                      }}
+                    >
+                      SUBSCRIBE NOW
+                    </Button>
+                  </div>
                 </Card.Body>
               </Card.Body>
             </Card>

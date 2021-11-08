@@ -14,7 +14,7 @@ export default function Sidebar() {
       <Link href="/">
         <a>BLEND</a>
       </Link>
-      <Link href="/">
+      <Link href="/cats">
         <a>COLD BREW</a>
       </Link>
     </nav>

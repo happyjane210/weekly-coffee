@@ -1,0 +1,26 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  background-color: #fafafa;
+  padding: 32px;
+  border-right: 1px solid #eaeaea;
+}
+
+.nav > a {
+  margin: 8px 0;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 30px;
+  padding: 12px 16px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.025em;
+  color: #333;
+
+  transition: all 0.125s ease;
+}
+
+.nav > a:hover {
+  background-color: #eaeaea;
+}

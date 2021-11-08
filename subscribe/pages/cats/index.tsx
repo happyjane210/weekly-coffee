@@ -1,6 +1,6 @@
 import router from "next/router";
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Sidebar from "../../components/sidebar/sidebar";
 import { RootState } from "../../provider";

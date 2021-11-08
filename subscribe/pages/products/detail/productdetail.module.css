@@ -1,10 +1,9 @@
 .order {
-  width: 35%;
-  text-align: center;
+  width: 33%;
 }
 
 .product {
-  width: 65%;
+  width: 67%;
   text-align: center;
 }
 
@@ -13,5 +12,6 @@
 }
 
 .orderbox {
-  height: 80%;
+  height: fit-content;
+  padding: 1rem;
 }

@@ -7,6 +7,7 @@ export interface ProductItem {
   name: string;
   image: string;
   description: string;
+  price: string;
 }
 
 export interface ProductList {
@@ -19,19 +20,22 @@ const initialState: ProductList = {
       id: 1,
       name: "cat1",
       image: sadcat,
-      description: "this is cat",
+      description: "this is sad cat",
+      price: "KRW 14,000",
     },
     {
       id: 2,
       name: "cat2",
       image: sadcat,
-      description: "this is cat",
+      description: "this is sad cat",
+      price: "KRW 25,000",
     },
     {
       id: 3,
       name: "cat3",
       image: sadcat,
-      description: "this is cat",
+      description: "this is sad cat",
+      price: "KRW 12,500",
     },
   ],
 };

@@ -34,7 +34,7 @@ const navbar = () => {
                 </Link>
               </Nav.Item>
               <Nav.Item>
-                <Link href="/cats">
+                <Link href="/mypage">
                   <a className={style.a}>MYPAGE</a>
                 </Link>
               </Nav.Item>
