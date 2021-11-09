@@ -150,6 +150,61 @@
 
 <br>
 
+### 2021-11-09
+
+<details>
+<summary> 주문화면, 마이페이지, 장바구니 구현 [👈click]</summary>
+
+## Front-end
+
+<br>
+
+> - Github commit
+>   <br> https://github.com/happyjane210/weekly-coffee/commit/372552606e609ff9e9b0f6bb10973567eade4682
+> - Develop Issue
+>   <br>
+>   URL
+>   <br>
+
+<br>
+
+- 장바구니 | 우측 추천제품 그리드 구현, 기타 정렬 및 버튼과 링크 구현
+- 주문화면 | 좌측 각 input 과 우측 주문정보 (옵션) 등이 있는 카드 구현, 결제정보 테이블 구현
+  - 결제하기 버튼 누르면 주문정보 백엔드로 보내주고 마이페이지로 이동하는 기능 구현 해야함
+- 마이페이지 | 테이블에 마우스 올리면 호버 처리, 테이블 행 하나 클릭 시 각 주문의 상세페이지로 넘어가야함 (주문 상세 구현 예정), 오른편에 추천제품 SSR으로 불러오기 구현해야함
+
+<br>
+
+## 장바구니
+
+![화면 캡처 2021-11-09 233559](https://user-images.githubusercontent.com/87756895/140948667-01ea2567-a9bb-4b26-9406-3357808075db.png)
+
+<br>
+
+## 주문화면
+
+![화면 캡처 2021-11-09 233517](https://user-images.githubusercontent.com/87756895/140948265-2292d0f2-52f5-4409-86ff-113f6c9e5bb3.png)
+
+<br>
+
+## 마이페이지
+
+![화면 캡처 2021-11-09 233436](https://user-images.githubusercontent.com/87756895/140948459-9b1ddccd-e032-4fbe-b5c7-0b9963ebf553.png)
+
+<br>
+
+### 참고 자료
+
+- <https://fritz.co.kr/order/orderform.html?basket_type=all_buy&delvtype=A>
+
+<br>
+
+---
+
+</details>
+
+<br>
+
 ### 2021-00-00 (양식)
 
 <details>
@@ -173,8 +228,8 @@
 -
 
 <br>
-  사진 / 참고자료
-<br>
+
+사진 / 참고자료
 
 <br>
 
