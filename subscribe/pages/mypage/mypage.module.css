@@ -1,4 +1,4 @@
-.cart {
+.mypage {
   width: 85%;
   padding: 2rem;
   text-align: center;
@@ -9,10 +9,4 @@
   padding: 1rem;
   text-align: center;
   align-content: center;
-}
-
-.table {
-  width: 85%;
-  margin: 0 auto;
-  vertical-align: middle;
 }

@@ -1,0 +1,12 @@
+.info {
+  width: 70%;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+.product {
+  width: 30%;
+  align-content: center;
+}
+.card {
+  margin: 1rem auto;
+}

@@ -10,6 +10,10 @@ import router from "next/router";
 const cart = () => {
   const cart = useSelector((state: RootState) => state.product.data);
 
+  const deleteAll = () => {
+    return null;
+  };
+
   return (
     <>
       <article className="d-flex" style={{ minHeight: "calc(100vh - 290px)" }}>
@@ -18,8 +22,9 @@ const cart = () => {
           className="d-flex justify-content-between"
           style={{ width: "90vw", margin: "0 auto", padding: "3rem" }}
         >
+          {/* cart */}
           <div className={style.cart}>
-            <h1 className="my-5">
+            <h1 className="my-4">
               <b>SHOPPING CART</b>
             </h1>
             <Table className={style.table}>
@@ -78,7 +83,16 @@ const cart = () => {
               <tfoot>
                 <tr>
                   <td></td>
-                  <td></td>
+                  <td>
+                    <Button
+                      variant="outline-secondary"
+                      onClick={() => {
+                        deleteAll();
+                      }}
+                    >
+                      전체삭제
+                    </Button>
+                  </td>
                   <td>
                     <b>Order Total</b>
                   </td>
@@ -108,11 +122,49 @@ const cart = () => {
               </tfoot>
             </Table>
           </div>
+          {/* recommand */}
           <div className={style.recommand}>
-            <h2>
+            <h5>
               <b>RECOMMAND</b>
-            </h2>
-            <div></div>
+            </h5>
+            <div>
+              <div
+                style={{
+                  border: "solid black",
+                  height: "150px",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                d
+              </div>
+              <div
+                style={{
+                  border: "solid black",
+                  height: "150px",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                d
+              </div>
+              <div
+                style={{
+                  border: "solid black",
+                  height: "150px",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                d
+              </div>
+              <div
+                style={{
+                  border: "solid black",
+                  height: "150px",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                d
+              </div>
+            </div>
           </div>
         </section>
       </article>
