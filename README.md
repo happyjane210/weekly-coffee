@@ -162,9 +162,7 @@
 > - Github commit
 >   <br> https://github.com/happyjane210/weekly-coffee/commit/372552606e609ff9e9b0f6bb10973567eade4682
 > - Develop Issue
->   <br>
->   URL
->   <br>
+>   <br> https://www.notion.so/Form-input-form-block-button-ca32c5d35b0941bbb7bdd2a762b3d526
 
 <br>
 

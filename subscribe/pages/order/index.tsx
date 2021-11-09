@@ -3,15 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../provider";
 import { ProductItem } from "../../provider/modules/product";
 import style from "./order.module.css";
-import {
-  Card,
-  Col,
-  Form,
-  Row,
-  Container,
-  Button,
-  Table,
-} from "react-bootstrap";
+import { Card, Form, Button, Table } from "react-bootstrap";
 
 const order = () => {
   const order = useSelector((state: RootState) => state.product.data);
