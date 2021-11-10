@@ -1,7 +1,11 @@
-.cart {
+.mypage {
   width: 85vw;
   padding: 2rem;
   text-align: center;
+}
+
+.mypage > h1 {
+  margin-bottom: 2rem;
 }
 
 .recommand {
@@ -11,13 +15,7 @@
   align-content: center;
 }
 
-.table {
-  width: 85%;
-  margin: 0 auto;
-  vertical-align: middle;
-}
-
-.recommandWrap > div {
+.recommandwrap > div {
   width: 150px;
   height: 150px;
   border: 1px solid #ddd;

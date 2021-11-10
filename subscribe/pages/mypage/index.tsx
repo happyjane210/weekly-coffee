@@ -1,3 +1,4 @@
+import router from "next/router";
 import React from "react";
 import { Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
@@ -17,6 +18,7 @@ const mypage = () => {
           className="d-flex justify-content-between"
           style={{ width: "90vw", margin: "0 auto", padding: "3rem" }}
         >
+          {/* mypage */}
           <div className={style.mypage}>
             <h1 className="my-4">
               <b>MY PAGE</b>
@@ -41,7 +43,10 @@ const mypage = () => {
               </thead>
               <tbody>
                 {mypage.map((item: ProductItem, index: number) => (
-                  <tr key={index}>
+                  <tr
+                    key={index}
+                    onClick={() => router.push(`/mypage/detail/${item.id}}`)}
+                  >
                     <td>20211S09001</td>
                     <td>
                       <img src={item.image} alt={item.name} width="50px" />
@@ -57,47 +62,16 @@ const mypage = () => {
               </tbody>
             </Table>
           </div>
+          {/* recommand */}
           <div className={style.recommand}>
             <h5>
               <b>RECOMMAND</b>
             </h5>
-            <div>
-              <div
-                style={{
-                  border: "solid black",
-                  height: "150px",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                d
-              </div>
-              <div
-                style={{
-                  border: "solid black",
-                  height: "150px",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                d
-              </div>
-              <div
-                style={{
-                  border: "solid black",
-                  height: "150px",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                d
-              </div>
-              <div
-                style={{
-                  border: "solid black",
-                  height: "150px",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                d
-              </div>
+            <div className={style.recomendWrap}>
+              <div>d</div>
+              <div>d</div>
+              <div>d</div>
+              <div>d</div>
             </div>
           </div>
         </section>

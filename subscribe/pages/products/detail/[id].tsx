@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 //import router, { useRouter } from "next/router"; - router는 리덕스쓸때 쓰는거임
 import Sidebar from "../../../components/sidebar/sidebar";
@@ -6,7 +6,7 @@ import style from "./productdetail.module.css";
 import axios from "axios";
 import { GetServerSideProps } from "next";
 import { Card, Form, Button } from "react-bootstrap";
-import router from "next/router";
+import router, { useRouter } from "next/router";
 
 interface Item {
   id: number;
@@ -28,17 +28,15 @@ interface DetailProp {
 }
 
 const ProductDetail = ({ item }: DetailProp) => {
-  // console.log(item);
-  //console.log(item.id);
+  const router = useRouter();
+  const id = router.query.id as string;
 
-  // let productItem = useSelector((state: ProductsProp) =>
-  //   state.item.find((item) => item.id === +id)
-  // );
+  const coffeebeanInput = useRef<HTMLSelectElement>();
+  const substermInput = useRef<HTMLSelectElement>();
+  const grindpointInput = useRef<HTMLSelectElement>();
+  const quantityInput = useRef<HTMLInputElement>();
 
-  // console.log(productItem?.id);
-  // console.log(productItem?.name);
-
-  //state.data.find((state:Item) => item.id === id)
+  const [quantity, setQuantity] = useState<number | undefined>(Number);
 
   return (
     <>
@@ -100,11 +98,14 @@ const ProductDetail = ({ item }: DetailProp) => {
                     aria-label="Floating label select example"
                     size="lg"
                     className="mb-4"
+                    defaultValue={"select coffee bean"}
                   >
-                    <option>select coffee bean</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="--" disabled>
+                      select coffee bean
+                    </option>
+                    <option value="one">One</option>
+                    <option value="two">Two</option>
+                    <option value="three">Three</option>
                   </Form.Select>
                   <h3>subscribe term</h3>
                   <Form.Select
@@ -112,7 +113,9 @@ const ProductDetail = ({ item }: DetailProp) => {
                     size="lg"
                     className="mb-4"
                   >
-                    <option>select subscribe term</option>
+                    <option value="--" disabled>
+                      select subscribe term
+                    </option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
@@ -123,7 +126,9 @@ const ProductDetail = ({ item }: DetailProp) => {
                     size="lg"
                     className="mb-4"
                   >
-                    <option>select grind-point</option>
+                    <option value="--" disabled>
+                      select grind-point
+                    </option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
@@ -191,7 +196,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log(id);
 
   // const res = await axios.get<Item[]>(
-  //   `http://makeup-api.herokuapp.com/api/v1/products.json?brand=benefit?id={id}`
+  //   `http://makeup-api.herokuapp.com/api/v1/products.json?brand=benefit?id=${id}`
   // );
   // const item = res.data;
 

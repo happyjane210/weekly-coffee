@@ -1,7 +1,11 @@
-.cart {
+.notice {
   width: 85vw;
   padding: 2rem;
+}
+
+.notice > h1 {
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 .recommand {
@@ -11,15 +15,14 @@
   align-content: center;
 }
 
-.table {
-  width: 85%;
-  margin: 0 auto;
-  vertical-align: middle;
-}
-
-.recommandWrap > div {
+.recommandwrap > div {
   width: 150px;
   height: 150px;
   border: 1px solid #ddd;
   margin: 1rem auto;
+}
+
+.buttonarea {
+  display: flex;
+  justify-content: space-between;
 }

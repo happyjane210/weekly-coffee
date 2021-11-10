@@ -127,43 +127,11 @@ const cart = () => {
             <h5>
               <b>RECOMMAND</b>
             </h5>
-            <div>
-              <div
-                style={{
-                  border: "solid black",
-                  height: "150px",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                d
-              </div>
-              <div
-                style={{
-                  border: "solid black",
-                  height: "150px",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                d
-              </div>
-              <div
-                style={{
-                  border: "solid black",
-                  height: "150px",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                d
-              </div>
-              <div
-                style={{
-                  border: "solid black",
-                  height: "150px",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                d
-              </div>
+            <div className={style.recommandWrap}>
+              <div>d</div>
+              <div>d</div>
+              <div>d</div>
+              <div>d</div>
             </div>
           </div>
         </section>

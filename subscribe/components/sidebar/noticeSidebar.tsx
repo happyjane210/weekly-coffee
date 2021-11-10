@@ -5,7 +5,7 @@ import styles from "./sidebar.module.css";
 export default function noticeSidebar() {
   return (
     <nav className={styles.nav}>
-      <Link href="/">
+      <Link href="/notice">
         <a>NOTICE</a>
       </Link>
     </nav>
