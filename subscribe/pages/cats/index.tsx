@@ -7,6 +7,7 @@ import { RootState } from "../../provider";
 import product, { ProductItem } from "../../provider/modules/product";
 
 const Cats = () => {
+  // useseletor로 product state 전체를 가져옴
   const cats = useSelector((state: RootState) => state.product.data);
 
   return (
@@ -28,22 +29,24 @@ const Cats = () => {
                 }}
                 onClick={() => {
                   // id값을 물고 이동해야함
-                  router.push(`/cats/detail/${item.id}`);
+                  router.push(`/cats/detail/${item.productId}`);
                 }}
               >
                 <Card.Img
                   variant="top"
-                  src={item.image}
-                  alt={item.name}
+                  src={item.productImageUrl}
+                  alt={item.productName}
                   width="150px"
                 />
                 <Card.Body>
-                  <Card.Title className="text-center">{item.name}</Card.Title>
+                  <Card.Title className="text-center">
+                    {item.companyName}
+                  </Card.Title>
                   <Card.Body>
                     <h2 className="text-center">
-                      <b>{item.description}</b>
+                      <b>{item.productName}</b>
                     </h2>
-                    <h4 className="text-center">{item.description}</h4>
+                    <h4 className="text-center">{item.productPrice}</h4>
                   </Card.Body>
                 </Card.Body>
               </Card>

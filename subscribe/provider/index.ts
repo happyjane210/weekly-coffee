@@ -1,5 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productReducer from "../provider/modules/product";
+import optionReducer from "../provider/modules/options";
+
+import rootSaga from "../middleware/index";
+import createSagaMiddleware from "@redux-saga/core";
+
+const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   // 각 state별로 처리할 reducer 목록
@@ -12,13 +18,17 @@ export const store = configureStore({
     // contact: contactReducer,
     //progress: progressReducer,
     //alert: alertReducer,
-    product: productReducer,
+    product: productReducer, // product state를 처리하는  reducer 등록
+
+    option: optionReducer,
   },
   // redux store(dispatcher)에 미들웨어 적용
   // middleware는 여러개 사용할 수 있음, [defaultMiddlware, sagaMiddleware, thunkMiddlware]
-  //middleware: [sagaMiddleware],
+  middleware: [sagaMiddleware],
   devTools: true, // 개발툴 사용여부
 });
+
+sagaMiddleware.run(rootSaga);
 
 export type RootState = ReturnType<typeof store.getState>;
 

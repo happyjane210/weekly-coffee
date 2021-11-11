@@ -1,42 +1,88 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //import router, { useRouter } from "next/router"; - router는 리덕스쓸때 쓰는거임
 import Sidebar from "../../../components/sidebar/sidebar";
 import style from "./productdetail.module.css";
 import axios from "axios";
+import Image from "next/image";
 import { GetServerSideProps } from "next";
 import { Card, Form, Button } from "react-bootstrap";
 import router, { useRouter } from "next/router";
+import { ProductPagingResponse, ProductResponse } from "..";
+import { AppDispatch, RootState } from "../../../provider";
+import { addOption, OptionItem } from "../../../provider/modules/options";
 
-interface Item {
-  id: number;
-  api_featured_image: string;
-  brand: string;
-  description: string;
-  name: string;
-  price: string;
-  price_sign: string;
-  product_api_url: string;
-  product_link: string;
-  product_type: string;
-  rating: null;
-  website_link: string;
+interface ProductsProp {
+  item: ProductResponse;
 }
 
-interface DetailProp {
-  item: Item;
-}
-
-const ProductDetail = ({ item }: DetailProp) => {
+const ProductDetail = ({ item }: ProductsProp) => {
   const router = useRouter();
-  const id = router.query.id as string;
+  const dispatch = useDispatch<AppDispatch>();
+  const optionData = useSelector((state: RootState) => state.option.data);
+  const productData = useSelector((state: RootState) => state.product.data);
+  //const id = router.query.id as string;
 
-  const coffeebeanInput = useRef<HTMLSelectElement>();
-  const substermInput = useRef<HTMLSelectElement>();
-  const grindpointInput = useRef<HTMLSelectElement>();
-  const quantityInput = useRef<HTMLInputElement>();
+  const amountInput = useRef<HTMLSelectElement>(null);
+  const substermInput = useRef<HTMLSelectElement>(null);
+  const grindpointInput = useRef<HTMLSelectElement>(null);
+  const quantityInput = useRef<HTMLInputElement>(null);
 
-  const [quantity, setQuantity] = useState<number | undefined>(Number);
+  const [total, setTotal] = useState(0);
+
+  const calc = (price: number) => {
+    let quantity = quantityInput.current ? quantityInput.current.value : "";
+
+    let amount = 0;
+    if (amountInput.current?.value === "200g") {
+      amount = 1;
+    } else if (amountInput.current?.value === "400g") {
+      amount = 2;
+    } else if (amountInput.current?.value === "600g") {
+      amount = 3;
+    }
+
+    let term = 0;
+    if (substermInput.current?.value === "1개월 - 4회") {
+      term = 4;
+    } else if (substermInput.current?.value === "2개월 - 8회") {
+      term = 8;
+    } else if (substermInput.current?.value === "3개월 - 12회") {
+      term = 12;
+    }
+
+    let total = +(price * amount * term * +quantity);
+    console.log(total);
+
+    setTotal(total);
+  };
+
+  const handleAddOption = () => {
+    console.log(amountInput.current?.value);
+    console.log(substermInput.current?.value);
+    console.log(grindpointInput.current?.value);
+    console.log(quantityInput.current?.value);
+
+    const item: OptionItem = {
+      optionId: optionData.length ? optionData[0].optionId + 1 : 1,
+      beanAmount: amountInput.current ? amountInput.current.value : "",
+      term: substermInput.current ? substermInput.current.value : "",
+      grindPoint: grindpointInput.current ? grindpointInput.current.value : "",
+      totalCost: total,
+      //quantity: quantityInput.current ? quantityInput.current.value : 0,
+      ///
+      //partnerId: productData.length
+      //productId: productData.find((item) => item.productId === +id),
+      partnerId: 0,
+      productId: 0,
+      productName: "",
+      productPrice: 0,
+      companyName: "",
+      quantity: 0,
+    };
+
+    dispatch(addOption(item));
+  };
 
   return (
     <>
@@ -51,29 +97,30 @@ const ProductDetail = ({ item }: DetailProp) => {
             <h1>
               <b>ProductDetail</b>
             </h1>
-            <img
-              src={item.api_featured_image}
-              alt={item.name}
-              className={style.img}
+
+            <Image
+              loader={() => item.productImageUrl}
+              alt={item.productName}
+              objectFit="cover"
+              src={item.productImageUrl}
+              width={400}
+              height={400}
             />
-            <p>{item.name}</p>
+            <p>{item.productName}</p>
             <h1>
-              <b>{item.brand}</b>
+              <b>{item.companyName}</b>
             </h1>
-            <h3>{item.product_type}</h3>
+            <h3>{item.country}</h3>
             <h2 className="text-center" style={{ color: "#00bcd4" }}>
-              <b>
-                {item.price_sign}
-                {item.price}
-              </b>
+              <b>KRW {new Intl.NumberFormat().format(item.productPrice)}</b>
             </h2>
             <br />
             <br />
             <br />
-            <h4>{item.description}</h4>
-            <h4>{item.description}</h4>
-            <h4>{item.description}</h4>
-            <h4>{item.description}</h4>
+            <h4>{item.processing}</h4>
+            <h4>{item.beanTag}</h4>
+            <h4>{item.beanType}</h4>
+            <h4>{item.roastingPoint}</h4>
           </div>
           {/* orderdetail */}
           <div className={style.order}>
@@ -81,71 +128,82 @@ const ProductDetail = ({ item }: DetailProp) => {
               <Card.Body>
                 <Card.Body>
                   <h1>
-                    [{item.brand}] {item.name}
+                    [{item.companyName}] {item.companyIntroduce}
                   </h1>
                   <h1 style={{ color: "#00bcd4" }}>
                     <b>
-                      {item.price_sign}
-                      {item.price}
+                      KRW {new Intl.NumberFormat().format(item.productPrice)}
                     </b>
                   </h1>
                   <hr className="my-5" />
                   <h3>💡NOTE💡</h3>
                   <h3>It'll be shipped every Monday.</h3>
                   <hr className="my-5" />
-                  <h3>coffee bean</h3>
+                  <h3>amount</h3>
                   <Form.Select
                     aria-label="Floating label select example"
                     size="lg"
                     className="mb-4"
-                    defaultValue={"select coffee bean"}
+                    defaultValue={"select coffee amount"}
+                    ref={amountInput}
+                    onChange={() => {
+                      calc(item.productPrice);
+                    }}
                   >
                     <option value="--" disabled>
-                      select coffee bean
+                      select coffee amount
                     </option>
-                    <option value="one">One</option>
-                    <option value="two">Two</option>
-                    <option value="three">Three</option>
+                    <option>200g</option>
+                    <option>400g</option>
+                    <option>600g</option>
                   </Form.Select>
                   <h3>subscribe term</h3>
                   <Form.Select
                     aria-label="Floating label select example"
                     size="lg"
                     className="mb-4"
+                    ref={substermInput}
+                    onChange={() => {
+                      calc(item.productPrice);
+                    }}
                   >
                     <option value="--" disabled>
                       select subscribe term
                     </option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option>1개월 - 4회</option>
+                    <option>2개월 - 8회</option>
+                    <option>3개월 - 12회</option>
                   </Form.Select>
                   <h3>grind-point</h3>
                   <Form.Select
                     aria-label="Floating label select example"
                     size="lg"
                     className="mb-4"
+                    ref={grindpointInput}
+                    onChange={() => {
+                      calc(item.productPrice);
+                    }}
                   >
                     <option value="--" disabled>
                       select grind-point
                     </option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option>홀빈(갈지않음)</option>
+                    <option>에스프레소</option>
+                    <option>더치</option>
+                    <option>프렌치프레스</option>
                   </Form.Select>
                   <h3>quantity</h3>
                   <input
                     type="number"
                     name="quantity"
-                    placeholder="1"
                     id="quantity"
                     min="1"
-                    style={{
-                      padding: "0.4rem",
-                      fontSize: "18px",
-                      textAlign: "center",
-                      maxWidth: "100px",
+                    className={style.quantity}
+                    ref={quantityInput}
+                    onChange={() => {
+                      calc(item.productPrice);
                     }}
+                    defaultValue="0"
                   />
 
                   <hr className="my-5" />
@@ -154,10 +212,7 @@ const ProductDetail = ({ item }: DetailProp) => {
                       <b>PRICE</b>
                     </h2>
                     <h2>
-                      <b>
-                        {item.price_sign}
-                        {item.price}
-                      </b>
+                      <b>{new Intl.NumberFormat().format(total)}</b>
                     </h2>
                   </div>
 
@@ -166,6 +221,7 @@ const ProductDetail = ({ item }: DetailProp) => {
                       variant="outline-secondary"
                       size="lg"
                       onClick={() => {
+                        handleAddOption();
                         router.push("/cart");
                       }}
                     >
@@ -175,6 +231,7 @@ const ProductDetail = ({ item }: DetailProp) => {
                       variant="outline-dark"
                       size="lg"
                       onClick={() => {
+                        handleAddOption();
                         router.push("/order");
                       }}
                     >
@@ -192,7 +249,8 @@ const ProductDetail = ({ item }: DetailProp) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.params?.id;
+  console.log("함수 시작!");
+  const id = context.params?.id as string;
   console.log(id);
 
   // const res = await axios.get<Item[]>(
@@ -200,24 +258,111 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // );
   // const item = res.data;
 
-  const item = {
-    id: 634,
-    api_featured_image:
-      "//s3.amazonaws.com/donovanbailey/products/api_featured_images/000/000/634/original/open-uri20171223-4-xq5rvq?1514061762",
-    brand: "benefit",
-    description: "creamy brow highlighting pencil",
-    image_link:
-      "https://www.benefitcosmetics.com/ca/sites/ca/files/styles/category_page_lg/public/1high-brow-component_0.png?itok=XpUgoe35",
-    name: "high brow eyebrow highlighter ",
-    price: "29.0",
-    price_sign: "₤",
-    product_api_url: "http://makeup-api.herokuapp.com/api/v1/products/644.json",
-    product_link:
-      "https://www.benefitcosmetics.com/ca/en-gb/product/porefessional-agent-zero-shine",
-    product_type: "foundation",
-    rating: null,
-    website_link: "https://www.benefitcosmetics.com",
+  const products: ProductPagingResponse = {
+    content: [
+      {
+        productId: 1,
+        partnerId: 1,
+        productName: "에티오피아 예가체프 게르시",
+        productPrice: 11000,
+        productImageUrl:
+          "https://d15u18gvocrbio.cloudfront.net/91c5552acb1e27ef4eb6abc2516faec12e7e826fae0eb651a7a0824887b60b75",
+        foodType: "원두",
+        expirationData: "제조일로부터 1년(권장기한 제조일로부터 1달)",
+        manufacturer: "프릳츠커피컴퍼니",
+        manufacturingDate: "제조일 별도 표기",
+        companyName: "프릳츠커피컴퍼니",
+        fileName: "영앤 도터스1.png",
+        fileType: "image/png",
+        productUploadDate: 11,
+        companyIntroduce:
+          "프릳츠의 탄생은 신선한 원두를 찾아내어 로스팅하고 다양한 맛의 커피를 테스팅하길 좋아하는 커피업계 종사자와 학창 시절부터 제빵의 길을 걷던 제빵업계 종사자 여섯 명이 공동 창업한 회사이다",
+        companyAddress:
+          "서울특별시 마포구 마포대로 156 공덕푸르지오시티 1층 107호",
+        companyContact: "010-2222-2222",
+        beanType: "블랜드",
+        beanTag: "달콤",
+        processing: "내추럴",
+        country: "에티오피아",
+        region: "예가체프",
+        farm: "게르시 소농들",
+        cupNote: "새콤한 산미",
+        roastingPoint: "라이트 미디엄",
+        variety: "에티오피아 토착종",
+        salesStatus: 0,
+      },
+      {
+        productId: 2,
+        partnerId: 2,
+        productName: "에티오피아 예가체프 게르시",
+        productPrice: 22000,
+        productImageUrl:
+          "https://d15u18gvocrbio.cloudfront.net/91c5552acb1e27ef4eb6abc2516faec12e7e826fae0eb651a7a0824887b60b75",
+        foodType: "원두",
+        expirationData: "제조일로부터 1년(권장기한 제조일로부터 1달)",
+        manufacturer: "프릳츠커피컴퍼니",
+        manufacturingDate: "제조일 별도 표기",
+        companyName: "프릳츠커피컴퍼니",
+        fileName: "영앤 도터스1.png",
+        fileType: "image/png",
+        productUploadDate: 11,
+        companyIntroduce:
+          "프릳츠의 탄생은 신선한 원두를 찾아내어 로스팅하고 다양한 맛의 커피를 테스팅하길 좋아하는 커피업계 종사자와 학창 시절부터 제빵의 길을 걷던 제빵업계 종사자 여섯 명이 공동 창업한 회사이다",
+        companyAddress:
+          "서울특별시 마포구 마포대로 156 공덕푸르지오시티 1층 107호",
+        companyContact: "010-2222-2222",
+        beanType: "블랜드",
+        beanTag: "달콤",
+        processing: "내추럴",
+        country: "에티오피아",
+        region: "예가체프",
+        farm: "게르시 소농들",
+        cupNote: "새콤한 산미",
+        roastingPoint: "라이트 미디엄",
+        variety: "에티오피아 토착종",
+        salesStatus: 0,
+      },
+      {
+        productId: 3,
+        partnerId: 3,
+        productName: "에티오피아 예가체프 게르시",
+        productPrice: 33000,
+        productImageUrl:
+          "https://d15u18gvocrbio.cloudfront.net/91c5552acb1e27ef4eb6abc2516faec12e7e826fae0eb651a7a0824887b60b75",
+        foodType: "원두",
+        expirationData: "제조일로부터 1년(권장기한 제조일로부터 1달)",
+        manufacturer: "프릳츠커피컴퍼니",
+        manufacturingDate: "제조일 별도 표기",
+        companyName: "프릳츠커피컴퍼니",
+        fileName: "영앤 도터스1.png",
+        fileType: "image/png",
+        productUploadDate: 11,
+        companyIntroduce:
+          "프릳츠의 탄생은 신선한 원두를 찾아내어 로스팅하고 다양한 맛의 커피를 테스팅하길 좋아하는 커피업계 종사자와 학창 시절부터 제빵의 길을 걷던 제빵업계 종사자 여섯 명이 공동 창업한 회사이다",
+        companyAddress:
+          "서울특별시 마포구 마포대로 156 공덕푸르지오시티 1층 107호",
+        companyContact: "010-2222-2222",
+        beanType: "블랜드",
+        beanTag: "달콤",
+        processing: "내추럴",
+        country: "에티오피아",
+        region: "예가체프",
+        farm: "게르시 소농들",
+        cupNote: "새콤한 산미",
+        roastingPoint: "라이트 미디엄",
+        variety: "에티오피아 토착종",
+        salesStatus: 0,
+      },
+    ],
+    last: false,
+    totalElements: 0,
+    totalPages: 0,
+    size: 0,
+    number: 0,
   };
+
+  const item =
+    products && products.content.find((item) => item && item.productId === +id);
 
   return { props: { item } };
 };

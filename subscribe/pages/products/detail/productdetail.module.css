@@ -1,18 +1,22 @@
 .order {
-  width: 33%;
+  width: 33vw;
 }
 
 .product {
-  width: 67%;
+  width: 67vw;
   text-align: center;
-}
-
-.img {
-  width: 50%;
+  padding: 2rem;
 }
 
 .orderbox {
   height: fit-content;
   padding: 1rem;
   box-shadow: 3px 3px 10px grey;
+}
+
+.quantity {
+  padding: 0.4rem;
+  font-size: 18px;
+  text-align: center;
+  width: 100px;
 }

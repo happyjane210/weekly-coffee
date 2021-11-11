@@ -1,17 +1,20 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { NavItem } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Sidebar from "../../../components/sidebar/sidebar";
 import { RootState } from "../../../provider";
+import { ProductItem, ProductState } from "../../../provider/modules/product";
+import { ProductsProp } from "../../products";
 import style from "./catsdetail.module.css";
 
-const CatDetail = () => {
+const CatDetail = ({ item }: ProductsProp) => {
   const router = useRouter();
 
   const id = router.query.id as string;
 
-  const cat = useSelector((state: RootState) =>
-    state.product.data.find((item) => item.id === +id)
+  const product = useSelector((state: RootState) =>
+    state.product.data.find((item) => item.partnerId === +id)
   );
   return (
     <>
@@ -23,17 +26,6 @@ const CatDetail = () => {
         >
           <div className={style.product}>
             <h1>ProductDetail</h1>
-            <p>{id}</p>
-            <img
-              src={cat && cat?.image}
-              alt={cat && cat?.name}
-              className={style.img}
-            />
-            <h1>{cat?.name}</h1>
-            <hr />
-            <h3>{cat?.description}</h3>
-            <h3>{cat?.description}</h3>
-            <h3>{cat?.description}</h3>
           </div>
           <div className={style.order}>
             <h1>ORDER DETAIL</h1>
