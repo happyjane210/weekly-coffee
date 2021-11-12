@@ -1,0 +1,23 @@
+.mypage {
+  width: 85vw;
+  padding: 2rem;
+  text-align: center;
+}
+
+.mypage > h1 {
+  margin-bottom: 2rem;
+}
+
+.recommand {
+  width: 15vw;
+  padding: 1rem;
+  text-align: center;
+  align-content: center;
+}
+
+.recommandwrap > div {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #ddd;
+  margin: 1rem auto;
+}

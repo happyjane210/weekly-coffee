@@ -57,6 +57,8 @@ const ProductDetail = ({ item }: ProductsProp) => {
   //const productData = useSelector((state: RootState) => state.product.data);
   //const id = router.query.id as string;
 
+  // const amountInput = useRef() as MutableRefObject<HTMLInputElement>;
+
   const amountInput = useRef<HTMLSelectElement>(null);
   const substermInput = useRef<HTMLSelectElement>(null);
   const groundpointInput = useRef<HTMLSelectElement>(null);
@@ -137,6 +139,8 @@ const ProductDetail = ({ item }: ProductsProp) => {
               src={item.productImageUrl}
               width={400}
               height={400}
+              placeholder="blur"
+              blurDataURL={item.productImageUrl}
             />
             <p>{item.productName}</p>
             <h1>

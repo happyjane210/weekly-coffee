@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import Sidebar from "../../components/sidebar/sidebar";
 import { Card } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../provider";
-import { loadProduct } from "../../provider/modules/product";
 
 export interface ProductPagingResponse {
   content: ProductItem[];
@@ -49,6 +46,7 @@ export interface ProductsProp {
 }
 
 const Products = ({ item }: ProductsProp) => {
+  console.log("--SSR | item:ProductsProp--");
   console.log(item);
   const router = useRouter();
   // const dispatch = useDispatch<AppDispatch>();
@@ -97,41 +95,39 @@ const Products = ({ item }: ProductsProp) => {
           </h1>
           <div className="d-flex flex-wrap">
             {item.content.map((item, index) => (
-              <>
-                <Card
-                  key={item.productId}
-                  style={{
-                    width: "calc((100% - 3rem) / 4)",
-                    marginLeft: index % 4 === 0 ? "0" : "1rem",
-                    marginTop: index > 3 ? "1rem" : "0",
-                  }}
-                  onClick={() => {
-                    // id값을 물고 이동해야함
-                    router.push(`/products/detail/${item.productId}`);
-                  }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={item.productImageUrl}
-                    alt={item.productName}
-                    width="150px"
-                  />
+              <Card
+                key={index}
+                style={{
+                  width: "calc((100% - 3rem) / 4)",
+                  marginLeft: index % 4 === 0 ? "0" : "1rem",
+                  marginTop: index > 3 ? "1rem" : "0",
+                }}
+                onClick={() => {
+                  // id값을 물고 이동해야함
+                  router.push(`/products/detail/${item.productId}`);
+                }}
+              >
+                <Card.Img
+                  variant="top"
+                  src={item.productImageUrl}
+                  alt={item.productName}
+                  width="150px"
+                />
+                <Card.Body>
+                  <Card.Title className="text-center">
+                    {item.productName}
+                  </Card.Title>
                   <Card.Body>
-                    <Card.Title className="text-center">
-                      {item.productName}
-                    </Card.Title>
-                    <Card.Body>
-                      <h2 className="text-center">
-                        <b>{item.companyName}</b>
-                      </h2>
-                      <h4 className="text-center">{item.cupNote}</h4>
-                      <h3 className="text-center" style={{ color: "#00bcd4" }}>
-                        <b>{item.productPrice}</b>
-                      </h3>
-                    </Card.Body>
+                    <h2 className="text-center">
+                      <b>{item.companyName}</b>
+                    </h2>
+                    <h4 className="text-center">{item.cupNote}</h4>
+                    <h3 className="text-center" style={{ color: "#00bcd4" }}>
+                      <b>{item.productPrice}</b>
+                    </h3>
                   </Card.Body>
-                </Card>
-              </>
+                </Card.Body>
+              </Card>
             ))}
           </div>
         </section>

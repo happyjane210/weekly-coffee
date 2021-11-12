@@ -68,37 +68,35 @@ const Index = ({ item }: ProductsProp) => {
         <hr />
         <div className="d-flex justify-content-center my-5 py-5">
           {item.content.map((item, index) => (
-            <>
-              <Card
-                key={item.productId}
-                style={{
-                  width: "calc((100% - 3rem) / 4)",
-                  marginLeft: index % 4 === 0 ? "0" : "1rem",
-                  marginTop: index > 3 ? "1rem" : "0",
-                }}
-                onClick={() => {
-                  // id값을 물고 이동해야함
-                  router.push(`/products/detail/${item.productId}`);
-                }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={item.productImageUrl}
-                  alt={item.productName}
-                  width="150px"
-                />
+            <Card
+              key={index}
+              style={{
+                width: "calc((100% - 3rem) / 4)",
+                marginLeft: index % 4 === 0 ? "0" : "1rem",
+                marginTop: index > 3 ? "1rem" : "0",
+              }}
+              onClick={() => {
+                // id값을 물고 이동해야함
+                router.push(`/products/detail/${item.productId}`);
+              }}
+            >
+              <Card.Img
+                variant="top"
+                src={item.productImageUrl}
+                alt={item.productName}
+                width="150px"
+              />
+              <Card.Body>
+                <Card.Title className="text-center">
+                  {item.productName}
+                </Card.Title>
                 <Card.Body>
-                  <Card.Title className="text-center">
-                    {item.productName}
-                  </Card.Title>
-                  <Card.Body>
-                    <h2 className="text-center">
-                      <b>{item.companyName}</b>
-                    </h2>
-                  </Card.Body>
+                  <h2 className="text-center">
+                    <b>{item.companyName}</b>
+                  </h2>
                 </Card.Body>
-              </Card>
-            </>
+              </Card.Body>
+            </Card>
           ))}
         </div>
       </div>

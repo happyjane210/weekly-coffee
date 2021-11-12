@@ -23,14 +23,22 @@ const navbar = () => {
                   <a className={style.a}>PRODUCT</a>
                 </Link>
               </Nav.Item>
+
               <Nav.Item className="me-3">
                 <Link href="/notice">
                   <a className={style.a}>NOTICE</a>
                 </Link>
               </Nav.Item>
+
               <Nav.Item className="me-3">
                 <Link href="/cart">
                   <a className={style.a}>CART</a>
+                </Link>
+              </Nav.Item>
+
+              <Nav.Item>
+                <Link href="/mypage">
+                  <a className={style.a}>MYPAGE</a>
                 </Link>
               </Nav.Item>
             </Nav>

@@ -2,19 +2,26 @@ import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../provider";
 import style from "./order.module.css";
-import { Card, Form, Button, Table } from "react-bootstrap";
+import { Card, Form, Button, Table, NavItem } from "react-bootstrap";
 import { useRouter } from "next/router";
+import { addSubscribe, Subscribe } from "../../provider/modules/subscribe";
+import cartItem, { CartItem } from "../../provider/modules/cartItem";
 
-const order = () => {
+interface CartProp {
+  item: CartItem;
+}
+
+const order = ({ item }: CartProp) => {
   const cartData = useSelector((state: RootState) => state.cartItem.data);
+  const subscribeData = useSelector((state: RootState) => state.subscribe.data);
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
   const nameInput = useRef() as MutableRefObject<HTMLInputElement>;
-  const phoneInput = useRef<HTMLInputElement>(null);
-  const addressInput1 = useRef<HTMLInputElement>(null);
-  const addressInput2 = useRef<HTMLInputElement>(null);
-  const memoInput = useRef<HTMLInputElement>(null);
+  const phoneInput = useRef() as MutableRefObject<HTMLInputElement>;
+  const addressInput1 = useRef() as MutableRefObject<HTMLInputElement>;
+  const addressInput2 = useRef() as MutableRefObject<HTMLInputElement>;
+  const memoInput = useRef() as MutableRefObject<HTMLTextAreaElement>;
 
   const [addTotal, setAddTotal] = useState(0);
 
@@ -29,6 +36,37 @@ const order = () => {
 
   // 배송비 포함한 합계 금액
   let final = addTotal + 2500;
+
+  const handleAddSubscribe = () => {
+    console.log(nameInput.current.value);
+    console.log(phoneInput.current.value);
+    console.log(addressInput1.current.value);
+    console.log(addressInput2.current.value);
+    console.log(memoInput.current.value);
+
+    const subsItem: Subscribe = {
+      partnerId: cartData[0].partnerId,
+      subscribeId: subscribeData.length ? subscribeData[0].subscribeId + 1 : 1,
+      subscribeDate: new Date().toLocaleDateString(),
+      subscriberName: nameInput.current.value,
+      subscriberPhone: phoneInput.current.value,
+      deliveryMemo: memoInput.current.value,
+      location: addressInput1.current.value + addressInput2.current.value,
+      totalPayment: final,
+      SubscribeDetail: [...cartData],
+    };
+
+    dispatch(addSubscribe(subsItem));
+
+    console.log("--dispatch in index--");
+    console.log(subsItem);
+  };
+
+  //SubscribeDetail: cartData[],
+
+  //cartData.map((item:CartItem, index:Number, array:CartItem[]) =>)
+
+  //(value: CartItem, index: number, array: CartItem[]) => CartItemState'
 
   return (
     <>
@@ -53,6 +91,7 @@ const order = () => {
                 type="name"
                 placeholder="이름"
                 style={{ width: "200px" }}
+                ref={nameInput}
               />
             </Form.Group>
 
@@ -63,6 +102,7 @@ const order = () => {
                 type="phone"
                 placeholder="0000"
                 style={{ width: "200px", marginRight: "0.5rem" }}
+                ref={phoneInput}
               />
             </Form.Group>
 
@@ -74,11 +114,13 @@ const order = () => {
                 type="adress"
                 placeholder="주소"
                 style={{ width: "470px", marginBottom: "0.5rem" }}
+                ref={addressInput1}
               />
               <Form.Control
                 type="adress"
                 placeholder="상세주소"
                 style={{ width: "470px" }}
+                ref={addressInput2}
               />
             </Form.Group>
 
@@ -91,6 +133,7 @@ const order = () => {
                 type="memo"
                 placeholder="배송메모"
                 style={{ width: "470px" }}
+                ref={memoInput}
               />
             </Form.Group>
           </Form>
@@ -103,32 +146,36 @@ const order = () => {
           </h2>
           <div style={{ padding: "1rem", marginTop: "1rem" }}>
             <Table>
-              <tr>
-                <td>
-                  <h4>
-                    주문금액
-                    <br />
-                    배송비
-                  </h4>
-                </td>
-                <td>
-                  <h4>
-                    KRW {new Intl.NumberFormat().format(addTotal)}
-                    <br />
-                    KRW 2,500
-                  </h4>
-                </td>
-              </tr>
-              <tfoot>
-                <td>
-                  <h4> 총 결제 금액</h4>
-                </td>
-                <td>
-                  <h4>
-                    <b>KRW {new Intl.NumberFormat().format(final)}</b>
-                  </h4>
-                </td>
-              </tfoot>
+              <thead>
+                <tr>
+                  <td>
+                    <h4>
+                      주문금액
+                      <br />
+                      배송비
+                    </h4>
+                  </td>
+                  <td>
+                    <h4>
+                      KRW {new Intl.NumberFormat().format(addTotal)}
+                      <br />
+                      KRW 2,500
+                    </h4>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <h4> 총 결제 금액</h4>
+                  </td>
+                  <td>
+                    <h4>
+                      <b>KRW {new Intl.NumberFormat().format(final)}</b>
+                    </h4>
+                  </td>
+                </tr>
+              </tbody>
             </Table>
           </div>
         </div>
@@ -138,7 +185,7 @@ const order = () => {
             <b>상품 정보</b>
           </h2>
           {cartData.map((item, index) => (
-            <Card className={style.card}>
+            <Card className={style.card} key={index}>
               <Card.Body className="d-flex">
                 <div>
                   <img
@@ -169,7 +216,14 @@ const order = () => {
             </Card>
           ))}
           <div className="d-grid gap-2">
-            <Button variant="outline-success" size="lg">
+            <Button
+              variant="outline-success"
+              size="lg"
+              onClick={() => {
+                handleAddSubscribe();
+                router.push("/mypage");
+              }}
+            >
               결제하기
             </Button>
           </div>
