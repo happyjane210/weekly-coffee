@@ -8,13 +8,13 @@ export interface ProductItem {
   productName: string;
   productPrice: number;
   productImageUrl: string;
+  fileName: string;
+  fileType: string;
   foodType: string;
   expirationData: string;
   manufacturer: string;
   manufacturingDate: string;
   companyName: string;
-  fileName: string;
-  fileType: string;
   productUploadDate: number;
   companyIntroduce: string;
   companyAddress: string;

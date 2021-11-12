@@ -1,21 +1,21 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { NavItem } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../../components/sidebar/sidebar";
-import { RootState } from "../../../provider";
+import { AppDispatch, RootState } from "../../../provider";
 import { ProductItem, ProductState } from "../../../provider/modules/product";
-import { ProductsProp } from "../../products";
 import style from "./catsdetail.module.css";
 
-const CatDetail = ({ item }: ProductsProp) => {
+const CatDetail = () => {
   const router = useRouter();
-
+  const dispatch = useDispatch<AppDispatch>();
   const id = router.query.id as string;
 
   const product = useSelector((state: RootState) =>
-    state.product.data.find((item) => item.partnerId === +id)
+    state.product.data.find((item) => item.productId === +id)
   );
+
   return (
     <>
       <article className="d-flex" style={{ minHeight: "calc(100vh - 290px)" }}>

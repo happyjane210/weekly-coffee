@@ -1,12 +1,34 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../provider";
-import { ProductItem } from "../../provider/modules/product";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../provider";
 import style from "./order.module.css";
 import { Card, Form, Button, Table } from "react-bootstrap";
+import { useRouter } from "next/router";
 
 const order = () => {
-  const order = useSelector((state: RootState) => state.product.data);
+  const cartData = useSelector((state: RootState) => state.cartItem.data);
+  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const nameInput = useRef() as MutableRefObject<HTMLInputElement>;
+  const phoneInput = useRef<HTMLInputElement>(null);
+  const addressInput1 = useRef<HTMLInputElement>(null);
+  const addressInput2 = useRef<HTMLInputElement>(null);
+  const memoInput = useRef<HTMLInputElement>(null);
+
+  const [addTotal, setAddTotal] = useState(0);
+
+  useEffect(() => {
+    // 배송비 포함하기 전 합계 금액
+    let total = 0;
+    cartData.map((item) => {
+      total += item.productPrice; // 모든 cartItem의 가격을 더함
+    });
+    setAddTotal(total);
+  }, []);
+
+  // 배송비 포함한 합계 금액
+  let final = addTotal + 2500;
 
   return (
     <>
@@ -24,52 +46,30 @@ const order = () => {
             <b>배송지 정보</b>
           </h2>
           <Form style={{ padding: "1rem", marginTop: "2rem" }}>
+            {/* nameInput */}
             <Form.Group className="mb-4" controlId="name">
               <Form.Label>받으시는 분</Form.Label>
-
               <Form.Control
                 type="name"
                 placeholder="이름"
                 style={{ width: "200px" }}
               />
             </Form.Group>
+
+            {/* phoneInput */}
             <Form.Group className="mb-4" controlId="phoneNumber">
               <Form.Label>휴대전화</Form.Label>
-              <div className="d-flex">
-                <Form.Select
-                  defaultValue="선택하세요"
-                  style={{ width: "150px", marginRight: "0.5rem" }}
-                >
-                  <option>선택하세요</option>
-                  <option>010</option>
-                  <option>011</option>
-                  <option>016</option>
-                  <option>017</option>
-                  <option>018</option>
-                  <option>019</option>
-                </Form.Select>
-                <Form.Control
-                  type="phone"
-                  placeholder="0000"
-                  style={{ width: "150px", marginRight: "0.5rem" }}
-                />
-                <Form.Control
-                  type="phone"
-                  placeholder="0000"
-                  style={{ width: "150px" }}
-                />
-              </div>
+              <Form.Control
+                type="phone"
+                placeholder="0000"
+                style={{ width: "200px", marginRight: "0.5rem" }}
+              />
             </Form.Group>
+
+            {/* addressInput */}
             <Form.Group className="mb-4" controlId="adress">
               <Form.Label>주소</Form.Label>
-              <div className="d-flex mb-2">
-                <Form.Control
-                  type="zip"
-                  placeholder="우편번호"
-                  style={{ width: "150px", marginRight: "0.5rem" }}
-                />
-                <Button variant="outline-secondary">검색</Button>
-              </div>
+              <div className="d-flex mb-2"></div>
               <Form.Control
                 type="adress"
                 placeholder="주소"
@@ -81,6 +81,8 @@ const order = () => {
                 style={{ width: "470px" }}
               />
             </Form.Group>
+
+            {/*  */}
             <Form.Group>
               <Form.Label>배송 메모</Form.Label>
               <Form.Control
@@ -103,19 +105,29 @@ const order = () => {
             <Table>
               <tr>
                 <td>
-                  주문금액
-                  <br />
-                  배송비
+                  <h4>
+                    주문금액
+                    <br />
+                    배송비
+                  </h4>
                 </td>
                 <td>
-                  KRW 100,000
-                  <br />
-                  KRW 2,500
+                  <h4>
+                    KRW {new Intl.NumberFormat().format(addTotal)}
+                    <br />
+                    KRW 2,500
+                  </h4>
                 </td>
               </tr>
               <tfoot>
-                <td>총 결제 금액</td>
-                <td>KRW 102,500</td>
+                <td>
+                  <h4> 총 결제 금액</h4>
+                </td>
+                <td>
+                  <h4>
+                    <b>KRW {new Intl.NumberFormat().format(final)}</b>
+                  </h4>
+                </td>
               </tfoot>
             </Table>
           </div>
@@ -125,29 +137,33 @@ const order = () => {
           <h2 style={{ textAlign: "center" }}>
             <b>상품 정보</b>
           </h2>
-          {order.map((item: ProductItem, index: number) => (
+          {cartData.map((item, index) => (
             <Card className={style.card}>
               <Card.Body className="d-flex">
                 <div>
                   <img
-                    src={item.image}
-                    alt={item.name}
+                    src={item.productImageUrl}
+                    alt={item.productName}
                     width="100px"
                     style={{ margin: "auto auto" }}
                   />
                 </div>
                 <div style={{ marginLeft: "1rem" }}>
                   <h5>
-                    [{item.name}] {item.description}
+                    [{item.companyName}] {item.productName}
                   </h5>
                   <p>
-                    option1:00000 <br />
-                    option2:00000 <br />
-                    option3:00000 <br />
-                    quantity: 1
+                    {item.beanAmount} <br />
+                    {item.groundPoint} <br />
+                    {item.term} <br />
+                    quantity: {item.orderQuantity}
                   </p>
                   <h6></h6>
-                  <h5>price: {item.price}</h5>
+                  <h5>
+                    <b>
+                      PRICE: {new Intl.NumberFormat().format(item.productPrice)}
+                    </b>
+                  </h5>
                 </div>
               </Card.Body>
             </Card>
@@ -164,3 +180,6 @@ const order = () => {
 };
 
 export default order;
+function final(final: any): React.ReactNode {
+  throw new Error("Function not implemented.");
+}

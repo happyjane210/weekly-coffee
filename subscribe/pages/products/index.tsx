@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import router, { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Sidebar from "../../components/sidebar/sidebar";
 import { Card } from "react-bootstrap";
-import Link from "next/link";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../provider";
+import { loadProduct } from "../../provider/modules/product";
 
 export interface ProductPagingResponse {
-  content: ProductResponse[];
+  content: ProductItem[];
   last: boolean;
   totalElements: number;
   totalPages: number;
@@ -14,7 +15,7 @@ export interface ProductPagingResponse {
   number: number;
 }
 
-export interface ProductResponse {
+export interface ProductItem {
   productId: number;
   partnerId: number;
   productName: string;
@@ -50,6 +51,41 @@ export interface ProductsProp {
 const Products = ({ item }: ProductsProp) => {
   console.log(item);
   const router = useRouter();
+  // const dispatch = useDispatch<AppDispatch>();
+  // const productData = useSelector((state: RootState) => state.product.data);
+
+  // const product: ProductItem = {
+  //   productId: productData.length ? productData[0].productId + 1 : 1,
+  //   partnerId: 0,
+  //   productName: "",
+  //   productPrice: 0,
+  //   productImageUrl: "",
+  //   fileName: "",
+  //   fileType: "",
+  //   foodType: "",
+  //   expirationData: "",
+  //   manufacturer: "",
+  //   manufacturingDate: "",
+  //   companyName: "",
+  //   productUploadDate: 0,
+  //   companyIntroduce: "",
+  //   companyAddress: "",
+  //   companyContact: "",
+  //   beanType: "",
+  //   beanTag: "",
+  //   processing: "",
+  //   country: "",
+  //   region: "",
+  //   farm: "",
+  //   cupNote: "",
+  //   roastingPoint: "",
+  //   variety: "",
+  //   salesStatus: 0,
+  // };
+
+  // useEffect(() => {
+  //   dispatch(loadProduct(product));
+  // }, []);
 
   return (
     <>
@@ -219,7 +255,3 @@ export async function getServerSideProps() {
 }
 
 export default Products;
-
-/**
- *
- */

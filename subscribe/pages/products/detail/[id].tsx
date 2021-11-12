@@ -6,26 +6,60 @@ import style from "./productdetail.module.css";
 import axios from "axios";
 import Image from "next/image";
 import { GetServerSideProps } from "next";
-import { Card, Form, Button } from "react-bootstrap";
+import { Card, Form, Button, NavItem } from "react-bootstrap";
 import router, { useRouter } from "next/router";
-import { ProductPagingResponse, ProductResponse } from "..";
 import { AppDispatch, RootState } from "../../../provider";
-import { addOption, OptionItem } from "../../../provider/modules/options";
+import { addCart, CartItem } from "../../../provider/modules/cartItem";
+import { iteratorSymbol } from "immer/dist/internal";
+import { ProductPagingResponse } from "../..";
+
+interface ProductItem {
+  productId: number;
+  partnerId: number;
+  productName: string;
+  productPrice: number;
+  productImageUrl: string;
+  fileName: string;
+  fileType: string;
+  foodType: string;
+  expirationData: string;
+  manufacturer: string;
+  manufacturingDate: string;
+  companyName: string;
+  productUploadDate: number;
+  companyIntroduce: string;
+  companyAddress: string;
+  companyContact: string;
+  beanType: string;
+  beanTag: string;
+  processing: string;
+  country: string;
+  region: string;
+  farm: string;
+  cupNote: string;
+  roastingPoint: string;
+  variety: string;
+  salesStatus: number;
+}
 
 interface ProductsProp {
-  item: ProductResponse;
+  item: ProductItem;
 }
 
 const ProductDetail = ({ item }: ProductsProp) => {
+  console.log("--SSR item--");
+  console.log(item);
+
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const optionData = useSelector((state: RootState) => state.option.data);
-  const productData = useSelector((state: RootState) => state.product.data);
+  const cartItemData = useSelector((state: RootState) => state.cartItem.data);
+
+  //const productData = useSelector((state: RootState) => state.product.data);
   //const id = router.query.id as string;
 
   const amountInput = useRef<HTMLSelectElement>(null);
   const substermInput = useRef<HTMLSelectElement>(null);
-  const grindpointInput = useRef<HTMLSelectElement>(null);
+  const groundpointInput = useRef<HTMLSelectElement>(null);
   const quantityInput = useRef<HTMLInputElement>(null);
 
   const [total, setTotal] = useState(0);
@@ -60,28 +94,26 @@ const ProductDetail = ({ item }: ProductsProp) => {
   const handleAddOption = () => {
     console.log(amountInput.current?.value);
     console.log(substermInput.current?.value);
-    console.log(grindpointInput.current?.value);
+    console.log(groundpointInput.current?.value);
     console.log(quantityInput.current?.value);
 
-    const item: OptionItem = {
-      optionId: optionData.length ? optionData[0].optionId + 1 : 1,
+    const orderItem: CartItem = {
+      cartItemId: cartItemData.length ? cartItemData[0].cartItemId + 1 : 1,
       beanAmount: amountInput.current ? amountInput.current.value : "",
       term: substermInput.current ? substermInput.current.value : "",
-      grindPoint: grindpointInput.current ? grindpointInput.current.value : "",
-      totalCost: total,
-      //quantity: quantityInput.current ? quantityInput.current.value : 0,
-      ///
-      //partnerId: productData.length
-      //productId: productData.find((item) => item.productId === +id),
-      partnerId: 0,
-      productId: 0,
-      productName: "",
-      productPrice: 0,
-      companyName: "",
-      quantity: 0,
+      groundPoint: groundpointInput.current
+        ? groundpointInput.current.value
+        : "",
+      orderQuantity: quantityInput.current ? +quantityInput.current.value : 0,
+      productPrice: total,
+      productId: item.productId,
+      productImageUrl: item.productImageUrl,
+      productName: item.productName,
+      companyName: item.companyName,
+      partnerId: item.partnerId,
     };
 
-    dispatch(addOption(item));
+    dispatch(addCart(orderItem));
   };
 
   return (
@@ -153,9 +185,9 @@ const ProductDetail = ({ item }: ProductsProp) => {
                     <option value="--" disabled>
                       select coffee amount
                     </option>
-                    <option>200g</option>
-                    <option>400g</option>
-                    <option>600g</option>
+                    <option value="200g">200g</option>
+                    <option value="400g">400g</option>
+                    <option value="600g">600g</option>
                   </Form.Select>
                   <h3>subscribe term</h3>
                   <Form.Select
@@ -174,20 +206,20 @@ const ProductDetail = ({ item }: ProductsProp) => {
                     <option>2개월 - 8회</option>
                     <option>3개월 - 12회</option>
                   </Form.Select>
-                  <h3>grind-point</h3>
+                  <h3>ground-point</h3>
                   <Form.Select
                     aria-label="Floating label select example"
                     size="lg"
                     className="mb-4"
-                    ref={grindpointInput}
+                    ref={groundpointInput}
                     onChange={() => {
                       calc(item.productPrice);
                     }}
                   >
                     <option value="--" disabled>
-                      select grind-point
+                      select ground-point
                     </option>
-                    <option>홀빈(갈지않음)</option>
+                    <option value="홀빈(갈지않음)">홀빈(갈지않음)</option>
                     <option>에스프레소</option>
                     <option>더치</option>
                     <option>프렌치프레스</option>
@@ -203,7 +235,7 @@ const ProductDetail = ({ item }: ProductsProp) => {
                     onChange={() => {
                       calc(item.productPrice);
                     }}
-                    defaultValue="0"
+                    defaultValue="1"
                   />
 
                   <hr className="my-5" />

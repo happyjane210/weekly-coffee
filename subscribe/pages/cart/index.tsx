@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Sidebar from "../../components/sidebar/sidebar";
 import { Table, Form, Button } from "react-bootstrap";
 import style from "./cart.module.css";
-import { useSelector } from "react-redux";
-import { RootState } from "../../provider";
-import product, { ProductItem } from "../../provider/modules/product";
-import router from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../provider";
+import router, { useRouter } from "next/router";
 
 const cart = () => {
-  const cart = useSelector((state: RootState) => state.product.data);
+  const cartData = useSelector((state: RootState) => state.cartItem.data);
+  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const deleteAll = () => {
-    return null;
-  };
+  const checkInput = useRef<HTMLInputElement>(null);
+
+  const [addTotal, setAddTotal] = useState(0);
+
+  const selectAll = () => {};
+  const deleteAll = () => {};
+  const deleteOne = () => {};
+
+  //
+  useEffect(() => {
+    let total = 0;
+    cartData.map((item) => {
+      total += item.productPrice;
+    });
+    setAddTotal(total);
+  }, []);
 
   return (
     <>
@@ -27,96 +41,110 @@ const cart = () => {
             <h1 className="my-4">
               <b>SHOPPING CART</b>
             </h1>
+
             <Table className={style.table}>
               <thead>
                 <tr>
                   <th>
                     <Form>
-                      <Form.Check type={"checkbox"} />
+                      <Form.Check type={"checkbox"} ref={checkInput} />
                     </Form>
                   </th>
                   <th>ITEM</th>
                   <th>NAME</th>
                   <th>PRICE</th>
                   <th>QUANTITY</th>
+                  <th>OPTION</th>
                   <th>REMOVE</th>
                 </tr>
               </thead>
               <tbody>
-                {cart.map((item: ProductItem, index: number) => (
+                {cartData.map((cartitem, index) => (
                   <tr key={index}>
                     <td>
                       <Form>
-                        <Form.Check type={"checkbox"} />
+                        <Form.Check
+                          type={"checkbox"}
+                          ref={checkInput}
+                          onClick={() => {
+                            selectAll();
+                          }}
+                        />
                       </Form>
                     </td>
                     <td>
-                      <img src={item.image} alt={item.name} width="100px" />
-                    </td>
-                    <td>
-                      [{item.name}] {item.description}
-                    </td>
-                    <td>
-                      <b>{item.price}</b>
-                    </td>
-                    <td>
-                      <input
-                        type="number"
-                        name="quantity"
-                        placeholder="1"
-                        id="quantity"
-                        min="1"
-                        style={{
-                          padding: "0.4rem",
-                          fontSize: "18px",
-                          textAlign: "center",
-                          maxWidth: "100px",
-                        }}
+                      <img
+                        src={cartitem.productImageUrl}
+                        alt={cartitem.productName}
+                        width="100px"
                       />
                     </td>
                     <td>
-                      <i className="bi bi-x-lg"></i>
+                      [{cartitem.companyName}] {cartitem.productName}
+                    </td>
+                    <td>
+                      <b>
+                        {new Intl.NumberFormat().format(cartitem.productPrice)}
+                      </b>
+                    </td>
+                    <td>{cartitem.orderQuantity}</td>
+                    <td>
+                      {cartitem.beanAmount} <br />
+                      {cartitem.groundPoint} <br />
+                      {cartitem.term}
+                    </td>
+                    <td>
+                      <i
+                        className="bi bi-x-lg"
+                        onClick={() => {
+                          deleteOne();
+                        }}
+                      ></i>
                     </td>
                   </tr>
                 ))}
               </tbody>
               <tfoot>
                 <tr>
-                  <td></td>
-                  <td>
-                    <Button
-                      variant="outline-secondary"
-                      onClick={() => {
-                        deleteAll();
-                      }}
-                    >
-                      전체삭제
-                    </Button>
+                  <td colSpan={2}>
+                    <div className="d-flex">
+                      <Button
+                        variant="outline-secondary"
+                        onClick={() => {
+                          deleteAll();
+                        }}
+                      >
+                        전체삭제
+                      </Button>
+                    </div>
                   </td>
                   <td>
                     <b>Order Total</b>
                   </td>
                   <td>
-                    <b>KRW 00,000</b>
+                    <b>{new Intl.NumberFormat().format(addTotal)}</b>
                   </td>
-                  <td colSpan={2}>
-                    <Button
-                      variant="outline-secondary"
-                      className="me-2"
-                      onClick={() => {
-                        router.push("/order");
-                      }}
-                    >
-                      선택 상품 주문
-                    </Button>
-                    <Button
-                      variant="outline-dark"
-                      onClick={() => {
-                        router.push("/order");
-                      }}
-                    >
-                      전체 상품 주문
-                    </Button>
+
+                  <td colSpan={3}>
+                    <div className="d-flex justify-content-end">
+                      <Button
+                        variant="outline-dark"
+                        className="me-2"
+                        onClick={() => {
+                          router.push("/order");
+                        }}
+                      >
+                        선택 상품 주문
+                      </Button>
+                      <Button
+                        variant="outline-dark"
+                        onClick={() => {
+                          router.push("/order");
+                        }}
+                      >
+                        전체 상품 주문
+                      </Button>
+                    </div>
                   </td>
                 </tr>
               </tfoot>

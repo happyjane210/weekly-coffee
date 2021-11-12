@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productReducer from "../provider/modules/product";
-import optionReducer from "../provider/modules/options";
+import cartItemReducer from "./modules/cartItem";
 
 import rootSaga from "../middleware/index";
 import createSagaMiddleware from "@redux-saga/core";
@@ -20,7 +20,7 @@ export const store = configureStore({
     //alert: alertReducer,
     product: productReducer, // product state를 처리하는  reducer 등록
 
-    option: optionReducer,
+    cartItem: cartItemReducer,
   },
   // redux store(dispatcher)에 미들웨어 적용
   // middleware는 여러개 사용할 수 있음, [defaultMiddlware, sagaMiddleware, thunkMiddlware]

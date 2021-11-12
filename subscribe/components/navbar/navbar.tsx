@@ -33,11 +33,6 @@ const navbar = () => {
                   <a className={style.a}>CART</a>
                 </Link>
               </Nav.Item>
-              <Nav.Item>
-                <Link href="/mypage">
-                  <a className={style.a}>MYPAGE</a>
-                </Link>
-              </Nav.Item>
             </Nav>
           </div>
         </Container>
