@@ -203,6 +203,88 @@
 
 <br>
 
+### 2021-11-11
+
+<details>
+<summary> SSR product + CSR cartItem 리덕스 구현 [👈click]</summary>
+
+## Front-end
+
+<br>
+
+> - Github commit
+>   <br> https://github.com/happyjane210/weekly-coffee/commit/c69e1c5fad51c95df538ba238c15643ed24a3018
+> - Develop issue
+>   <br> https://www.notion.so/SSR-CSR-state-9877dc1b6f744104b874cedac1497a08
+
+<br>
+
+- product는 serversideRender 인데 내가 입력하는 cartItem input 은 클라이언트사이드 라서 이 두개를 어떻게 묶어서 cartItem state로 보내야 할지 고민이 많았다.
+- 어려움을 겪었지만 결론은 가능했던 것이었다.
+- 왼쪽이 SSR로 불러온 제품정보, 오른쪽이 CSR input 으로 입력하는 옵션선택 정보
+
+<br>
+
+![화면 캡처 2021-11-13 164539](https://user-images.githubusercontent.com/87756895/141610626-4e0b38bc-beb4-43ce-a6a3-4c14d8d72a19.png)
+
+<br>
+
+---
+
+</details>
+
+<br>
+
+### 2021-11-12
+
+<details>
+<summary> subscribe Redux state 구현 [👈click]</summary>
+
+## Front-end
+
+<br>
+
+> - Github commit
+>   <br> https://github.com/happyjane210/weekly-coffee/commit/1cb0437237eb7cd4cc5fc982e7396e18d6e9daca
+> - Develop Issue
+>   <br> https://www.notion.so/state-f1ace38024fc48219689ed4a8589d44f
+
+<br>
+
+- subscribe state를 cartItem 에서 넘어온 정보와 입력한 자료를 함께 묶어서 보내줘야 했다.
+  - subscribe state 내부에 cartItem을 배열로 보내는데 어려움이 있었다
+
+<br>
+
+- state 에 배열 넣는 방법
+  <br>
+
+![화면 캡처 2021-11-13 033655](https://user-images.githubusercontent.com/87756895/141646439-ce559d86-3847-43d1-a303-3de5016422e5.png)
+
+<br>
+
+- console에 찍힌 subsItem 모습
+
+<br>
+
+![화면 캡처 2021-11-13 033519](https://user-images.githubusercontent.com/87756895/141646555-ffdec5b9-a322-4bf6-81be-ecdc51893bf5.png)
+
+<br>
+
+- state에 추가된 모습
+
+<br>
+
+![화면 캡처 2021-11-13 031959](https://user-images.githubusercontent.com/87756895/141646619-f1b032e2-9e9c-4cfa-8915-f7a6beac5728.png)
+
+<br>
+
+---
+
+</details>
+
+<br>
+
 ### 2021-00-00 (양식)
 
 <details>

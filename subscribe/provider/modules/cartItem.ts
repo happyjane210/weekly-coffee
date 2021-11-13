@@ -58,8 +58,8 @@ const cartItemSlice = createSlice({
     },
 
     // 장바구니 전체 삭제
-    removeAll: (state, action: PayloadAction<CartItem>) => {
-      const cart = action.payload;
+    removeAll: (state, action: PayloadAction<number>) => {
+      const length = action.payload;
       console.log("--remove all in reducer--");
       state.data.splice(0, state.data.length);
       state.isRemoveAllCompleted = true;
