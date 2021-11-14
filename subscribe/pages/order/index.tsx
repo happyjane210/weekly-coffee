@@ -7,11 +7,7 @@ import { useRouter } from "next/router";
 import { addSubscribe, Subscribe } from "../../provider/modules/subscribe";
 import cartItem, { CartItem } from "../../provider/modules/cartItem";
 
-interface CartProp {
-  item: CartItem;
-}
-
-const order = ({ item }: CartProp) => {
+const order = () => {
   const cartData = useSelector((state: RootState) => state.cartItem.data);
   const subscribeData = useSelector((state: RootState) => state.subscribe.data);
   const router = useRouter();
@@ -38,12 +34,6 @@ const order = ({ item }: CartProp) => {
   let final = addTotal + 2500;
 
   const handleAddSubscribe = () => {
-    console.log(nameInput.current.value);
-    console.log(phoneInput.current.value);
-    console.log(addressInput1.current.value);
-    console.log(addressInput2.current.value);
-    console.log(memoInput.current.value);
-
     const subsItem: Subscribe = {
       partnerId: cartData[0].partnerId,
       subscribeId: subscribeData.length ? subscribeData[0].subscribeId + 1 : 1,
@@ -61,6 +51,12 @@ const order = ({ item }: CartProp) => {
     console.log("--dispatch in index--");
     console.log(subsItem);
   };
+
+  // console.log(nameInput.current.value);
+  //   console.log(phoneInput.current.value);
+  //   console.log(addressInput1.current.value);
+  //   console.log(addressInput2.current.value);
+  //   console.log(memoInput.current.value);
 
   //SubscribeDetail: cartData[],
 

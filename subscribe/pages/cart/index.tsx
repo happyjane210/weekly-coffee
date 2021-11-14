@@ -19,7 +19,7 @@ const cart = () => {
   const deleteAll = () => {};
   const deleteOne = () => {};
 
-  //
+  // 장바구니에 들어있는 총액 더해서 보여줌
   useEffect(() => {
     let total = 0;
     cartData.map((item) => {
