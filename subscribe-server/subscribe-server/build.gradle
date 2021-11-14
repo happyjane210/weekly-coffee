@@ -22,14 +22,20 @@ dependencies {
     //JPA , postgreSQL
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'org.postgresql:postgresql'
+	
 	// Spring boot
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	// redis»ç¿ë
+	
+	// redisì‚¬ìš©
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.5.5'
+    // rabbit mq
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	// rabbit mq test
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 }
 
 test {

@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:  application:    name: subscribe-server
+  datasource:    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://database-1.caipcwydwewo.ap-northeast-2.rds.amazonaws.com:5432/postgres?currentSchema=weeklycoffee
+    username: postgres
+    password: password123!
+  jpa:    show-sql: true
+    generate-ddl: true
+  cache:    type: redis
+  redis:    host: 127.0.0.1
+    port: 6379
+  rabbitmq:    addresses: amqps://b-2c76102e-2ad9-459d-b4f8-9656a169070f.mq.ap-northeast-2.amazonaws.com:5671
+    username: rabbitmq
+    password: password123!
