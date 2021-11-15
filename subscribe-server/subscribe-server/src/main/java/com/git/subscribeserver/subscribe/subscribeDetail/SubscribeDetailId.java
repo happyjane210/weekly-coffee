@@ -11,10 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SubscribeDetailId implements Serializable {
 
-	
-	  /**
-	 * 
-	 */
 	private static final long serialVersionUID = 4115897150946242178L;
 	
 	private long subscribeId;

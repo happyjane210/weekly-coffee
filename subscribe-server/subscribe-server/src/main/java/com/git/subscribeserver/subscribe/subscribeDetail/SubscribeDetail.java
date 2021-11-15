@@ -1,6 +1,5 @@
 package com.git.subscribeserver.subscribe.subscribeDetail;
 
-import com.git.subscribeserver.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.ManyToOne;
+
 
 @Data
 @Builder
@@ -22,18 +21,31 @@ public class SubscribeDetail {
     private long subscribeId;
 
     @Id
-    private int seq;
+    private int seq;  // 상품 숫자
 
-    @ManyToOne
-    private Product product;
-
-    private long partnerId;
-    private String productName;
-    private int productPrice;
     private int beanAmount;
     private int term;
-    private int orderQuantity;
     private String groundPoint;
+    private int orderQuantity;
+    private int productPrice;
+
+    private long productId;
     private String productImageUrl;
+    private String productName;
+    
+    private long partnerId;
+    private String companyName;
+
+
+
+
+
+
+
+
+
+
+
+
 }
 

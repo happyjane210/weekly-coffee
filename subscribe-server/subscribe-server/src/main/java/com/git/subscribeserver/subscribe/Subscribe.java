@@ -29,8 +29,6 @@ public class Subscribe {
     private String location;
     private String deliveryMemo;
     private int totalPayment;
-    private boolean orderCheck;
-    private long createdTime;
 
 
     @OneToMany //단방향 <- List<subscribeDetail>

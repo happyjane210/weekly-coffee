@@ -12,13 +12,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@IdClass(ProductId.class)
 public class Product {
 
     @Id
     private long productId;
 
-    
     private long partnerId;
 
     private String productName;
