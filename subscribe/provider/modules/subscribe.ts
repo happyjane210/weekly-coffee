@@ -3,16 +3,17 @@ import { CartItem } from "./cartItem";
 
 export interface Subscribe {
   //1
-  partnerId: number;
   subscribeId: number;
+  partnerId: number;
   subscribeDate: string;
+  subscriberId: number; //추가함
   subscriberName: string;
   subscriberPhone: string;
-  deliveryMemo: string;
   location: string;
+  deliveryMemo: string;
   totalPayment: number;
 
-  SubscribeDetail: CartItem[]; //[1, 2]
+  details: CartItem[]; //[1, 2]
 }
 // subs 1  subsDetail[1(1), 2(1)]  -> 백엔드
 

@@ -37,14 +37,17 @@ const order = () => {
     const subsItem: Subscribe = {
       partnerId: cartData[0].partnerId,
       subscribeId: subscribeData.length ? subscribeData[0].subscribeId + 1 : 1,
+      subscriberId: 0,
       subscribeDate: new Date().toLocaleDateString(),
       subscriberName: nameInput.current.value,
       subscriberPhone: phoneInput.current.value,
       deliveryMemo: memoInput.current.value,
       location: addressInput1.current.value + addressInput2.current.value,
       totalPayment: final,
-      SubscribeDetail: [...cartData],
+      details: [...cartData],
     };
+
+    //details: [...cartData],
 
     dispatch(addSubscribe(subsItem));
 

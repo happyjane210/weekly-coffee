@@ -2,9 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ProductItem } from "./product";
 
 export interface CartItem {
-  cartItemId: number;
-  beanAmount: string;
-  term: string;
+  subscribeId?: number; // 부모의 id
+  seq: number;
+  beanAmount: number;
+  term: number;
   groundPoint: string;
   orderQuantity: number;
   productPrice: number;
@@ -51,7 +52,7 @@ const cartItemSlice = createSlice({
 
       // id에 해당하는 아이템의 index를 찾고 그 index로 splice를 한다.
       state.data.splice(
-        state.data.findIndex((item) => item.cartItemId === id),
+        state.data.findIndex((item) => item.seq === id),
         1
       );
       state.isRemoveOneCompleted = true;

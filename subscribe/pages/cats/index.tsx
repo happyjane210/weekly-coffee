@@ -1,14 +1,20 @@
 import router from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Image } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../components/sidebar/sidebar";
-import { RootState } from "../../provider";
+import { requestFatchAllProduct } from "../../middleware/module/product";
+import { AppDispatch, RootState } from "../../provider";
 import product, { ProductItem } from "../../provider/modules/product";
 
 const Cats = () => {
   // useseletor로 product state 전체를 가져옴
+  const dispatch = useDispatch<AppDispatch>();
   const cats = useSelector((state: RootState) => state.product.data);
+
+  useEffect(() => {
+    dispatch(requestFatchAllProduct());
+  }, []);
 
   return (
     <>
@@ -19,38 +25,39 @@ const Cats = () => {
             <strong>CATS</strong>
           </h1>
           <div className="d-flex flex-wrap">
-            {cats.map((item: ProductItem, index: number) => (
-              <Card
-                key={index}
-                style={{
-                  width: "calc((100% - 3rem) / 4)",
-                  marginLeft: index % 4 === 0 ? "0" : "1rem",
-                  marginTop: index > 3 ? "1rem" : "0",
-                }}
-                onClick={() => {
-                  // id값을 물고 이동해야함
-                  router.push(`/cats/detail/${item.productId}`);
-                }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={item.productImageUrl}
-                  alt={item.productName}
-                  width="150px"
-                />
-                <Card.Body>
-                  <Card.Title className="text-center">
-                    {item.companyName}
-                  </Card.Title>
+            {cats &&
+              cats.map((item, index) => (
+                <Card
+                  key={index}
+                  style={{
+                    width: "calc((100% - 3rem) / 4)",
+                    marginLeft: index % 4 === 0 ? "0" : "1rem",
+                    marginTop: index > 3 ? "1rem" : "0",
+                  }}
+                  onClick={() => {
+                    // id값을 물고 이동해야함
+                    router.push(`/cats/detail/${item.productId}`);
+                  }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={item.productImageUrl}
+                    alt={item.productName}
+                    width="150px"
+                  />
                   <Card.Body>
-                    <h2 className="text-center">
-                      <b>{item.productName}</b>
-                    </h2>
-                    <h4 className="text-center">{item.productPrice}</h4>
+                    <Card.Title className="text-center">
+                      {item.companyName}
+                    </Card.Title>
+                    <Card.Body>
+                      <h2 className="text-center">
+                        <b>{item.productName}</b>
+                      </h2>
+                      <h4 className="text-center">{item.productPrice}</h4>
+                    </Card.Body>
                   </Card.Body>
-                </Card.Body>
-              </Card>
-            ))}
+                </Card>
+              ))}
           </div>
         </section>
       </article>
