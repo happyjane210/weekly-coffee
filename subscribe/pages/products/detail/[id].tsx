@@ -61,7 +61,8 @@ const ProductDetail = ({ item }: ProductsProp) => {
         ? groundpointInput.current.value
         : "",
       orderQuantity: quantityInput.current ? +quantityInput.current.value : 0,
-      productPrice: total,
+      sum: total,
+      productPrice: item.productPrice,
       productId: item.productId,
       productImageUrl: item.productImageUrl,
       productName: item.productName,
@@ -70,6 +71,9 @@ const ProductDetail = ({ item }: ProductsProp) => {
     };
 
     dispatch(addCart(orderItem));
+
+    console.log("sum " + total);
+    console.log("productPrice " + item.productPrice);
   };
 
   return (
@@ -107,10 +111,25 @@ const ProductDetail = ({ item }: ProductsProp) => {
             <br />
             <br />
             <br />
-            <h4>{item.processing}</h4>
             <h4>{item.beanTag}</h4>
             <h4>{item.beanType}</h4>
+            <h4>{item.companyAddress}</h4>
+            <h4>{item.companyContact}</h4>
+            <h4>{item.companyIntroduce}</h4>
+            <h4>{item.companyName}</h4>
+            <h4>{item.country}</h4>
+            <h4>{item.cupNote}</h4>
+            <h4>{item.expirationData}</h4>
+            <h4>{item.farm}</h4>
+            <h4>{item.foodType}</h4>
+            <h4>{item.manufacturer}</h4>
+            <h4>{item.manufacturingDate}</h4>
+            <h4>{item.processing}</h4>
+            <h4>{item.productName}</h4>
+            <h4>{item.productPrice}</h4>
+            <h4>{item.region}</h4>
             <h4>{item.roastingPoint}</h4>
+            <h4>{item.variety}</h4>
           </div>
           {/* orderdetail */}
           <div className={style.order}>
@@ -118,7 +137,7 @@ const ProductDetail = ({ item }: ProductsProp) => {
               <Card.Body>
                 <Card.Body>
                   <h1>
-                    [{item.companyName}] {item.companyIntroduce}
+                    [{item.companyName}] {item.productName}
                   </h1>
                   <h1 style={{ color: "#00bcd4" }}>
                     <b>

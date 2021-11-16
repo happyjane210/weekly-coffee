@@ -13,7 +13,7 @@ export interface Subscribe {
   deliveryMemo: string;
   totalPayment: number;
 
-  details: CartItem[]; //[1, 2]
+  subscribeDetails: CartItem[]; //[1, 2]
 }
 // subs 1  subsDetail[1(1), 2(1)]  -> 백엔드
 

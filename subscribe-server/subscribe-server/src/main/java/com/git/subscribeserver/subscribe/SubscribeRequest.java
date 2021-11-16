@@ -16,13 +16,11 @@ public class SubscribeRequest {
 	private long subscribeId;
     private long partnerId;
 
-    private String subscribeDate;
     private int subscriberId;
     private String subscriberName;
     private String subscriberPhone;
     private String location;
     private String deliveryMemo;
-    private int totalPayment;
     private List<SubscribeDetail> subscribeDetails;
     
     @Data

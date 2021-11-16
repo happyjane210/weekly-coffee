@@ -10,6 +10,11 @@ spring:  application:    name: subscribe-server
   cache:    type: redis
   redis:    host: 127.0.0.1
     port: 6379
-  rabbitmq:    addresses: amqps://b-2c76102e-2ad9-459d-b4f8-9656a169070f.mq.ap-northeast-2.amazonaws.com:5671
+  rabbitmq:
+    listener:      simple:        retry:          enabled: true
+          initial-interval: 3s
+          max-interval: 10s
+          max-attempts: 5
+          multiplier: 2    addresses: amqps://b-2c76102e-2ad9-459d-b4f8-9656a169070f.mq.ap-northeast-2.amazonaws.com:5671
     username: rabbitmq
     password: password123!

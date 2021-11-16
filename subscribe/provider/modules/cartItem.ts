@@ -9,6 +9,7 @@ export interface CartItem {
   groundPoint: string;
   orderQuantity: number;
   productPrice: number;
+  sum: number;
 
   productId: number;
   productImageUrl: string;

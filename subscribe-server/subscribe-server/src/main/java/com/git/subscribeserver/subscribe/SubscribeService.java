@@ -34,14 +34,12 @@ public class SubscribeService {
 		
 		// 요청객체 -> entity 객체로 변환 - 내 DB에 저장
 		Subscribe toSaveSubs = Subscribe.builder()
-				.partnerId(subsReq.getPartnerId())
-				.subscribeDate(subsReq.getSubscribeDate())
+				.partnerId(subsReq.getPartnerId())		
 				.subscriberId(subsReq.getSubscriberId())
 				.subscriberName(subsReq.getSubscriberName())
 				.subscriberPhone(subsReq.getSubscriberPhone())
 				.location(subsReq.getLocation())
 				.deliveryMemo(subsReq.getDeliveryMemo())
-				.totalPayment(subsReq.getTotalPayment())
 				.build();
 		
 		// 주문 정보 저장

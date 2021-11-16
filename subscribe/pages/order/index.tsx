@@ -6,6 +6,7 @@ import { Card, Form, Button, Table, NavItem } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { addSubscribe, Subscribe } from "../../provider/modules/subscribe";
 import cartItem, { CartItem, clearCart } from "../../provider/modules/cartItem";
+import { requestAddSubscribe } from "../../middleware/module/subscribe";
 
 const order = () => {
   const cartData = useSelector((state: RootState) => state.cartItem.data);
@@ -44,12 +45,14 @@ const order = () => {
       deliveryMemo: memoInput.current.value,
       location: addressInput1.current.value + addressInput2.current.value,
       totalPayment: final,
-      details: [...cartData],
+      subscribeDetails: [...cartData],
     };
 
     //details: [...cartData],
 
-    dispatch(addSubscribe(subsItem));
+    //dispatch(addSubscribe(subsItem));
+
+    dispatch(requestAddSubscribe(subsItem));
 
     console.log("--dispatch in index--");
     console.log(subsItem);
@@ -222,6 +225,7 @@ const order = () => {
                 handleAddSubscribe();
                 router.push("/mypage");
                 // 순차적으로 처리 안될 수 있음
+
                 dispatch(clearCart());
               }}
             >
@@ -235,6 +239,3 @@ const order = () => {
 };
 
 export default order;
-function final(final: any): React.ReactNode {
-  throw new Error("Function not implemented.");
-}

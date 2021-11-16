@@ -24,6 +24,7 @@ public class SubscribeController {
 	// 주문 추가
 	@PostMapping("/subscribes")
 	public Subscribe requestSubscribe(@RequestBody SubscribeRequest subsReq) {
+		System.out.println(subsReq);
 		Subscribe savedSubscribe = service.saveSubscribe(subsReq);
 		service.sendSubscribe(savedSubscribe);
 		return savedSubscribe;
