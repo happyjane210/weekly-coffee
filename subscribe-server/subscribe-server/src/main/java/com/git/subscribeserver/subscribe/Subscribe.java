@@ -33,6 +33,6 @@ public class Subscribe {
 
     @OneToMany //단방향 <- List<subscribeDetail>
     @JoinColumn(name = "subscribeId")
-    private List<SubscribeDetail> details;
+    private List<SubscribeDetail> subscribeDetails;
 
 }

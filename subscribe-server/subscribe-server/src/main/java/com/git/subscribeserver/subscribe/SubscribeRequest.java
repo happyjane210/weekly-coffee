@@ -23,7 +23,7 @@ public class SubscribeRequest {
     private String location;
     private String deliveryMemo;
     private int totalPayment;
-    private List<SubscribeDetail> details;
+    private List<SubscribeDetail> subscribeDetails;
     
     @Data
     @NoArgsConstructor

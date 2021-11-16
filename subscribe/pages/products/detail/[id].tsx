@@ -37,27 +37,11 @@ const ProductDetail = ({ item }: ProductsProp) => {
   const [total, setTotal] = useState(0);
 
   const calc = (price: number) => {
-    let quantity = quantityInput.current ? quantityInput.current.value : "";
+    let quantity = quantityInput.current ? +quantityInput.current.value : 0;
 
-    let amount = 0;
-    if (amountInput.current?.value === "200g") {
-      amount = 1;
-    } else if (amountInput.current?.value === "400g") {
-      amount = 2;
-    } else if (amountInput.current?.value === "600g") {
-      amount = 3;
-    }
-
-    let term = 0;
-    if (substermInput.current?.value === "1개월 - 4회") {
-      term = 4;
-    } else if (substermInput.current?.value === "2개월 - 8회") {
-      term = 8;
-    } else if (substermInput.current?.value === "3개월 - 12회") {
-      term = 12;
-    }
-
-    let total = +(price * amount * term * +quantity);
+    let amount = amountInput.current ? +amountInput.current.value : 0;
+    let term = substermInput.current ? +substermInput.current.value : 0;
+    let total = price * amount * term * quantity;
     console.log(total);
 
     setTotal(total);
@@ -71,8 +55,8 @@ const ProductDetail = ({ item }: ProductsProp) => {
 
     const orderItem: CartItem = {
       seq: cartItemData.length ? cartItemData[0].seq + 1 : 1,
-      beanAmount: amountInput.current ? amountInput.current.value : "",
-      term: substermInput.current ? substermInput.current.value : "",
+      beanAmount: amountInput.current ? +amountInput.current.value : 0,
+      term: substermInput.current ? +substermInput.current.value : 0,
       groundPoint: groundpointInput.current
         ? groundpointInput.current.value
         : "",
@@ -159,9 +143,9 @@ const ProductDetail = ({ item }: ProductsProp) => {
                     <option value="--" disabled>
                       select coffee amount
                     </option>
-                    <option value="200g">200g</option>
-                    <option value="400g">400g</option>
-                    <option value="600g">600g</option>
+                    <option value="1">200g</option>
+                    <option value="2">400g</option>
+                    <option value="3">600g</option>
                   </Form.Select>
                   <h3>subscribe term</h3>
                   <Form.Select
@@ -176,9 +160,9 @@ const ProductDetail = ({ item }: ProductsProp) => {
                     <option value="--" disabled>
                       select subscribe term
                     </option>
-                    <option>1개월 - 4회</option>
-                    <option>2개월 - 8회</option>
-                    <option>3개월 - 12회</option>
+                    <option value="4">1개월 - 4회</option>
+                    <option value="8">2개월 - 8회</option>
+                    <option value="12">3개월 - 12회</option>
                   </Form.Select>
                   <h3>ground-point</h3>
                   <Form.Select

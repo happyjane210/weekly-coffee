@@ -50,10 +50,10 @@ public class SubscribeService {
 		// 주문 상세정보 id 설정
 		List<SubscribeDetail> toSaveDetails = new ArrayList<SubscribeDetail>();
 		// detail 배열 생성 반복문
-		for(SubscribeRequest.SubscribeDetail detailReq : subsReq.getDetails()) {
+		for(SubscribeRequest.SubscribeDetail detailReq : subsReq.getSubscribeDetails()) {
 			SubscribeDetail detail = SubscribeDetail.builder()
 					.subscribeId(savedSubscribe.getSubscribeId())
-					.seq(subsReq.getDetails().indexOf(detailReq) + 1)
+					.seq(subsReq.getSubscribeDetails().indexOf(detailReq) + 1)
 					.beanAmount(detailReq.getBeanAmount())
 					.term(detailReq.getTerm())
 					.groundPoint(detailReq.getGroundPoint())
@@ -72,7 +72,7 @@ public class SubscribeService {
 		// 주문 상세정보 저장
 		List<SubscribeDetail> savedSubscribeDetails = detailRepo.saveAll(toSaveDetails);
 		
-		savedSubscribe.setDetails(savedSubscribeDetails);
+		savedSubscribe.setSubscribeDetails(savedSubscribeDetails);
 		
 		
 		return savedSubscribe;

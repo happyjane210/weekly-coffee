@@ -45,6 +45,11 @@ const cartItemSlice = createSlice({
       state.isAddCompleted = true;
     },
 
+    clearCart: (state) => {
+      const emptyCart: CartItem[] = [];
+      state.data = emptyCart;
+    },
+
     // 장바구니 목록 한개 삭제
     removeOne: (state, action: PayloadAction<number>) => {
       const id = action.payload;
@@ -68,6 +73,7 @@ const cartItemSlice = createSlice({
   },
 });
 
-export const { addCart, removeOne, removeAll } = cartItemSlice.actions;
+export const { addCart, removeOne, removeAll, clearCart } =
+  cartItemSlice.actions;
 
 export default cartItemSlice.reducer;

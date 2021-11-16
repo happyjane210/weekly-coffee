@@ -285,6 +285,78 @@
 
 <br>
 
+### 2021-11-15
+
+<details>
+<summary>product, subcribe 메시지 큐 구현 (소비자 <--> 판매자) [👈click]</summary>
+
+## Front-end && Back-end
+
+<br>
+
+> - Github commit
+>   <br>
+>   Front-end
+>   <br> > https://github.com/happyjane210/weekly-coffee/commit/f8c59e91d2db312433c8225a46f7387091c87e13 > <br>
+>   Back-end
+>   <br> > https://github.com/happyjane210/weekly-coffee/commit/87400d99d4bd688655482b4590b0e48c4660c6e0
+> - Develop Issue
+>   <br> > https://www.notion.so/subscribe-8011c25da3074d8287139ff683876197
+
+<br>
+
+- 판매자 → 소비자 product 데이터를 rabbit 메시지 큐로 받아오기 구현
+- 소비자 → 판매자 subscribe (결제) 데이터를 rabbit 메시지 큐로 받아오기 구현
+- subscribe는 백엔드까지 구현 완료 하였고, 프론트와 연결 하기 위해서 Redux-saga 와 api 를 구현할 예정이다.
+- 백엔드를 구현하면서 가장 신경 썼던 부분은 내 프론트와 백엔드 필드명과 타입, 그리고 메시지 큐 받는 쪽의 필드명과 타입이 일치해야 해서 그 부분을 맞추려고 노력했다.
+- product로 백엔드와 프론트를 연결하는 과정에서 프론트 api, redux-saga, slice , 백엔드 service, controller를 구현하는 순서를 익혔다.
+
+<br>
+
+- postman 에서 소비자 → 판매자 쪽으로 주문을 보낸다.
+
+<br>
+
+![화면 캡처 2021-11-16 002128](https://user-images.githubusercontent.com/87756895/141886064-3bf0d4b2-43a9-440a-8f6d-4f96196d9db2.png)
+
+<br>
+
+- 메시지 큐를 판매자 측에 주문이 이렇게 실시간으로 뜬다.
+
+<br>
+
+![화면 캡처 2021-11-16 003601](https://user-images.githubusercontent.com/87756895/141886207-115f93fb-71eb-4163-bbb9-6fec70131a58.png)
+
+![화면 캡처 2021-11-16 003641](https://user-images.githubusercontent.com/87756895/141886270-2b4f6323-8cff-46d7-9cfe-305b20ff1fab.png)
+
+<br>
+
+- PostgresQL 에서도 조회가 된다. 판매 상품 데이터와 주문 데이터
+
+<br>
+
+![화면 캡처 2021-11-16 004406](https://user-images.githubusercontent.com/87756895/141886393-a3963591-1a1a-4367-8fab-c778329e1f72.png)
+
+<br>
+
+![화면 캡처 2021-11-16 004608](https://user-images.githubusercontent.com/87756895/141886423-9a32f88f-83c5-45f0-9bb5-64abd041c2db.png)
+
+<br>
+
+- 내 쪽에서 SSR으로 불러온 판매 목록
+
+<br>
+
+![화면 캡처 2021-11-16 011240](https://user-images.githubusercontent.com/87756895/141886495-e6b1c773-b9d6-467e-b458-4a34c47ba3b8.png)
+
+<br>
+
+---
+
+</details>
+
+<br>
+
 ### 2021-00-00 (양식)
 
 <details>

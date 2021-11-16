@@ -5,6 +5,7 @@ import style from "./cart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../provider";
 import router, { useRouter } from "next/router";
+import { clearCart } from "../../provider/modules/cartItem";
 
 const cart = () => {
   const cartData = useSelector((state: RootState) => state.cartItem.data);
@@ -111,7 +112,8 @@ const cart = () => {
                       <Button
                         variant="outline-secondary"
                         onClick={() => {
-                          deleteAll();
+                          //deleteAll();
+                          dispatch(clearCart());
                         }}
                       >
                         전체삭제
