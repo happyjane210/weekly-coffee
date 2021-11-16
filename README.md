@@ -297,11 +297,11 @@
 > - Github commit
 >   <br>
 >   Front-end
->   <br> > https://github.com/happyjane210/weekly-coffee/commit/f8c59e91d2db312433c8225a46f7387091c87e13 > <br>
+>   <br> https://github.com/happyjane210/weekly-coffee/commit/f8c59e91d2db312433c8225a46f7387091c87e13 <br>
 >   Back-end
->   <br> > https://github.com/happyjane210/weekly-coffee/commit/87400d99d4bd688655482b4590b0e48c4660c6e0
+>   <br> https://github.com/happyjane210/weekly-coffee/commit/87400d99d4bd688655482b4590b0e48c4660c6e0
 > - Develop Issue
->   <br> > https://www.notion.so/subscribe-8011c25da3074d8287139ff683876197
+>   <br> https://www.notion.so/subscribe-8011c25da3074d8287139ff683876197
 
 <br>
 
