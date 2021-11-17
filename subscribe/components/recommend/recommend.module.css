@@ -1,0 +1,13 @@
+.recommand {
+  width: 15vw;
+  padding: 1rem;
+  text-align: center;
+  align-content: center;
+}
+
+.recommandWrap > div {
+  width: 150px;
+  height: 150px;
+  /* border: 1px solid #ddd; */
+  margin: 1rem auto;
+}

@@ -3,8 +3,13 @@ import React from "react";
 import { Button, Table } from "react-bootstrap";
 import NoticeSidebar from "../../../components/sidebar/noticeSidebar";
 import style from "./noticedetail.module.css";
+import Recommend, {
+  ProductsProp,
+} from "../../../components/recommend/recommend";
+import { ProductItem } from "../../../provider/modules/product";
+import axios from "axios";
 
-const NoticeDetail = () => {
+const NoticeDetail = ({ item }: ProductsProp) => {
   return (
     <>
       <article className="d-flex" style={{ minHeight: "calc(100vh - 290px)" }}>
@@ -73,21 +78,20 @@ const NoticeDetail = () => {
             </div>
           </div>
           {/* recommand */}
-          <div className={style.recommand}>
-            <h5>
-              <b>RECOMMAND</b>
-            </h5>
-            <div className={style.recommandwrap}>
-              <div>d</div>
-              <div>d</div>
-              <div>d</div>
-              <div>d</div>
-            </div>
-          </div>
+          <Recommend item={item} />
         </section>
       </article>
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const res = await axios.get<ProductItem[]>(`http://localhost:8080/products`);
+  const item = res.data;
+
+  console.log(item);
+
+  return { props: { item } };
+}
 
 export default NoticeDetail;

@@ -30,10 +30,13 @@ public class ProductController {
 	
 	@GetMapping(value = "/products/{id}")
 	public Optional<Product> getProduct(@PathVariable Long id) {
-		return productRepo.findById(id);
-				
+		return productRepo.findById(id);			
 	}
 
+//	@GetMapping(value = "/products/recommend")
+//	public List<Product> getRecommend() {
+//		return productRepo.findAll();
+//	}
 	
 	
 	

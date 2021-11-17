@@ -4,22 +4,14 @@
   text-align: center;
 }
 
-.recommand {
-  width: 15vw;
-  padding: 1rem;
-  text-align: center;
-  align-content: center;
-}
-
 .table {
   width: 85%;
   margin: 0 auto;
   vertical-align: middle;
 }
 
-.recommandWrap > div {
-  width: 150px;
-  height: 150px;
-  border: 1px solid #ddd;
-  margin: 1rem auto;
+.icon > i:hover {
+  color: rgb(255, 0, 0);
+  font-size: x-large;
+  cursor: pointer;
 }

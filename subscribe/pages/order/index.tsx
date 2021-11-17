@@ -224,8 +224,7 @@ const order = () => {
               onClick={() => {
                 handleAddSubscribe();
                 router.push("/mypage");
-                // 순차적으로 처리 안될 수 있음
-
+                // 순차적으로 처리 안될 수도 있음
                 dispatch(clearCart());
               }}
             >

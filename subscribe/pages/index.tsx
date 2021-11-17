@@ -1,23 +1,16 @@
-import { coffee } from "../lib/data/coffee";
 import axios from "axios";
 import React from "react";
 import router from "next/router";
 import { Card } from "react-bootstrap";
 import { ProductItem } from "../provider/modules/product";
 import Image from "next/image";
+import { coffee } from "../lib/data/coffee";
 
 export interface ProductsProp {
   item: ProductItem[];
 }
 
 const Index = ({ item }: ProductsProp) => {
-  const API_URL =
-    "http://makeup-api.herokuapp.com/api/v1/products.json?brand=dior";
-
-  function getData() {
-    axios.get(API_URL).then((res) => {});
-  }
-
   return (
     <>
       <div className="position-relative overflow-hidden p-md-5 m-md-3 text-center bg-light">

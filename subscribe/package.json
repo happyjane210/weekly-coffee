@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "deploy": "ssh -i \"C:Users\juh22OneDrive문서GithubGIT2021-workingmyworkspace.pem\" ubuntu@ec2-15-165-17-21.ap-northeast-2.compute.amazonaws.com \"pkill -f node; cd/home/ubuntu/weekly-coffee/subscribe; git pull; npm run build; nohup npm start 1>/dev/null 2>&1 & \""
+    "lint": "next lint"
   },
   "dependencies": {
     "@popperjs/core": "^2.10.2",

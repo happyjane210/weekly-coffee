@@ -46,6 +46,7 @@ const cartItemSlice = createSlice({
       state.isAddCompleted = true;
     },
 
+    // 장바구니 전체 삭제
     clearCart: (state) => {
       const emptyCart: CartItem[] = [];
       state.data = emptyCart;
@@ -63,18 +64,9 @@ const cartItemSlice = createSlice({
       );
       state.isRemoveOneCompleted = true;
     },
-
-    // 장바구니 전체 삭제
-    removeAll: (state, action: PayloadAction<number>) => {
-      const length = action.payload;
-      console.log("--remove all in reducer--");
-      state.data.splice(0, state.data.length);
-      state.isRemoveAllCompleted = true;
-    },
   },
 });
 
-export const { addCart, removeOne, removeAll, clearCart } =
-  cartItemSlice.actions;
+export const { addCart, removeOne, clearCart } = cartItemSlice.actions;
 
 export default cartItemSlice.reducer;

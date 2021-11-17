@@ -3,8 +3,11 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import NoticeSidebar from "../../components/sidebar/noticeSidebar";
 import style from "./notice.module.css";
+import Recommend, { ProductsProp } from "../../components/recommend/recommend";
+import axios from "axios";
+import { ProductItem } from "../../provider/modules/product";
 
-const notice = () => {
+const notice = ({ item }: ProductsProp) => {
   return (
     <>
       <article className="d-flex" style={{ minHeight: "calc(100vh - 290px)" }}>
@@ -15,7 +18,7 @@ const notice = () => {
         >
           {/* notice */}
           <div className={style.notice}>
-            <h1>
+            <h1 className="my-4">
               <b>NOTICE</b>
             </h1>
             <Table
@@ -58,21 +61,20 @@ const notice = () => {
             </Table>
           </div>
           {/* recommand */}
-          <div className={style.recommand}>
-            <h5>
-              <b>RECOMMAND</b>
-            </h5>
-            <div className={style.recommandwrap}>
-              <div>d</div>
-              <div>d</div>
-              <div>d</div>
-              <div>d</div>
-            </div>
-          </div>
+          <Recommend item={item} />
         </section>
       </article>
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const res = await axios.get<ProductItem[]>(`http://localhost:8080/products`);
+  const item = res.data;
+
+  console.log(item);
+
+  return { props: { item } };
+}
 
 export default notice;

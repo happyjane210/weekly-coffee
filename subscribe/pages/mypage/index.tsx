@@ -6,9 +6,13 @@ import Sidebar from "../../components/sidebar/sidebar";
 import { RootState } from "../../provider";
 import { ProductItem } from "../../provider/modules/product";
 import style from "./mypage.module.css";
+import Recommend, { ProductsProp } from "../../components/recommend/recommend";
+import axios from "axios";
+import Image from "next/image";
 
-const mypage = () => {
-  const mypage = useSelector((state: RootState) => state.product.data);
+const mypage = ({ item }: ProductsProp) => {
+  const subsData = useSelector((state: RootState) => state.subscribe.data);
+  const cartData = useSelector((state: RootState) => state.cartItem.data);
 
   return (
     <>
@@ -42,6 +46,31 @@ const mypage = () => {
                 </tr>
               </thead>
               <tbody>
+                {subsData.map((subsitem, index) => {
+                  subsitem.subscribeDetails.map((item) => (
+                    <tr key={index}>
+                      <td>{subsitem.subscribeDate}</td>
+                      <td>
+                        <Image
+                          loader={() => item.productImageUrl}
+                          alt={item.productName}
+                          objectFit="cover"
+                          src={item.productImageUrl}
+                          width={400}
+                          height={400}
+                          placeholder="blur"
+                          blurDataURL={item.productImageUrl}
+                        />
+                      </td>
+                      <td>
+                        [{item.companyName}]{item.productName}
+                      </td>
+                      <td>{}</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  ));
+                })}
                 {/* {mypage.map((item: ProductItem, index: number) => (
                   <tr
                     key={index}
@@ -63,21 +92,20 @@ const mypage = () => {
             </Table>
           </div>
           {/* recommand */}
-          <div className={style.recommand}>
-            <h5>
-              <b>RECOMMAND</b>
-            </h5>
-            <div className={style.recomendWrap}>
-              <div>d</div>
-              <div>d</div>
-              <div>d</div>
-              <div>d</div>
-            </div>
-          </div>
+          <Recommend item={item} />
         </section>
       </article>
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const res = await axios.get<ProductItem[]>(`http://localhost:8080/products`);
+  const item = res.data;
+
+  console.log(item);
+
+  return { props: { item } };
+}
 
 export default mypage;
