@@ -380,7 +380,7 @@
 ### 2021-11-17
 
 <details>
-<summary>장바구니 디테일, 추천 상품 구현 [👈click]</summary>
+<summary>장바구니 디테일 && 추천 상품 구현 [👈click]</summary>
 
 ## Front-end
 
@@ -388,18 +388,28 @@
 
 > - Github commit
 >   <br> https://github.com/happyjane210/weekly-coffee/commit/30da56c8341c355fea03d9c07092236bfb1a5d91
-> - Develop Issue
->   <br>
->   URL
+> - Develop Issue <br>
+>   - https://www.notion.so/recommend-SSR-props-up-7df6342784034949a189175accfbce59 <br>
+>   - https://www.notion.so/useEffect-state-749038e8a8be4f7fbc8da64e316855c8
 
 <br>
 
--
--
+- 장바구니에서 X 버튼 누르면 한 건만 삭제되는 기능을 구현했다.
+  - cart index 에서 remove 함수 구현 , cart Slice 와 dispatch로 연동하고 state 업데이트 reducer 구현
+- 추천 목록 배열을 component , SSR 으로 구현
+  - Recommend component , 각 import 하는 page에서 SSR api 호출문 작성
 
 <br>
 
-사진 / 참고자료
+- SSR으로 구현한 추천 제품
+
+![화면 캡처 2021-11-17 174541](https://user-images.githubusercontent.com/87756895/142238745-d84d3dce-d5a1-4fde-acf1-9a679a2040da.png)
+
+<br>
+
+- 장바구니 한건 삭제 구현 및 디테일 수정
+
+![ljl화면 캡처 2021-11-18 000427](https://user-images.githubusercontent.com/87756895/142239377-a3b428f7-4f9a-4c01-900b-7ec35934459e.png)
 
 <br>
 

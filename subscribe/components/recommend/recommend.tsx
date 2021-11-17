@@ -11,11 +11,11 @@ export interface ProductsProp {
 
 const recommend = ({ item }: ProductsProp) => {
   return (
-    <div className={style.recommand}>
+    <div className={style.recommend}>
       <h5>
-        <b>RECOMMAND</b>
+        <b>RECOMMEND</b>
       </h5>
-      <div className={style.recommandWrap}>
+      <div className={style.recommendWrap}>
         {item.map((item, index) => (
           <div
             key={index}
