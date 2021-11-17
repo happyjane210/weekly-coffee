@@ -2,10 +2,10 @@ import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../provider";
 import style from "./order.module.css";
-import { Card, Form, Button, Table, NavItem } from "react-bootstrap";
+import { Card, Form, Button, Table } from "react-bootstrap";
 import { useRouter } from "next/router";
-import { addSubscribe, Subscribe } from "../../provider/modules/subscribe";
-import cartItem, { CartItem, clearCart } from "../../provider/modules/cartItem";
+import { Subscribe } from "../../provider/modules/subscribe";
+import { clearCart } from "../../provider/modules/cartItem";
 import { requestAddSubscribe } from "../../middleware/module/subscribe";
 
 const order = () => {
@@ -21,15 +21,43 @@ const order = () => {
   const memoInput = useRef() as MutableRefObject<HTMLTextAreaElement>;
 
   const [addTotal, setAddTotal] = useState(0);
+  const [amount, setAmount] = useState("");
+  const [term, setTerm] = useState("");
 
   useEffect(() => {
     // 배송비 포함하기 전 합계 금액
     let total = 0;
     cartData.map((item) => {
-      total += item.productPrice; // 모든 cartItem의 가격을 더함
+      total += item.sum; // 모든 cartItem의 가격을 더함
     });
     setAddTotal(total);
-  }, []);
+
+    let convertAmt = 0;
+    let convertTrm = 0;
+    cartData.map((option) => {
+      convertAmt = option.beanAmount;
+      console.log(convertAmt);
+
+      if (convertAmt === 1) {
+        setAmount("200g");
+      } else if (convertAmt === 2) {
+        setAmount("400g");
+      } else if (convertAmt === 3) {
+        setAmount("600g");
+      }
+
+      convertTrm = option.term;
+      console.log(convertTrm);
+      // 4 8 12
+      if (convertTrm === 4) {
+        setTerm("1개월 - 4회");
+      } else if (convertTrm === 8) {
+        setTerm("2개월 - 8회");
+      } else if (convertTrm === 12) {
+        setTerm("3개월 - 12회");
+      }
+    });
+  }, [cartData]);
 
   // 배송비 포함한 합계 금액
   let final = addTotal + 2500;
@@ -202,16 +230,14 @@ const order = () => {
                     [{item.companyName}] {item.productName}
                   </h5>
                   <p>
-                    {item.beanAmount} <br />
+                    {amount} <br />
                     {item.groundPoint} <br />
-                    {item.term} <br />
+                    {term} <br />
                     quantity: {item.orderQuantity}
                   </p>
                   <h6></h6>
                   <h5>
-                    <b>
-                      PRICE: {new Intl.NumberFormat().format(item.productPrice)}
-                    </b>
+                    <b>PRICE: {new Intl.NumberFormat().format(item.sum)}</b>
                   </h5>
                 </div>
               </Card.Body>

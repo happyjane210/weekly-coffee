@@ -4,12 +4,8 @@ import { Table, Form, Button } from "react-bootstrap";
 import style from "./cart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../provider";
-import router, { useRouter } from "next/router";
-import {
-  CartItem,
-  clearCart,
-  removeOne,
-} from "../../provider/modules/cartItem";
+import { useRouter } from "next/router";
+import { clearCart, removeOne } from "../../provider/modules/cartItem";
 import Recommend, { ProductsProp } from "../../components/recommend/recommend";
 import axios from "axios";
 import { ProductItem } from "../../provider/modules/product";
@@ -26,7 +22,6 @@ const cart = ({ item }: ProductsProp) => {
   const [term, setTerm] = useState("");
 
   const selectAll = () => {};
-  const deleteAll = () => {};
   const deleteOne = (id: number) => {
     dispatch(removeOne(id));
   };
@@ -151,7 +146,6 @@ const cart = ({ item }: ProductsProp) => {
                       <Button
                         variant="outline-secondary"
                         onClick={() => {
-                          //deleteAll();
                           dispatch(clearCart());
                         }}
                       >

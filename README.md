@@ -377,6 +377,38 @@
 
 <br>
 
+### 2021-11-17
+
+<details>
+<summary>장바구니 디테일, 추천 상품 구현 [👈click]</summary>
+
+## Front-end
+
+<br>
+
+> - Github commit
+>   <br> https://github.com/happyjane210/weekly-coffee/commit/30da56c8341c355fea03d9c07092236bfb1a5d91
+> - Develop Issue
+>   <br>
+>   URL
+
+<br>
+
+-
+-
+
+<br>
+
+사진 / 참고자료
+
+<br>
+
+---
+
+</details>
+
+<br>
+
 ### 2021-00-00 (양식)
 
 <details>
