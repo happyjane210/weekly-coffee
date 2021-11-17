@@ -257,7 +257,6 @@
 <br>
 
 - state 에 배열 넣는 방법
-  <br>
 
 ![화면 캡처 2021-11-13 033655](https://user-images.githubusercontent.com/87756895/141646439-ce559d86-3847-43d1-a303-3de5016422e5.png)
 
@@ -265,15 +264,11 @@
 
 - console에 찍힌 subsItem 모습
 
-<br>
-
 ![화면 캡처 2021-11-13 033519](https://user-images.githubusercontent.com/87756895/141646555-ffdec5b9-a322-4bf6-81be-ecdc51893bf5.png)
 
 <br>
 
 - state에 추가된 모습
-
-<br>
 
 ![화면 캡처 2021-11-13 031959](https://user-images.githubusercontent.com/87756895/141646619-f1b032e2-9e9c-4cfa-8915-f7a6beac5728.png)
 
@@ -315,15 +310,11 @@
 
 - postman 에서 소비자 → 판매자 쪽으로 주문을 보낸다.
 
-<br>
-
 ![화면 캡처 2021-11-16 002128](https://user-images.githubusercontent.com/87756895/141886064-3bf0d4b2-43a9-440a-8f6d-4f96196d9db2.png)
 
 <br>
 
 - 메시지 큐를 판매자 측에 주문이 이렇게 실시간으로 뜬다.
-
-<br>
 
 ![화면 캡처 2021-11-16 003601](https://user-images.githubusercontent.com/87756895/141886207-115f93fb-71eb-4163-bbb9-6fec70131a58.png)
 
@@ -332,8 +323,6 @@
 <br>
 
 - PostgresQL 에서도 조회가 된다. 판매 상품 데이터와 주문 데이터
-
-<br>
 
 ![화면 캡처 2021-11-16 004406](https://user-images.githubusercontent.com/87756895/141886393-a3963591-1a1a-4367-8fab-c778329e1f72.png)
 
@@ -345,9 +334,40 @@
 
 - 내 쪽에서 SSR으로 불러온 판매 목록
 
+![화면 캡처 2021-11-16 011240](https://user-images.githubusercontent.com/87756895/141886495-e6b1c773-b9d6-467e-b458-4a34c47ba3b8.png)
+
 <br>
 
-![화면 캡처 2021-11-16 011240](https://user-images.githubusercontent.com/87756895/141886495-e6b1c773-b9d6-467e-b458-4a34c47ba3b8.png)
+---
+
+</details>
+
+<br>
+
+### 2021-11-16
+
+<details>
+<summary>subscirbe 백엔드 프론트 연동, 주문 추가 구현 [👈click]</summary>
+
+## Front-end && Back-end
+
+<br>
+
+> - Github commit
+>   <br> https://github.com/happyjane210/weekly-coffee/commit/d16d1a8c19743fc945f082ceca1b584d621f31ff
+> - Develop Issue
+>   <br> https://www.notion.so/e7b0af95bd5748cea4de5c81bd8b2787
+
+<br>
+
+- subscribe 백엔드 구현 후 프론트에서 subscirbe redux-saga , api 를 통해 백엔드와 연동을 구현했다.
+- 첫 홈페이지에서 slice 의 initial state 데이터로 넣어 놓은 데이터를 localhost 서버 SSR 으로 교체했다.
+
+<br>
+
+- 화면에서 넣은 주문이 local 서버로 잘 들어가는 모습
+
+![화면 캡처 2021-11-16 164821](https://user-images.githubusercontent.com/87756895/142095523-7d4112e3-40c6-45e3-93d0-78ea5a2de92c.png)
 
 <br>
 
