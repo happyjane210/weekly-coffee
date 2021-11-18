@@ -91,10 +91,10 @@ const ProductDetail = ({ item }: ProductsProp) => {
             </h1>
 
             <Image
+              src={item.productImageUrl}
               loader={() => item.productImageUrl}
               alt={item.productName}
               objectFit="cover"
-              src={item.productImageUrl}
               width={400}
               height={400}
               placeholder="blur"

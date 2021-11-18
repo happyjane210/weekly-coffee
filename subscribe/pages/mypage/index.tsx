@@ -1,18 +1,35 @@
 import router from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../components/sidebar/sidebar";
-import { RootState } from "../../provider";
+import { AppDispatch, RootState } from "../../provider";
 import { ProductItem } from "../../provider/modules/product";
 import style from "./mypage.module.css";
 import Recommend, { ProductsProp } from "../../components/recommend/recommend";
 import axios from "axios";
 import Image from "next/image";
+import { requestFetchPagingSubscribe } from "../../middleware/module/subscribe";
 
 const mypage = ({ item }: ProductsProp) => {
   const subsData = useSelector((state: RootState) => state.subscribe.data);
+  const subscribe = useSelector((state: RootState) => state.subscribe);
   const cartData = useSelector((state: RootState) => state.cartItem.data);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (subscribe.isFetched === false) {
+      dispatch(
+        requestFetchPagingSubscribe({
+          subscriberId: 1,
+          page: subscribe.page ? subscribe.page : 0,
+          size: subscribe.pageSize ? subscribe.pageSize : 0,
+        })
+      );
+    }
+  }, []);
+
+  console.log(subsData);
 
   return (
     <>
@@ -40,54 +57,41 @@ const mypage = ({ item }: ProductsProp) => {
                   <th>주문일자</th>
                   <th>제품</th>
                   <th>제품정보</th>
-                  <th>수량</th>
+                  <th>판매자</th>
                   <th>상품구매금액</th>
                   <th>주문처리상태</th>
                 </tr>
               </thead>
               <tbody>
-                {subsData.map((subsitem, index) => {
-                  subsitem.subscribeDetails.map((item) => (
-                    <tr key={index}>
-                      <td>{subsitem.subscribeDate}</td>
-                      <td>
-                        <Image
-                          loader={() => item.productImageUrl}
-                          alt={item.productName}
-                          objectFit="cover"
-                          src={item.productImageUrl}
-                          width={400}
-                          height={400}
-                          placeholder="blur"
-                          blurDataURL={item.productImageUrl}
-                        />
-                      </td>
-                      <td>
-                        [{item.companyName}]{item.productName}
-                      </td>
-                      <td>{}</td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  ));
-                })}
-                {/* {mypage.map((item: ProductItem, index: number) => (
+                {subsData.map((item, index) => (
                   <tr
                     key={index}
-                    onClick={() => router.push(`/mypage/detail/${item.id}}`)}
+                    onClick={() =>
+                      router.push(`/mypage/detail/${item.subscribeId}`)
+                    }
                   >
-                    <td>20211S09001</td>
+                    <td>{item.subscribeDate}</td>
                     <td>
-                      <img src={item.image} alt={item.name} width="50px" />
+                      <img
+                        src={item.subscribeDetails.map(
+                          (item) => item.productImageUrl
+                        )}
+                        alt={item.subscribeDetails.map(
+                          (item) => item.productName
+                        )}
+                        width={100}
+                      />
                     </td>
                     <td>
-                      [{item.name}] {item.description}
+                      {item.subscribeDetails.map((item) => item.productName)}
                     </td>
-                    <td>{item.id}</td>
-                    <td>{item.price}</td>
-                    <td>미접수/접수/출고</td>
+                    <td>
+                      {item.subscribeDetails.map((item) => item.companyName)}
+                    </td>
+                    <td>{item.totalPayment}</td>
+                    <td>{item.subscriberName}</td>
                   </tr>
-                ))} */}
+                ))}
               </tbody>
             </Table>
           </div>

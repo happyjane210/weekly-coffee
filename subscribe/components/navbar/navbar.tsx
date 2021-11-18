@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import Link from "next/link";
 import style from "./navbar.module.css";
 import Top from "../top";
 
 const navbar = () => {
+  // useEffect(() => {
+
+  // },[])
   return (
     <>
       <Navbar expand="lg" className={style.nav}>

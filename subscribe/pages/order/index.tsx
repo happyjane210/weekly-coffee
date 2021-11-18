@@ -63,10 +63,11 @@ const order = () => {
   let final = addTotal + 2500;
 
   const handleAddSubscribe = () => {
+    console.log("버튼 클릭");
     const subsItem: Subscribe = {
       partnerId: cartData[0].partnerId,
       subscribeId: subscribeData.length ? subscribeData[0].subscribeId + 1 : 1,
-      subscriberId: 0,
+      subscriberId: 1,
       subscribeDate: new Date().toLocaleDateString(),
       subscriberName: nameInput.current.value,
       subscriberPhone: phoneInput.current.value,
@@ -251,7 +252,6 @@ const order = () => {
                 handleAddSubscribe();
                 router.push("/mypage");
                 // 순차적으로 처리 안될 수도 있음
-                dispatch(clearCart());
               }}
             >
               결제하기

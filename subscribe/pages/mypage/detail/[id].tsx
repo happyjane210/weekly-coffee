@@ -1,10 +1,15 @@
+import axios from "axios";
 import router from "next/router";
 import React from "react";
 import { Button, Table } from "react-bootstrap";
+import Recommend, {
+  ProductsProp,
+} from "../../../components/recommend/recommend";
 import Sidebar from "../../../components/sidebar/sidebar";
+import { ProductItem } from "../../../provider/modules/product";
 import style from "./mypagedetail.module.css";
 
-const MypageDetail = () => {
+const MypageDetail = ({ item }: ProductsProp) => {
   return (
     <>
       <article className="d-flex" style={{ minHeight: "calc(100vh - 290px)" }}>
@@ -48,21 +53,21 @@ const MypageDetail = () => {
               목록
             </Button>
           </div>
-          <div className={style.recommand}>
-            <h5>
-              <b>RECOMMAND</b>
-            </h5>
-            <div className={style.recommandwrap}>
-              <div>d</div>
-              <div>d</div>
-              <div>d</div>
-              <div>d</div>
-            </div>
-          </div>
+          {/* recommand */}
+          <Recommend item={item} />
         </section>
       </article>
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const res = await axios.get<ProductItem[]>(`http://localhost:8080/products`);
+  const item = res.data;
+
+  console.log(item);
+
+  return { props: { item } };
+}
 
 export default MypageDetail;

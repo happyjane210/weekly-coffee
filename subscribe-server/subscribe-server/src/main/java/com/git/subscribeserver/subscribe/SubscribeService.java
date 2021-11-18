@@ -2,7 +2,9 @@ package com.git.subscribeserver.subscribe;
 
 import com.git.subscribeserver.subscribe.SubscribeRequest;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -32,7 +34,18 @@ public class SubscribeService {
 	@Transactional(rollbackOn = Exception.class)
 	public Subscribe saveSubscribe(SubscribeRequest subsReq ) {
 		
+		int total = 0;
+        for (SubscribeRequest.SubscribeDetail reqDetail : subsReq.getSubscribeDetails()) {
+            total += (reqDetail.getTerm() * reqDetail.getProductPrice()) * reqDetail.getOrderQuantity() * reqDetail.getBeanAmount();
+        }
+        
+        Date now = new Date();
+        String year = String.valueOf(now.getYear());
+        String month = String.format("%02d",now.getMonth() + 1);
+        String day = String.format("%02d", now.getDate());
+        
 		// 요청객체 -> entity 객체로 변환 - 내 DB에 저장
+		@SuppressWarnings("deprecation")
 		Subscribe toSaveSubs = Subscribe.builder()
 				.partnerId(subsReq.getPartnerId())		
 				.subscriberId(subsReq.getSubscriberId())
@@ -40,6 +53,8 @@ public class SubscribeService {
 				.subscriberPhone(subsReq.getSubscriberPhone())
 				.location(subsReq.getLocation())
 				.deliveryMemo(subsReq.getDeliveryMemo())
+				.totalPayment(total)
+				.subscribeDate(year+"-"+month+"-"+day)
 				.build();
 		
 		// 주문 정보 저장

@@ -1,4 +1,3 @@
-import axios from "axios";
 import Image from "next/image";
 import router from "next/router";
 import React from "react";
