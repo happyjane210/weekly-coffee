@@ -419,9 +419,44 @@
 
 <br>
 
+### 2021-11-18
+
+<details>
+<summary>subscribe 조회 구현 (마이페이지) [👈click]</summary>
+
+## Front-end && Back-end
+
+<br>
+
+> - Github commit
+>   <br>
+>   URL
+> - Develop Issue
+>   <br>
+>   URL
+>   <br>
+
+<br>
+
+-
+-
+
+<br>
+
+사진 / 참고자료
+
+<br>
+
+---
+
+</details>
+
+<br>
+
 ### 2021-00-00 (양식)
 
 <details>
+
 <summary> 요약 [👈click]</summary>
 
 ## Front-end / Back-end
