@@ -8,13 +8,11 @@ import { ProductItem } from "../../provider/modules/product";
 import style from "./mypage.module.css";
 import Recommend, { ProductsProp } from "../../components/recommend/recommend";
 import axios from "axios";
-import Image from "next/image";
 import { requestFetchPagingSubscribe } from "../../middleware/module/subscribe";
 
 const mypage = ({ item }: ProductsProp) => {
   const subsData = useSelector((state: RootState) => state.subscribe.data);
   const subscribe = useSelector((state: RootState) => state.subscribe);
-  const cartData = useSelector((state: RootState) => state.cartItem.data);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -47,7 +45,6 @@ const mypage = ({ item }: ProductsProp) => {
             <Table
               className="table-hover"
               style={{
-                width: "85%",
                 margin: "0 auto",
                 verticalAlign: "middle",
               }}
@@ -69,27 +66,46 @@ const mypage = ({ item }: ProductsProp) => {
                     onClick={() =>
                       router.push(`/mypage/detail/${item.subscribeId}`)
                     }
+                    style={{ cursor: "pointer" }}
                   >
                     <td>{item.subscribeDate}</td>
                     <td>
                       <img
-                        src={item.subscribeDetails.map(
-                          (item) => item.productImageUrl
-                        )}
-                        alt={item.subscribeDetails.map(
-                          (item) => item.productName
-                        )}
+                        src={
+                          item.subscribeDetails.length > 1
+                            ? item.subscribeDetails[0].productImageUrl
+                            : item.subscribeDetails[0].productImageUrl
+                        }
+                        alt={
+                          item.subscribeDetails.length > 1
+                            ? item.subscribeDetails[0].productName
+                            : item.subscribeDetails[0].productName
+                        }
                         width={100}
                       />
                     </td>
                     <td>
-                      {item.subscribeDetails.map((item) => item.productName)}
+                      {/* 여러개 주문했을 경우 첫번째 한개만 보여준다, 
+                      detail의 길이가 1보다 크면 배열의 첫번째만 보여주고,
+                      그게 아니면 배열의 첫번째만 보여준다.*/}
+                      {item.subscribeDetails.length > 1
+                        ? item.subscribeDetails[0].productName +
+                          ", 외 " +
+                          (item.subscribeDetails.length - 1) +
+                          "건"
+                        : item.subscribeDetails[0].productName}
                     </td>
                     <td>
-                      {item.subscribeDetails.map((item) => item.companyName)}
+                      {item.subscribeDetails.length > 1
+                        ? item.subscribeDetails[0].companyName
+                        : item.subscribeDetails[0].companyName}
                     </td>
-                    <td>{item.totalPayment}</td>
-                    <td>{item.subscriberName}</td>
+                    <td>{new Intl.NumberFormat().format(item.totalPayment)}</td>
+                    <td>
+                      {item.subscribeDetails.length > 1
+                        ? item.subscribeId
+                        : item.subscribeId}
+                    </td>
                   </tr>
                 ))}
               </tbody>

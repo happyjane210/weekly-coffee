@@ -21,45 +21,45 @@ const cart = ({ item }: ProductsProp) => {
   const [amount, setAmount] = useState("");
   const [term, setTerm] = useState("");
 
-  const selectAll = () => {};
   const deleteOne = (id: number) => {
     dispatch(removeOne(id));
   };
 
   // 장바구니에 들어있는 총액 더해서 보여줌
+
   useEffect(() => {
     let total = 0;
     cartData.map((item) => {
       total += item.sum;
     });
     setAddTotal(total);
+  }, []);
 
-    let convertAmt = 0;
-    let convertTrm = 0;
-    cartData.map((option) => {
-      convertAmt = option.beanAmount;
-      console.log(convertAmt);
+  // let convertAmt = 0;
+  // let convertTrm = 0;
+  // cartData.map((option) => {
+  //   convertAmt = option.beanAmount;
+  //   console.log(convertAmt);
 
-      if (convertAmt === 1) {
-        setAmount("200g");
-      } else if (convertAmt === 2) {
-        setAmount("400g");
-      } else if (convertAmt === 3) {
-        setAmount("600g");
-      }
+  //   if (convertAmt === 1) {
+  //     setAmount("200g");
+  //   } else if (convertAmt === 2) {
+  //     setAmount("400g");
+  //   } else if (convertAmt === 3) {
+  //     setAmount("600g");
+  //   }
 
-      convertTrm = option.term;
-      console.log(convertTrm);
+  //   convertTrm = option.term;
+  //   console.log(convertTrm);
 
-      if (convertTrm === 4) {
-        setTerm("1개월 - 4회");
-      } else if (convertTrm === 8) {
-        setTerm("2개월 - 8회");
-      } else if (convertTrm === 12) {
-        setTerm("3개월 - 12회");
-      }
-    });
-  }, [cartData]);
+  //   if (convertTrm === 4) {
+  //     setTerm("1개월 - 4회");
+  //   } else if (convertTrm === 8) {
+  //     setTerm("2개월 - 8회");
+  //   } else if (convertTrm === 12) {
+  //     setTerm("3개월 - 12회");
+  //   }
+  // });
 
   return (
     <>
@@ -103,9 +103,7 @@ const cart = ({ item }: ProductsProp) => {
                         <Form.Check
                           type={"checkbox"}
                           ref={checkInput}
-                          onClick={() => {
-                            selectAll();
-                          }}
+                          onClick={() => {}}
                         />
                       </Form>
                     </td>
@@ -124,9 +122,22 @@ const cart = ({ item }: ProductsProp) => {
                     </td>
                     <td>{cartitem.orderQuantity}</td>
                     <td>
-                      {amount} <br />
+                      {cartitem.beanAmount === 1
+                        ? "200g"
+                        : cartitem.beanAmount === 2
+                        ? "400g"
+                        : cartitem.beanAmount === 3
+                        ? "600g"
+                        : ""}
+                      <br />
                       {cartitem.groundPoint} <br />
-                      {term}
+                      {cartitem.term === 4
+                        ? "1개월 - 4회"
+                        : cartitem.term === 8
+                        ? "2개월 - 8회"
+                        : cartitem.term === 12
+                        ? "3개월 - 12회"
+                        : ""}
                     </td>
                     <td className={style.icon}>
                       <i

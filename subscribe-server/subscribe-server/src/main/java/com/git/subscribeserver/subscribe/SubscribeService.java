@@ -36,11 +36,12 @@ public class SubscribeService {
 		
 		int total = 0;
         for (SubscribeRequest.SubscribeDetail reqDetail : subsReq.getSubscribeDetails()) {
+        	System.out.println(total);
             total += (reqDetail.getTerm() * reqDetail.getProductPrice()) * reqDetail.getOrderQuantity() * reqDetail.getBeanAmount();
         }
         
         Date now = new Date();
-        String year = String.valueOf(now.getYear());
+        String year = String.valueOf(now.getYear() + 1900);
         String month = String.format("%02d",now.getMonth() + 1);
         String day = String.format("%02d", now.getDate());
         
@@ -55,6 +56,7 @@ public class SubscribeService {
 				.deliveryMemo(subsReq.getDeliveryMemo())
 				.totalPayment(total)
 				.subscribeDate(year+"-"+month+"-"+day)
+				.orderNumber(year + month + day + 00 + subsReq.getSubscribeId())
 				.build();
 		
 		// 주문 정보 저장
@@ -77,6 +79,7 @@ public class SubscribeService {
 					.productName(detailReq.getProductName())
 					.partnerId(detailReq.getPartnerId())
 					.companyName(detailReq.getCompanyName())
+					.sum(detailReq.getTerm() * detailReq.getBeanAmount() * detailReq.getOrderQuantity() * detailReq.getProductPrice())
 					.build();
 			
 			toSaveDetails.add(detail);

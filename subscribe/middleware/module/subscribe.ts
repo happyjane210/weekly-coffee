@@ -86,6 +86,7 @@ function* fetchPagingData(action: PayloadAction<PageRequest>) {
           deliveryMemo: item.deliveryMemo,
           totalPayment: item.totalPayment,
           subscribeDetails: item.subscribeDetails,
+          orderNumber: item.orderNumber,
         } as Subscribe)
     ),
     isLast: result.data.last,

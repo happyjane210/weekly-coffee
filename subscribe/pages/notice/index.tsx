@@ -24,7 +24,6 @@ const notice = ({ item }: ProductsProp) => {
             <Table
               className="table-hover"
               style={{
-                width: "85%",
                 margin: "0 auto",
                 verticalAlign: "middle",
               }}

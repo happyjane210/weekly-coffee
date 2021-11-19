@@ -10,4 +10,5 @@
   height: 150px;
   /* border: 1px solid #ddd; */
   margin: 1rem auto;
+  cursor: pointer;
 }

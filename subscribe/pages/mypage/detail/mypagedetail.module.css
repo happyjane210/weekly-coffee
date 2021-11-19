@@ -8,6 +8,11 @@
   margin-bottom: 2rem;
 }
 
+.table {
+  vertical-align: middle;
+  line-height: 2.5rem;
+}
+
 .recommand {
   width: 15vw;
   padding: 1rem;
@@ -20,4 +25,8 @@
   height: 150px;
   border: 1px solid #ddd;
   margin: 1rem auto;
+}
+
+.img {
+  cursor: pointer;
 }

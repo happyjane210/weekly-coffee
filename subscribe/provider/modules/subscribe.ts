@@ -36,6 +36,7 @@ export interface Subscribe {
   location: string;
   deliveryMemo: string;
   totalPayment: number;
+  orderNumber?: number;
 
   subscribeDetails: CartItem[]; //[1, 2]
 }

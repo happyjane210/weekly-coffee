@@ -35,6 +35,7 @@ public class SubscribeDetail {
     
     private long partnerId;
     private String companyName;
+    private int sum;
 
 
 

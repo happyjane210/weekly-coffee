@@ -1,11 +1,10 @@
 .cart {
   width: 85vw;
-  padding: 2rem;
+  padding: 2rem 6rem;
   text-align: center;
 }
 
 .table {
-  width: 85%;
   margin: 0 auto;
   vertical-align: middle;
 }
