@@ -60,7 +60,7 @@ const Products = ({ item }: ProductsProp) => {
           <div className="d-flex flex-wrap">
             {item.map(
               (item, index) =>
-                !item.salesStatus && (
+                item.salesStatus && (
                   <Card
                     key={index}
                     style={{
