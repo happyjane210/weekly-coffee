@@ -1,5 +1,7 @@
 package com.git.subscribeserver.product;
 
+import java.util.Optional;
+
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,9 +48,36 @@ public class ProductService {
                 .variety(productRes.getVariety()).build();
 		
 		productRepo.save(product);
-		System.out.println("제품정보 저장" + product);
+		System.out.println("제품정보 저장" + product);	
+	}
+	
+	@RabbitListener(queues = "partner.productSales.send")
+	public void receiveProductSales(ProductSalesResponse salesRes) {
+		System.out.println("sales status 바뀜 " + salesRes);
 		
+		// 이걸 가지고 찾음
+		Optional<Product> productOptional = productRepo.findById(salesRes.getProductId());
 		
+		// product에 담음
+		Product product = productOptional.get();
+		product.setSalesStatus(salesRes.getSalesStatus());
+		
+		productRepo.save(product);
+	}
+	
+	@RabbitListener(queues = "partner.removeProduct.send")
+	public void receiveProductRemove(long productId) {
+		System.out.println("product 지움" + productId);
+		
+		productRepo.deleteById(productId);
+	}
+	
+	@RabbitListener(queues = "partner.semiModify.send")
+	public void receiveProductModify(Product productRes) {
+		System.out.println("product 수정" + productRes);
+		
+		// 이걸 가지고 찾음
+		productRepo.save(productRes);
 		
 	}
 	
