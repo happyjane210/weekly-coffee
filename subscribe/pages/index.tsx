@@ -52,7 +52,9 @@ const Index = ({ item }: ProductsProp) => {
 };
 
 export async function getServerSideProps() {
-  const res = await axios.get<ProductItem[]>(`http://localhost:8080/products`);
+  const res = await axios.get<ProductItem[]>(
+    `${process.env.NEXT_PUBLIC_API_BASE}/products`
+  );
   const item = res.data;
 
   return { props: { item } };

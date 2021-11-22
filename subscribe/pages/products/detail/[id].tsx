@@ -272,7 +272,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id;
 
   const res = await axios.get<ProductItem[]>(
-    `http://localhost:8080/products/${id}`
+    `${process.env.NEXT_PUBLIC_API_BASE}/products/${id}`
   );
   const item = res.data;
 
