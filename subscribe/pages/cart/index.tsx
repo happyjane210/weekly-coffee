@@ -10,7 +10,7 @@ import Recommend, { ProductsProp } from "../../components/recommend/recommend";
 import axios from "axios";
 import { ProductItem } from "../../provider/modules/product";
 
-const cart = ({ item }: ProductsProp) => {
+const Cart = ({ item }: ProductsProp) => {
   const cartData = useSelector((state: RootState) => state.cartItem.data);
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
@@ -18,8 +18,6 @@ const cart = ({ item }: ProductsProp) => {
   const checkInput = useRef<HTMLInputElement>(null);
 
   const [addTotal, setAddTotal] = useState(0);
-  const [amount, setAmount] = useState("");
-  const [term, setTerm] = useState("");
 
   const deleteOne = (id: number) => {
     dispatch(removeOne(id));
@@ -33,7 +31,7 @@ const cart = ({ item }: ProductsProp) => {
       total += item.sum;
     });
     setAddTotal(total);
-  }, []);
+  }, [setAddTotal, cartData]);
 
   // let convertAmt = 0;
   // let convertTrm = 0;
@@ -215,4 +213,4 @@ export async function getServerSideProps() {
   return { props: { item } };
 }
 
-export default cart;
+export default Cart;

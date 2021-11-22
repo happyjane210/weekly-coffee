@@ -14,7 +14,7 @@ const Cats = () => {
 
   useEffect(() => {
     dispatch(requestFatchAllProduct());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
