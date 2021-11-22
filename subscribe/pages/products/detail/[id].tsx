@@ -95,6 +95,15 @@ const ProductDetail = ({ item }: ProductsProp) => {
               <b>ProductDetail</b>
             </h1>
 
+            <Image
+              src={item.productImageUrl}
+              alt={item.productName}
+              objectFit="cover"
+              width={400}
+              height={400}
+              placeholder="blur"
+              blurDataURL={item.productImageUrl}
+            />
             <img
               src={item.productImageUrl}
               alt={item.productName}

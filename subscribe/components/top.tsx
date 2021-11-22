@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Top() {
   return (
@@ -7,7 +8,7 @@ export default function Top() {
       <Link href="/">
         <a>
           <div className="d-flex justify-content-center my-3">
-            <img src="/image/logo.png" alt="logo" style={{ width: 200 }} />
+            <Image src="/image/logo.png" alt="logo" width={200} />
           </div>
         </a>
       </Link>

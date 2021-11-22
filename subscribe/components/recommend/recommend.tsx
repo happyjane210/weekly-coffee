@@ -22,10 +22,20 @@ const recommend = ({ item }: ProductsProp) => {
               router.push(`/products/detail/${item.productId}`);
             }}
           >
+            <Image
+              loader={() => item.productImageUrl}
+              alt={item.productName}
+              objectFit="cover"
+              src={item.productImageUrl}
+              width={400}
+              height={400}
+              placeholder="blur"
+              blurDataURL={item.productImageUrl}
+            />
             <img
               src={item.productImageUrl}
               alt={item.productName}
-              style={{ width: "150px", height: "150px", position: "relative" }}
+              style={{ width: "400px", height: "400px", background: "cover" }}
             />
           </div>
         ))}
