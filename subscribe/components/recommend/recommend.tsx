@@ -32,11 +32,6 @@ const recommend = ({ item }: ProductsProp) => {
               placeholder="blur"
               blurDataURL={item.productImageUrl}
             />
-            <img
-              src={item.productImageUrl}
-              alt={item.productName}
-              style={{ width: "400px", height: "400px", background: "cover" }}
-            />
           </div>
         ))}
       </div>

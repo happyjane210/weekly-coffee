@@ -96,6 +96,7 @@ const ProductDetail = ({ item }: ProductsProp) => {
             </h1>
 
             <Image
+              loader={() => item.productImageUrl}
               src={item.productImageUrl}
               alt={item.productName}
               objectFit="cover"
@@ -104,11 +105,7 @@ const ProductDetail = ({ item }: ProductsProp) => {
               placeholder="blur"
               blurDataURL={item.productImageUrl}
             />
-            <img
-              src={item.productImageUrl}
-              alt={item.productName}
-              style={{ width: "400px", height: "400px" }}
-            />
+
             <p>{item.productName}</p>
             <h1>
               <b>{item.companyName}</b>
@@ -164,7 +161,7 @@ const ProductDetail = ({ item }: ProductsProp) => {
                   </h1>
                   <hr className="my-5" />
                   <h3>💡NOTE💡</h3>
-                  <h3>It'll be shipped every Monday.</h3>
+                  <h3>It&apos;ll be shipped every Monday.</h3>
                   <hr className="my-5" />
                   <h3>amount</h3>
                   <Form.Select
