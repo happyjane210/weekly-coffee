@@ -61,7 +61,6 @@ const Products = ({ item }: ProductsProp) => {
             {item.map((item, index) =>
               item.salesStatus === 1 ? (
                 <Card
-                  key={index}
                   style={{
                     width: "calc((100% - 3rem) / 4)",
                     marginLeft: index % 4 === 0 ? "0" : "1rem",
@@ -72,13 +71,13 @@ const Products = ({ item }: ProductsProp) => {
                     router.push(`/products/detail/${item.productId}`);
                   }}
                 >
-                  <Card.Img
-                    variant="top"
-                    src={item.productImageUrl}
-                    alt={item.productName}
-                    width="150px"
-                  />
                   <Card.Body>
+                    <Card.Img
+                      variant="top"
+                      src={item.productImageUrl}
+                      alt={item.productName}
+                      width="150px"
+                    />
                     <Card.Title className="text-center">
                       {item.productName}
                     </Card.Title>

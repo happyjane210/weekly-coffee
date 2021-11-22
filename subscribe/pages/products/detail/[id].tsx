@@ -95,15 +95,10 @@ const ProductDetail = ({ item }: ProductsProp) => {
               <b>ProductDetail</b>
             </h1>
 
-            <Image
+            <img
               src={item.productImageUrl}
-              loader={() => item.productImageUrl}
               alt={item.productName}
-              objectFit="cover"
-              width={400}
-              height={400}
-              placeholder="blur"
-              blurDataURL={item.productImageUrl}
+              style={{ width: "400px", height: "400px" }}
             />
             <p>{item.productName}</p>
             <h1>
