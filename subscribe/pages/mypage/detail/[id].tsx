@@ -63,7 +63,7 @@ const MypageDetail = ({ item }: ProductsProp) => {
     //     setTerm("3개월 - 12회");
     //   }
     // });
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

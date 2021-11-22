@@ -8,7 +8,7 @@ import { Subscribe } from "../../provider/modules/subscribe";
 import { clearCart } from "../../provider/modules/cartItem";
 import { requestAddSubscribe } from "../../middleware/module/subscribe";
 
-const order = () => {
+const Order = () => {
   const cartData = useSelector((state: RootState) => state.cartItem.data);
   const subscribeData = useSelector((state: RootState) => state.subscribe.data);
   const router = useRouter();
@@ -57,7 +57,7 @@ const order = () => {
         setTerm("3개월 - 12회");
       }
     });
-  }, [cartData]);
+  }, [cartData, setTerm, setAmount, setAddTotal]);
 
   // 배송비 포함한 합계 금액
   let final = addTotal + 2500;
@@ -263,4 +263,4 @@ const order = () => {
   );
 };
 
-export default order;
+export default Order;

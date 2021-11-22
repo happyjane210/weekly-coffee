@@ -10,7 +10,7 @@ import Recommend, { ProductsProp } from "../../components/recommend/recommend";
 import axios from "axios";
 import { requestFetchPagingSubscribe } from "../../middleware/module/subscribe";
 
-const mypage = ({ item }: ProductsProp) => {
+const Mypage = ({ item }: ProductsProp) => {
   const subsData = useSelector((state: RootState) => state.subscribe.data);
   const subscribe = useSelector((state: RootState) => state.subscribe);
   const dispatch = useDispatch<AppDispatch>();
@@ -25,7 +25,7 @@ const mypage = ({ item }: ProductsProp) => {
         })
       );
     }
-  }, []);
+  }, [dispatch]);
 
   console.log(subsData);
 
@@ -130,4 +130,4 @@ export async function getServerSideProps() {
   return { props: { item } };
 }
 
-export default mypage;
+export default Mypage;
