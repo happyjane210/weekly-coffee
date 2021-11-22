@@ -113,28 +113,37 @@ const ProductDetail = ({ item }: ProductsProp) => {
             <h2 className="text-center" style={{ color: "#00bcd4" }}>
               <b>KRW {new Intl.NumberFormat().format(item.productPrice)}</b>
             </h2>
-            <br />
-            <br />
-            <br />
-            <h4>{item.beanTag}</h4>
-            <h4>{item.beanType}</h4>
-            <h4>{item.companyAddress}</h4>
-            <h4>{item.companyContact}</h4>
-            <h4>{item.companyIntroduce}</h4>
-            <h4>{item.companyName}</h4>
-            <h4>{item.country}</h4>
-            <h4>{item.cupNote}</h4>
-            <h4>{item.expirationData}</h4>
-            <h4>{item.farm}</h4>
-            <h4>{item.foodType}</h4>
-            <h4>{item.manufacturer}</h4>
-            <h4>{item.manufacturingDate}</h4>
-            <h4>{item.processing}</h4>
-            <h4>{item.productName}</h4>
-            <h4>{item.productPrice}</h4>
-            <h4>{item.region}</h4>
-            <h4>{item.roastingPoint}</h4>
-            <h4>{item.variety}</h4>
+            <div className="my-5">
+              <h2>원두 소개</h2>
+              <h4>{item.beanTag}</h4>
+              <h4>{item.beanType}</h4>
+              <h4>{item.country}</h4>
+              <h4>{item.cupNote}</h4>
+              <h4>{item.expirationData}</h4>
+              <h4>{item.farm}</h4>
+              <h4>{item.foodType}</h4>
+              <h4>{item.manufacturer}</h4>
+              <h4>{item.manufacturingDate}</h4>
+              <h4>{item.processing}</h4>
+              <h4>{item.productName}</h4>
+              <h4>{item.productPrice}</h4>
+              <h4>{item.region}</h4>
+              <h4>{item.roastingPoint}</h4>
+              <h4>{item.variety}</h4>
+            </div>
+            <div className="my-5">
+              <h2>로스터리 소개</h2>
+              <h4>{item.companyAddress}</h4>
+              <h4>{item.companyContact}</h4>
+              <h4>{item.companyIntroduce}</h4>
+              <h4>{item.companyName}</h4>
+            </div>
+            <div>
+              <h2>상품 필수 표기 정보</h2>
+            </div>
+            <div>
+              <h2>배송안내</h2>
+            </div>
           </div>
           {/* orderdetail */}
           <div className={style.order}>

@@ -37,15 +37,11 @@ const Index = ({ item }: ProductsProp) => {
                 router.push(`/products/detail/${item.productId}`);
               }}
             >
-              <Image
-                loader={() => item.productImageUrl}
-                alt={item.productName}
-                objectFit="cover"
+              <Card.Img
+                variant="top"
                 src={item.productImageUrl}
-                width={400}
-                height={400}
-                placeholder="blur"
-                blurDataURL={item.productImageUrl}
+                alt={item.productName}
+                width="150px"
               />
             </Card>
           ))}

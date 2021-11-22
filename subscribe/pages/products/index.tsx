@@ -58,46 +58,44 @@ const Products = ({ item }: ProductsProp) => {
             <strong>PRODUCTS</strong>
           </h1>
           <div className="d-flex flex-wrap">
-            {item.map(
-              (item, index) =>
-                item.salesStatus && (
-                  <Card
-                    key={index}
-                    style={{
-                      width: "calc((100% - 3rem) / 4)",
-                      marginLeft: index % 4 === 0 ? "0" : "1rem",
-                      marginTop: index > 3 ? "1rem" : "0",
-                    }}
-                    onClick={() => {
-                      // id값을 물고 이동해야함
-                      router.push(`/products/detail/${item.productId}`);
-                    }}
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={item.productImageUrl}
-                      alt={item.productName}
-                      width="150px"
-                    />
+            {item.map((item, index) =>
+              item.salesStatus === 1 ? (
+                <Card
+                  key={index}
+                  style={{
+                    width: "calc((100% - 3rem) / 4)",
+                    marginLeft: index % 4 === 0 ? "0" : "1rem",
+                    marginTop: index > 3 ? "1rem" : "0",
+                  }}
+                  onClick={() => {
+                    // id값을 물고 이동해야함
+                    router.push(`/products/detail/${item.productId}`);
+                  }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={item.productImageUrl}
+                    alt={item.productName}
+                    width="150px"
+                  />
+                  <Card.Body>
+                    <Card.Title className="text-center">
+                      {item.productName}
+                    </Card.Title>
                     <Card.Body>
-                      <Card.Title className="text-center">
-                        {item.productName}
-                      </Card.Title>
-                      <Card.Body>
-                        <h2 className="text-center">
-                          <b>{item.companyName}</b>
-                        </h2>
-                        <h4 className="text-center">{item.cupNote}</h4>
-                        <h3
-                          className="text-center"
-                          style={{ color: "#00bcd4" }}
-                        >
-                          <b>{item.productPrice}</b>
-                        </h3>
-                      </Card.Body>
+                      <h2 className="text-center">
+                        <b>{item.companyName}</b>
+                      </h2>
+                      <h4 className="text-center">{item.cupNote}</h4>
+                      <h3 className="text-center" style={{ color: "#00bcd4" }}>
+                        <b>{item.productPrice}</b>
+                      </h3>
                     </Card.Body>
-                  </Card>
-                )
+                  </Card.Body>
+                </Card>
+              ) : (
+                <></>
+              )
             )}
           </div>
         </section>
