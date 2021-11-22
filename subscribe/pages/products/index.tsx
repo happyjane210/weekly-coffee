@@ -87,7 +87,10 @@ const Products = ({ item }: ProductsProp) => {
                       </h2>
                       <h4 className="text-center">{item.cupNote}</h4>
                       <h3 className="text-center" style={{ color: "#00bcd4" }}>
-                        <b>{item.productPrice}</b>
+                        <b>
+                          KRW{" "}
+                          {new Intl.NumberFormat().format(item.productPrice)}
+                        </b>
                       </h3>
                     </Card.Body>
                   </Card.Body>

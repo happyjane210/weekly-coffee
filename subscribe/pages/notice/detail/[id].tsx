@@ -8,6 +8,7 @@ import Recommend, {
 } from "../../../components/recommend/recommend";
 import { ProductItem } from "../../../provider/modules/product";
 import axios from "axios";
+import next from "next";
 
 const NoticeDetail = ({ item }: ProductsProp) => {
   return (
@@ -65,15 +66,7 @@ const NoticeDetail = ({ item }: ProductsProp) => {
                 >
                   목록
                 </Button>
-                <div>
-                  <Button variant="outline-dark" className="me-2">
-                    <i className="bi bi-caret-left"></i>
-                  </Button>
-
-                  <Button variant="outline-dark">
-                    <i className="bi bi-caret-right"></i>
-                  </Button>
-                </div>
+                <div></div>
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import productReducer from "../provider/modules/product";
 import cartItemReducer from "./modules/cartItem";
 import subscribeReducer from "./modules/subscribe";
+import alertReducer from "./modules/alert";
 
 import rootSaga from "../middleware/index";
 import createSagaMiddleware from "@redux-saga/core";
@@ -19,6 +20,8 @@ export const store = configureStore({
     // contact: contactReducer,
     //progress: progressReducer,
     //alert: alertReducer,
+    alert: alertReducer,
+
     product: productReducer, // product state를 처리하는  reducer 등록
 
     cartItem: cartItemReducer,
