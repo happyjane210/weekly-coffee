@@ -65,6 +65,7 @@ const Products = ({ item }: ProductsProp) => {
                     width: "calc((100% - 3rem) / 4)",
                     marginLeft: index % 4 === 0 ? "0" : "1rem",
                     marginTop: index > 3 ? "1rem" : "0",
+                    cursor: "pointer",
                   }}
                   onClick={() => {
                     // id값을 물고 이동해야함

@@ -3,6 +3,7 @@ import Head from "next/head";
 import Footer from "./footer";
 import Top from "./top";
 import Navbar from "./navbar/navbar";
+
 //import styledcomponent from "styled-components";
 
 interface LayoutProps {
@@ -21,6 +22,11 @@ export default function Layout({ children }: LayoutProps) {
         <title>WEEKLY COFFEE</title>
         <meta name="description" content="weekly coffee home" />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          type="text/css"
+          rel="stylesheet"
+          href="../styles/globals.css"
+        ></link>
       </Head>
       <header>
         <Top />

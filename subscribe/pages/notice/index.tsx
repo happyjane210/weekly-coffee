@@ -38,19 +38,34 @@ const notice = ({ item }: ProductsProp) => {
               </thead>
               <tbody>
                 {/* map 삽입 */}
-                <tr onClick={() => router.push("/notice/detail/1")}>
+                <tr
+                  onClick={() => router.push("/notice/detail/1")}
+                  style={{
+                    cursor: "pointer",
+                  }}
+                >
                   <td>1</td>
                   <td>주간커피를 가장 맛있게 이용하는 방법</td>
                   <td>관리자</td>
                   <td>2021-11-10</td>
                 </tr>
-                <tr onClick={() => router.push("/notice/detail/2")}>
+                <tr
+                  onClick={() => router.push("/notice/detail/2")}
+                  style={{
+                    cursor: "pointer",
+                  }}
+                >
                   <td>2</td>
                   <td>원두 배송 관련 안내</td>
                   <td>관리자</td>
                   <td>2021-11-10</td>
                 </tr>
-                <tr onClick={() => router.push("/notice/detail/3")}>
+                <tr
+                  onClick={() => router.push("/notice/detail/3")}
+                  style={{
+                    cursor: "pointer",
+                  }}
+                >
                   <td>3</td>
                   <td>파트너즈 로스터리 소개</td>
                   <td>관리자</td>

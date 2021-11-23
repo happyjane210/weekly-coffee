@@ -8,7 +8,6 @@ ssh -i "C:\Users\juh22\OneDrive\문서\Github\weekly-coffee\myworkspace.pem" ubu
 ssh -i "C:\Users\juh22\OneDrive\문서\Github\weekly-coffee\myworkspace.pem" ubuntu@ec2-15-165-17-21.ap-northeast-2.compute.amazonaws.com "cd /home/ubuntu/weekly-coffee/subscribe; git pull; npm install; npm run build; nohup npm start 1>/dev/null 2>&1 &"
 
 
-
 @rem 백엔드 우분투 접속
 ssh -i "C:\Users\juh22\OneDrive\문서\Github\weekly-coffee\subscribeserver.pem" ubuntu@ec2-3-37-61-78.ap-northeast-2.compute.amazonaws.com  
 

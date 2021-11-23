@@ -23,7 +23,8 @@ const Index = ({ item }: ProductsProp) => {
           </h1>
         </div>
 
-        <div className="d-flex justify-content-center my-5 py-5">
+        <div className="d-flex  flex-wrap justify-content-center my-5 py-5 px-5">
+          {/* {item.slice(0, 7)} */}
           {item.map((item, index) => (
             <Card
               key={index}
@@ -31,6 +32,7 @@ const Index = ({ item }: ProductsProp) => {
                 width: "calc((100% - 3rem) / 4)",
                 marginLeft: index % 4 === 0 ? "0" : "1rem",
                 marginTop: index > 3 ? "1rem" : "0",
+                cursor: "pointer",
               }}
               onClick={() => {
                 // id값을 물고 이동해야함

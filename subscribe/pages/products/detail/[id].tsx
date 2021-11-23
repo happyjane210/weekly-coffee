@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import router, { useRouter } from "next/router"; - router는 리덕스쓸때 쓰는거임
 import Sidebar from "../../../components/sidebar/sidebar";
@@ -11,6 +11,9 @@ import { useRouter } from "next/router";
 import { AppDispatch, RootState } from "../../../provider";
 import { addCart, CartItem } from "../../../provider/modules/cartItem";
 import { ProductItem } from "../../../provider/modules/product";
+import alert, { addAlert, removeAlert } from "../../../provider/modules/alert";
+import { nanoid } from "@reduxjs/toolkit";
+import Alert from "../../../components/alertStack";
 
 interface ProductsProp {
   item: ProductItem;
@@ -33,6 +36,7 @@ const ProductDetail = ({ item }: ProductsProp) => {
   const substermInput = useRef<HTMLSelectElement>(null);
   const groundpointInput = useRef<HTMLSelectElement>(null);
   const quantityInput = useRef<HTMLInputElement>(null);
+  const alert = useSelector((state: RootState) => state.alert);
 
   const [total, setTotal] = useState(item.productPrice);
 
@@ -50,7 +54,7 @@ const ProductDetail = ({ item }: ProductsProp) => {
     }
   };
 
-  const handleAddOption = () => {
+  const handleAddCart = () => {
     console.log(amountInput.current?.value);
     console.log(substermInput.current?.value);
     console.log(groundpointInput.current?.value);
@@ -75,7 +79,65 @@ const ProductDetail = ({ item }: ProductsProp) => {
 
     console.log(orderItem);
 
-    dispatch(addCart(orderItem));
+    if (
+      amountInput.current?.value === "select coffee amount" ||
+      substermInput.current?.value === "select subscribe term" ||
+      groundpointInput.current?.value === "select ground-point" ||
+      quantityInput.current?.value === null
+    ) {
+      dispatch(
+        addAlert({
+          id: nanoid(),
+          variant: "danger",
+          message: "옵션을 모두 선택하세요!",
+        })
+      );
+    } else {
+      dispatch(addCart(orderItem));
+      router.push("/cart");
+    }
+
+    console.log("sum " + total);
+    console.log("productPrice " + item.productPrice);
+  };
+
+  const handleSubscribe = () => {
+    const orderItem: CartItem = {
+      seq: cartItemData.length ? cartItemData[0].seq + 1 : 1,
+      beanAmount: amountInput.current ? +amountInput.current.value : 0,
+      term: substermInput.current ? +substermInput.current.value : 0,
+      groundPoint: groundpointInput.current
+        ? groundpointInput.current.value
+        : "",
+      orderQuantity: quantityInput.current ? +quantityInput.current.value : 1,
+      sum: total,
+      productPrice: item.productPrice,
+      productId: item.productId,
+      productImageUrl: item.productImageUrl,
+      productName: item.productName,
+      companyName: item.companyName,
+      partnerId: item.partnerId,
+    };
+
+    console.log(orderItem);
+
+    if (
+      amountInput.current?.value === "select coffee amount" ||
+      substermInput.current?.value === "select subscribe term" ||
+      groundpointInput.current?.value === "select ground-point" ||
+      quantityInput.current?.value === null
+    ) {
+      dispatch(
+        addAlert({
+          id: nanoid(),
+          variant: "danger",
+          message: "옵션을 모두 선택하세요!",
+        })
+      );
+    } else {
+      dispatch(addCart(orderItem));
+      router.push("/order");
+    }
 
     console.log("sum " + total);
     console.log("productPrice " + item.productPrice);
@@ -83,6 +145,7 @@ const ProductDetail = ({ item }: ProductsProp) => {
 
   return (
     <>
+      <Alert />
       <article className="d-flex" style={{ minHeight: "calc(100vh - 290px)" }}>
         <Sidebar />
         <section
@@ -173,6 +236,9 @@ const ProductDetail = ({ item }: ProductsProp) => {
                     onChange={() => {
                       calc(item.productPrice);
                     }}
+                    style={{
+                      cursor: "pointer",
+                    }}
                   >
                     <option disabled>select coffee amount</option>
 
@@ -190,6 +256,9 @@ const ProductDetail = ({ item }: ProductsProp) => {
                     onChange={() => {
                       calc(item.productPrice);
                     }}
+                    style={{
+                      cursor: "pointer",
+                    }}
                   >
                     <option disabled>select subscribe term</option>
                     <option value={4}>1개월 - 4회</option>
@@ -205,6 +274,9 @@ const ProductDetail = ({ item }: ProductsProp) => {
                     ref={groundpointInput}
                     onChange={() => {
                       calc(item.productPrice);
+                    }}
+                    style={{
+                      cursor: "pointer",
                     }}
                   >
                     <option disabled>select ground-point</option>
@@ -242,8 +314,7 @@ const ProductDetail = ({ item }: ProductsProp) => {
                       variant="outline-secondary"
                       size="lg"
                       onClick={() => {
-                        handleAddOption();
-                        router.push("/cart");
+                        handleAddCart();
                       }}
                     >
                       ADD TO CART
@@ -252,8 +323,7 @@ const ProductDetail = ({ item }: ProductsProp) => {
                       variant="outline-dark"
                       size="lg"
                       onClick={() => {
-                        handleAddOption();
-                        router.push("/order");
+                        handleSubscribe();
                       }}
                     >
                       SUBSCRIBE NOW
