@@ -3,6 +3,7 @@ import Head from "next/head";
 import Footer from "./footer";
 import Top from "./top";
 import Navbar from "./navbar/navbar";
+//import img from "../public/image/coffee-bean.png"
 
 //import styledcomponent from "styled-components";
 
@@ -21,7 +22,7 @@ export default function Layout({ children }: LayoutProps) {
       <Head>
         <title>WEEKLY COFFEE</title>
         <meta name="description" content="weekly coffee home" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/coffee-bean.ico" />
         <link
           type="text/css"
           rel="stylesheet"

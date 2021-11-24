@@ -39,13 +39,13 @@ const Cats = () => {
                     router.push(`/cats/detail/${item.productId}`);
                   }}
                 >
-                  <Card.Img
-                    variant="top"
-                    src={item.productImageUrl}
-                    alt={item.productName}
-                    width="150px"
-                  />
                   <Card.Body>
+                    <Card.Img
+                      variant="top"
+                      src={item.productImageUrl}
+                      alt={item.productName}
+                      width="150px"
+                    />
                     <Card.Title className="text-center">
                       {item.companyName}
                     </Card.Title>

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Sidebar from "../../components/sidebar/sidebar";
 import { Card } from "react-bootstrap";
 import axios from "axios";
 import { ProductItem } from "../../provider/modules/product";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../provider";
+import { requestFetchCountry } from "../../middleware/module/product";
 
 export interface ProductsProp {
   item: ProductItem[];
@@ -13,41 +16,15 @@ const Products = ({ item }: ProductsProp) => {
   console.log("--SSR | item:ProductsProp--");
   console.log(item);
   const router = useRouter();
-  // const dispatch = useDispatch<AppDispatch>();
-  // const productData = useSelector((state: RootState) => state.product.data);
 
-  // const product: ProductItem = {
-  //   productId: productData.length ? productData[0].productId + 1 : 1,
-  //   partnerId: 0,
-  //   productName: "",
-  //   productPrice: 0,
-  //   productImageUrl: "",
-  //   fileName: "",
-  //   fileType: "",
-  //   foodType: "",
-  //   expirationData: "",
-  //   manufacturer: "",
-  //   manufacturingDate: "",
-  //   companyName: "",
-  //   productUploadDate: 0,
-  //   companyIntroduce: "",
-  //   companyAddress: "",
-  //   companyContact: "",
-  //   beanType: "",
-  //   beanTag: "",
-  //   processing: "",
-  //   country: "",
-  //   region: "",
-  //   farm: "",
-  //   cupNote: "",
-  //   roastingPoint: "",
-  //   variety: "",
-  //   salesStatus: 0,
-  // };
+  const dispatch = useDispatch<AppDispatch>();
+  const countryData = useSelector((state: RootState) => state.product.data);
 
-  // useEffect(() => {
-  //   dispatch(loadProduct(product));
-  // }, []);
+  const [country, setCountry] = useState(false);
+
+  useEffect(() => {
+    dispatch(requestFetchCountry());
+  }, [dispatch]);
 
   return (
     <>
@@ -58,48 +35,99 @@ const Products = ({ item }: ProductsProp) => {
             <strong>PRODUCTS</strong>
           </h1>
           <div className="d-flex flex-wrap">
-            {item.map((item, index) =>
-              item.salesStatus === 1 ? (
-                <Card
-                  style={{
-                    width: "calc((100% - 3rem) / 4)",
-                    marginLeft: index % 4 === 0 ? "0" : "1rem",
-                    marginTop: index > 3 ? "1rem" : "0",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    // id값을 물고 이동해야함
-                    router.push(`/products/detail/${item.productId}`);
-                  }}
-                >
-                  <Card.Body>
-                    <Card.Img
-                      variant="top"
-                      src={item.productImageUrl}
-                      alt={item.productName}
-                      width="150px"
-                    />
-                    <Card.Title className="text-center">
-                      {item.productName}
-                    </Card.Title>
+            {/* 원산지 별 분류 */}
+            {country === true &&
+              countryData.filter((item) => item.country === item.country)}
+
+            {country === true &&
+              countryData.map((item, index) =>
+                item.salesStatus === 1 ? (
+                  <Card
+                    style={{
+                      width: "calc((100% - 3rem) / 4)",
+                      marginLeft: index % 4 === 0 ? "0" : "1rem",
+                      marginTop: index > 3 ? "1rem" : "0",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      // id값을 물고 이동해야함
+                      router.push(`/products/detail/${item.productId}`);
+                    }}
+                  >
                     <Card.Body>
-                      <h2 className="text-center">
-                        <b>{item.companyName}</b>
-                      </h2>
-                      <h4 className="text-center">{item.cupNote}</h4>
-                      <h3 className="text-center" style={{ color: "#00bcd4" }}>
-                        <b>
-                          KRW{" "}
-                          {new Intl.NumberFormat().format(item.productPrice)}
-                        </b>
-                      </h3>
+                      <Card.Img
+                        variant="top"
+                        src={item.productImageUrl}
+                        alt={item.productName}
+                        width="150px"
+                      />
+
+                      <Card.Body>
+                        <h2 className="text-center my-4">
+                          <b>{item.companyName}</b>
+                        </h2>
+                        <h4 className="text-center">{item.productName}</h4>
+                        <h3
+                          className="text-center mt-4"
+                          style={{ color: "#00bcd4" }}
+                        >
+                          <b>
+                            KRW{" "}
+                            {new Intl.NumberFormat().format(item.productPrice)}
+                          </b>
+                        </h3>
+                      </Card.Body>
                     </Card.Body>
-                  </Card.Body>
-                </Card>
-              ) : (
-                <></>
-              )
-            )}
+                  </Card>
+                ) : (
+                  <></>
+                )
+              )}
+            {/* 전체 조회 */}
+            {country === false &&
+              item.map((item, index) =>
+                item.salesStatus === 1 ? (
+                  <Card
+                    style={{
+                      width: "calc((100% - 3rem) / 4)",
+                      marginLeft: index % 4 === 0 ? "0" : "1rem",
+                      marginTop: index > 3 ? "1rem" : "0",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      // id값을 물고 이동해야함
+                      router.push(`/products/detail/${item.productId}`);
+                    }}
+                  >
+                    <Card.Body>
+                      <Card.Img
+                        variant="top"
+                        src={item.productImageUrl}
+                        alt={item.productName}
+                        width="150px"
+                      />
+
+                      <Card.Body>
+                        <h2 className="text-center my-4">
+                          <b>{item.companyName}</b>
+                        </h2>
+                        <h4 className="text-center">{item.productName}</h4>
+                        <h3
+                          className="text-center mt-4"
+                          style={{ color: "#00bcd4" }}
+                        >
+                          <b>
+                            KRW{" "}
+                            {new Intl.NumberFormat().format(item.productPrice)}
+                          </b>
+                        </h3>
+                      </Card.Body>
+                    </Card.Body>
+                  </Card>
+                ) : (
+                  <></>
+                )
+              )}
           </div>
         </section>
       </article>

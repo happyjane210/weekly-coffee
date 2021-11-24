@@ -5,7 +5,7 @@
 .product {
   width: 67vw;
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 4rem;
 }
 
 .orderbox {
@@ -19,4 +19,9 @@
   font-size: 18px;
   text-align: center;
   width: 100px;
+}
+
+.table {
+  text-align: left;
+  margin-bottom: 5rem;
 }

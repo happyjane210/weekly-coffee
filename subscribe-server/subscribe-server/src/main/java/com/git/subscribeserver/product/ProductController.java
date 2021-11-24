@@ -33,10 +33,10 @@ public class ProductController {
 		return productRepo.findById(id);			
 	}
 
-//	@GetMapping(value = "/products/recommend")
-//	public List<Product> getRecommend() {
-//		return productRepo.findAll();
-//	}
+	@GetMapping(value = "/products/country/{countryName}")
+	public List<Product> getProductContainsCountry(@PathVariable String countryName) {
+		return productRepo.findByCountry(countryName);
+	}
 	
 	
 	

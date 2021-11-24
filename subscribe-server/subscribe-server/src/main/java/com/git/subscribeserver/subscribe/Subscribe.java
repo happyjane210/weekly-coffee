@@ -30,11 +30,14 @@ public class Subscribe {
     private String deliveryMemo;
     private int totalPayment;
     private String orderNumber;
+    private boolean orderCheck;
     
 
 
     @OneToMany //단방향 <- List<subscribeDetail>
     @JoinColumn(name = "subscribeId")
     private List<SubscribeDetail> subscribeDetails;
+
+
 
 }

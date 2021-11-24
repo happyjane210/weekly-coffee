@@ -6,9 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,7 +101,19 @@ public class SubscribeService {
 	}
 	
 			
-			
+	// 주문 접수됐습니다 메시지 창
+	@RabbitListener(queues = "partner.subscribeCheck.send")
+	public void receiveOrderCheck(long subscribeId) {
+		System.out.println("order check");
+		// 찾아서
+		Optional<Subscribe> subs = subsRepo.findById(subscribeId);
+		// 담음
+		Subscribe subscribe = subs.get();
+		
+		subscribe.setOrderCheck(true);
+		
+		subsRepo.save(subscribe);
+	}
 			
 			
 			

@@ -18,9 +18,11 @@ const Index = ({ item }: ProductsProp) => {
         <div className="col-md-5 p-lg-5 my-5">
           <h3>Whenever you need a cup of coffee.</h3>
           <h1>WEEKLY COFFEE</h1>
-          <h1 className="my-5">
-            <a href="/products">Getting Start☕</a>
-          </h1>
+          <h2 className="my-5">
+            <a href="/products" style={{ textDecoration: "none" }}>
+              Getting Start☕
+            </a>
+          </h2>
         </div>
 
         <div className="d-flex  flex-wrap justify-content-center my-5 py-5 px-5">

@@ -5,17 +5,17 @@ import styles from "./sidebar.module.css";
 export default function Sidebar() {
   return (
     <nav className={styles.nav}>
-      <Link href="/">
-        <a>DECAF</a>
+      <Link href="/products">
+        <a>Colombia</a>
       </Link>
-      <Link href="/">
-        <a>SINGLE ORIGIN</a>
+      <Link href="/products">
+        <a>Ethiopia</a>
       </Link>
-      <Link href="/">
-        <a>BLEND</a>
+      <Link href="/products">
+        <a>Guatemala</a>
       </Link>
       <Link href="/cats">
-        <a>COLD BREW</a>
+        <a>El Salvador</a>
       </Link>
     </nav>
   );

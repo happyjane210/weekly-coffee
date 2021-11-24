@@ -6,7 +6,7 @@ import style from "./productdetail.module.css";
 import axios from "axios";
 import Image from "next/image";
 import { GetServerSideProps } from "next";
-import { Card, Form, Button } from "react-bootstrap";
+import { Card, Form, Button, Table } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { AppDispatch, RootState } from "../../../provider";
 import { addCart, CartItem } from "../../../provider/modules/cartItem";
@@ -14,6 +14,7 @@ import { ProductItem } from "../../../provider/modules/product";
 import alert, { addAlert, removeAlert } from "../../../provider/modules/alert";
 import { nanoid } from "@reduxjs/toolkit";
 import Alert from "../../../components/alertStack";
+//import icon1 from "../../../public/image/calendar.png";
 
 interface ProductsProp {
   item: ProductItem;
@@ -154,8 +155,8 @@ const ProductDetail = ({ item }: ProductsProp) => {
         >
           {/* product detail */}
           <div className={style.product}>
-            <h1>
-              <b>ProductDetail</b>
+            <h1 className="mb-5">
+              <b>PRODUCT DETAIL</b>
             </h1>
 
             <Image
@@ -163,51 +164,251 @@ const ProductDetail = ({ item }: ProductsProp) => {
               src={item.productImageUrl}
               alt={item.productName}
               objectFit="cover"
-              width={400}
-              height={400}
+              width={700}
+              height={700}
               placeholder="blur"
               blurDataURL={item.productImageUrl}
             />
 
-            <p>{item.productName}</p>
-            <h1>
-              <b>{item.companyName}</b>
-            </h1>
-            <h3>{item.country}</h3>
-            <h2 className="text-center" style={{ color: "#00bcd4" }}>
-              <b>KRW {new Intl.NumberFormat().format(item.productPrice)}</b>
-            </h2>
             <div className="my-5">
-              <h2>원두 소개</h2>
-              <h4>{item.beanTag}</h4>
-              <h4>{item.beanType}</h4>
-              <h4>{item.country}</h4>
-              <h4>{item.cupNote}</h4>
+              <h1>
+                <b>{item.companyName}</b>
+              </h1>
+              <h3>{item.productName}</h3>
+            </div>
+
+            <Table className={style.table}>
+              <tbody>
+                <tr>
+                  <td>
+                    <div className="d-flex">
+                      <img
+                        src="/image/calendar.png"
+                        alt="icon1"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div className="mt-1">
+                        <b>로스팅 스케줄</b> <br />
+                        매주 월 화 수 목 금
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div className="d-flex">
+                      <img
+                        src="/image/lemon.png"
+                        alt="icon2"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div className="mt-2">
+                        <b>산미</b>
+                        <br />
+                        {item.cupNote}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div className="d-flex">
+                      <img
+                        src="/image/coffee-beans.png"
+                        alt="icon3"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div className="mt-2">
+                        <b>원두 타입</b>
+                        <br />
+                        {item.beanType}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div className="d-flex">
+                      <img
+                        src="/image/roasting.png"
+                        alt="icon4"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div className="mt-2">
+                        <b>로스팅 포인트</b>
+                        <br />
+                        {item.roastingPoint}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+
+            <h2 className="my-5">원두 노트</h2>
+            <Table className={style.table}>
+              <tbody>
+                <tr>
+                  <td>
+                    <div className="d-flex">
+                      <img
+                        src="/image/globe.png"
+                        alt="icon5"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div className="mt-1">
+                        <b>원산지</b> <br />
+                        {item.country}
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="d-flex">
+                      <img
+                        src="/image/location.png"
+                        alt="icon6"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div className="mt-1">
+                        <b>지역</b> <br />
+                        {item.country}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div className="d-flex">
+                      <img
+                        src="/image/field.png"
+                        alt="icon7"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div className="mt-1">
+                        <b>농장</b> <br />
+                        {item.farm}
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="d-flex">
+                      <img
+                        src="/image/plant.png"
+                        alt="icon8"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div className="mt-1">
+                        <b>품종</b> <br />
+                        {item.variety}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div className="d-flex">
+                      <img
+                        src="/image/wash.png"
+                        alt="icon9"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div className="mt-1">
+                        <b>가공 방식</b> <br />
+                        {item.processing}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+
+            <h2 className="my-5">로스터리 소개</h2>
+            <Table className={style.table}>
+              <tbody>
+                <tr>
+                  <td colSpan={2}>
+                    <div className="d-flex">
+                      <img
+                        src="/image/building.png"
+                        alt="icon5"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div>
+                        <h3>{item.companyName}</h3>
+                        {item.companyIntroduce}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div className="d-flex">
+                      <img
+                        src="/image/location.png"
+                        alt="icon5"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div className="mt-1">
+                        <b>위치</b> <br />
+                        {item.companyAddress}
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="d-flex">
+                      <img
+                        src="/image/phone.png"
+                        alt="icon9"
+                        width={50}
+                        height={50}
+                        className="me-3"
+                      />
+                      <div className="mt-1">
+                        <b>Contact</b> <br />
+                        {item.companyContact}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+            {/* 
+            <div className="my-5">
               <h4>{item.expirationData}</h4>
-              <h4>{item.farm}</h4>
-              <h4>{item.foodType}</h4>
               <h4>{item.manufacturer}</h4>
               <h4>{item.manufacturingDate}</h4>
-              <h4>{item.processing}</h4>
-              <h4>{item.productName}</h4>
-              <h4>{item.productPrice}</h4>
-              <h4>{item.region}</h4>
-              <h4>{item.roastingPoint}</h4>
-              <h4>{item.variety}</h4>
             </div>
-            <div className="my-5">
-              <h2>로스터리 소개</h2>
-              <h4>{item.companyAddress}</h4>
-              <h4>{item.companyContact}</h4>
-              <h4>{item.companyIntroduce}</h4>
-              <h4>{item.companyName}</h4>
-            </div>
+
             <div>
               <h2>상품 필수 표기 정보</h2>
+              <h4>{item.foodType}</h4>
             </div>
             <div>
               <h2>배송안내</h2>
-            </div>
+            </div> */}
           </div>
           {/* orderdetail */}
           <div className={style.order}>
