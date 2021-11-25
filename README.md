@@ -488,6 +488,40 @@
 
 <br>
 
+### 2021-11-24
+
+<details>
+
+<summary>글씨체, product detail 화면 디자인 마무리 [👈click]</summary>
+
+## Front-end
+
+<br>
+
+> - Github commit
+>   <br> https://github.com/happyjane210/weekly-coffee/commit/8db4432986ff52ac536f2e1c7e3157989d7421ac
+> - Develop Issue
+>   <br>
+>   URL
+>   <br>
+
+<br>
+
+-
+-
+
+<br>
+
+사진 / 참고자료
+
+<br>
+
+---
+
+</details>
+
+<br>
+
 ### 2021-00-00 (양식)
 
 <details>
