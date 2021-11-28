@@ -2,6 +2,7 @@ import { createAction, PayloadAction } from "@reduxjs/toolkit";
 import {
   addSubscribe,
   fetchSubscribePage,
+  initialComplete,
   PageRequest,
   Subscribe,
   SubscribePage,
@@ -43,6 +44,7 @@ function* addSubcribeData(action: PayloadAction<Subscribe>) {
 
   // 백엔드에서 처리한 데이터 객체로 state를 변경할 payload 객체를 생성
   yield put(addSubscribe(result.data));
+  yield put(initialComplete());
   yield put(clearCart());
 }
 

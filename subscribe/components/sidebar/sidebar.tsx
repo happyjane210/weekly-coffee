@@ -14,7 +14,7 @@ export default function Sidebar() {
       <Link href="/products">
         <a>Guatemala</a>
       </Link>
-      <Link href="/cats">
+      <Link href="/products">
         <a>El Salvador</a>
       </Link>
     </nav>
