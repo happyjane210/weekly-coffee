@@ -11,9 +11,7 @@ import { requestAddSubscribe } from "../../middleware/module/subscribe";
 const Order = () => {
   const cartData = useSelector((state: RootState) => state.cartItem.data);
   const subscribeData = useSelector((state: RootState) => state.subscribe.data);
-  const isAddComplete = useSelector(
-    (state: RootState) => state.subscribe.isAddCompleted
-  );
+
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -26,10 +24,6 @@ const Order = () => {
   const [addTotal, setAddTotal] = useState(0);
   const [amount, setAmount] = useState("");
   const [term, setTerm] = useState("");
-
-  useEffect(() => {
-    isAddComplete && router.push("/mypage");
-  }, [isAddComplete, router]);
 
   useEffect(() => {
     // 배송비 포함하기 전 합계 금액
@@ -87,7 +81,7 @@ const Order = () => {
     //details: [...cartData],
 
     //dispatch(addSubscribe(subsItem));
-    if(subsItem){
+    if (subsItem) {
       dispatch(requestAddSubscribe(subsItem));
     }
 
@@ -258,7 +252,7 @@ const Order = () => {
               size="lg"
               onClick={() => {
                 handleAddSubscribe();
-                //router.push("/mypage");
+                router.push("/mypage");
                 // 순차적으로 처리 안될 수도 있음
               }}
             >

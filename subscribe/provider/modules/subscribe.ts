@@ -74,9 +74,6 @@ const subscribeSlice = createSlice({
       state.data.unshift(subscribe);
       state.isAddCompleted = true;
     },
-    initialComplete: (state) => {
-      delete state.isAddCompleted;
-    },
 
     // 마이페이지 주문 내역 페이지
     fetchSubscribePage: (state, action: PayloadAction<SubscribePage>) => {
@@ -93,7 +90,6 @@ const subscribeSlice = createSlice({
   },
 });
 
-export const { addSubscribe, fetchSubscribePage, initialComplete } =
-  subscribeSlice.actions;
+export const { addSubscribe, fetchSubscribePage } = subscribeSlice.actions;
 
 export default subscribeSlice.reducer;
