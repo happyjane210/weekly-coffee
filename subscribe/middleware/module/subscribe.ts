@@ -2,6 +2,7 @@ import { createAction, PayloadAction } from "@reduxjs/toolkit";
 import {
   addSubscribe,
   fetchSubscribePage,
+  initialComplete,
   PageRequest,
   Subscribe,
   SubscribePage,
@@ -29,7 +30,6 @@ export const requestFetchPagingSubscribe = createAction<PageRequest>(
 
 function* addSubcribeData(action: PayloadAction<Subscribe>) {
   yield console.log("--addSubscribeData in Saga--");
-  yield console.log(action);
 
   // 백엔드로 보내주는쪽
   // action의 payload로 넘어온 객체
@@ -41,9 +41,14 @@ function* addSubcribeData(action: PayloadAction<Subscribe>) {
     subscribeRequest
   );
 
+  yield console.log(result.data);
+
   // 백엔드에서 처리한 데이터 객체로 state를 변경할 payload 객체를 생성
-  yield put(addSubscribe(result.data));
-  yield put(clearCart());
+  if (result) {
+    yield put(addSubscribe(result.data));
+    yield put(clearCart());
+    yield put(initialComplete());
+  }
 }
 
 function* fetchPagingData(action: PayloadAction<PageRequest>) {
