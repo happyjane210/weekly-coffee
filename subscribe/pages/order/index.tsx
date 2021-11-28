@@ -84,6 +84,7 @@ const Order = () => {
       totalPayment: final,
       subscribeDetails: [...cartData],
     };
+    console.log(susbItem);
 
     //details: [...cartData],
 
@@ -93,7 +94,6 @@ const Order = () => {
     }
 
     console.log("--dispatch in index--");
-    console.log(subsItem);
   };
 
   // console.log(nameInput.current.value);
