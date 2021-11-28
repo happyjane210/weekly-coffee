@@ -28,10 +28,8 @@ const Order = () => {
   const [term, setTerm] = useState("");
 
   useEffect(() => {
-    if (isAddComplete === true) {
-      router.push("/mypage");
-    }
-  }, [isAddComplete]);
+    isAddComplete && router.push("/mypage");
+  }, [isAddComplete, router]);
 
   useEffect(() => {
     // 배송비 포함하기 전 합계 금액
@@ -89,8 +87,9 @@ const Order = () => {
     //details: [...cartData],
 
     //dispatch(addSubscribe(subsItem));
-
-    dispatch(requestAddSubscribe(subsItem));
+    if(subsItem){
+      dispatch(requestAddSubscribe(subsItem));
+    }
 
     console.log("--dispatch in index--");
     console.log(subsItem);
