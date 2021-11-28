@@ -84,7 +84,7 @@ const Order = () => {
       totalPayment: final,
       subscribeDetails: [...cartData],
     };
-    console.log(susbItem);
+    console.log(subsItem);
 
     //details: [...cartData],
 
